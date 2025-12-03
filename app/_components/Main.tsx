@@ -14,14 +14,43 @@ function Main() {
       pagination={{ clickable: true }}
       modules={[Pagination]}>
       <SwiperSlide>
-        <div className="h-[600px] bg-blue-500 flex items-center justify-end text-white text-2xl">
-          <video
-            src="/media.mp4"
-            autoPlay
-            loop
-            playsInline
-            className="w-full"
-          />
+        <div className="  bg-blue-500 flex items-center justify-end text-white text-2xl">
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+              Understand user flow and
+              <strong className="text-indigo-600"> increase </strong>
+              conversions
+            </h1>
+
+            <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque,
+              nisi. Natus, provident accusamus impedit minima harum corporis
+              iusto.
+            </p>
+
+            <div className="mt-4 flex gap-4 sm:mt-6">
+              <a
+                className="inline-block rounded border border-yellow-600 bg-primary px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-yellow-700"
+                href="#">
+                Get Started
+              </a>
+
+              <a
+                className="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900"
+                href="#">
+                Learn More
+              </a>
+            </div>
+          </div>
+          <div>
+            <video
+              src="/media.mp4"
+              autoPlay={true}
+              loop
+              playsInline
+              className="w-[100vw] h-[600px] object-cover"
+            />
+          </div>
         </div>
       </SwiperSlide>
       <SwiperSlide>
