@@ -1,6 +1,7 @@
 {
   "name": "elekstatic-ls",
   "version": "0.1.0",
+  "author": "Abdulrazak Samman",
   "private": true,
   "scripts": {
     "dev": "next dev",
