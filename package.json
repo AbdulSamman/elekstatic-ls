@@ -4,12 +4,13 @@
   "author": "Abdulrazak Samman",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "axios": "^1.13.2",
     "next": "16.0.6",
     "react": "19.2.0",
     "react-dom": "19.2.0",

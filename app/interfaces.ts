@@ -1,0 +1,58 @@
+export interface IAppContext {
+  products: IProduct[];
+  //   productDetails: any;
+  //   getOneProduct: (id: any) => void;
+  //   getProductListByCategory: (category: any) => void;
+  //   productListCategory: any;
+  //   cart: any;
+  //   isAdded: boolean;
+  //   handleAddToCart: (product: any) => void;
+  //   handleDeleteCartItem: (id: any) => void;
+  //   getCartItems: () => void;
+  //   discount: number;
+  //   totalPrice: number;
+  //   shipping: number;
+  //   hardWare: number;
+  //   getTotalAmount: () => any;
+  //   handleShipping: (e: any) => void;
+}
+
+export interface IAppProvider {
+  children: React.ReactNode;
+}
+
+export interface IProduct {
+  id: number;
+  attributes: any;
+}
+export interface IProductAttributes {
+  banner: { data: { attributes: any } };
+  category: boolean;
+  createdAt: string;
+  description: string[];
+  instantDelivery: boolean;
+  price: number;
+  publishedAt: string;
+  title: string;
+  updatedAt: string;
+  whatsIncluded: boolean;
+}
+//      export interface IBanner{
+
+//     alternativeText: boolean ;
+//     caption: boolean ;
+//     createdAt: string;
+//     ext: string;
+//     formats: IBannerFormats;
+//     hash: string;
+//     height: number;
+//     mime: string;
+//     name: string;
+//     previewUrl: boolean;
+//     provider: string;
+//     provider_metadata: boolean;
+//     size: number;
+//     updatedAt: string;
+//     url: string;
+//     width: number;
+//   }
