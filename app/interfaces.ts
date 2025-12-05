@@ -1,20 +1,5 @@
 export interface IAppContext {
   products: IProduct[];
-  //   productDetails: any;
-  //   getOneProduct: (id: any) => void;
-  //   getProductListByCategory: (category: any) => void;
-  //   productListCategory: any;
-  //   cart: any;
-  //   isAdded: boolean;
-  //   handleAddToCart: (product: any) => void;
-  //   handleDeleteCartItem: (id: any) => void;
-  //   getCartItems: () => void;
-  //   discount: number;
-  //   totalPrice: number;
-  //   shipping: number;
-  //   hardWare: number;
-  //   getTotalAmount: () => any;
-  //   handleShipping: (e: any) => void;
 }
 
 export interface IAppProvider {
@@ -23,36 +8,67 @@ export interface IAppProvider {
 
 export interface IProduct {
   id: number;
-  attributes: any;
-}
-export interface IProductAttributes {
-  banner: { data: { attributes: any } };
-  category: boolean;
-  createdAt: string;
-  description: string[];
-  instantDelivery: boolean;
-  price: number;
-  publishedAt: string;
+  documentId: string;
   title: string;
-  updatedAt: string;
+  description: Array<{ [key: string]: any }>;
+  banner: IBanner | null;
+  price: number;
+  instantDelivery: boolean;
+  files?: any;
   whatsIncluded: boolean;
+  category: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
 }
-//      export interface IBanner{
+export interface IBanner {
+  alternativeText?: boolean;
+  caption?: boolean;
+  createdAt: string;
+  documentId: string;
+  ext: string;
+  formats: IBannerFormats;
+  hash: string;
+  height: number;
+  id: number;
+  mime: string;
+  name: string;
+  previewUrl: boolean;
+  provider: string;
+  provider_metadata: boolean;
+  publishedAt: string;
+  size: number;
+  updatedAt: string;
+  url: string;
+  width: number;
+}
+export interface IFormatDetails {
+  ext: string;
+  hash: string;
+  height: number;
+  mime: string;
+  name: string;
+  path: boolean;
+  size: number;
+  sizeInBytes: number;
+  url: string;
+  width: number;
+}
+export interface IBannerFormats {
+  thumbnail: IFormatDetails;
+  small: IFormatDetails;
+  hash: string;
+  height: number;
+  mime: string;
+  id: number;
+  name: string;
+  previewUrl: boolean;
 
-//     alternativeText: boolean ;
-//     caption: boolean ;
-//     createdAt: string;
-//     ext: string;
-//     formats: IBannerFormats;
-//     hash: string;
-//     height: number;
-//     mime: string;
-//     name: string;
-//     previewUrl: boolean;
-//     provider: string;
-//     provider_metadata: boolean;
-//     size: number;
-//     updatedAt: string;
-//     url: string;
-//     width: number;
-//   }
+  provider: string;
+  provider_metadata: boolean;
+  publishedAt: string;
+  size: number;
+  updatedAt: string;
+  url: string;
+  width: number;
+}
