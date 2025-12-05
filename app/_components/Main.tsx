@@ -54,7 +54,7 @@ function Main() {
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" h-screen  bg-red-500 flex flex-col sm:flex-row items-center justify-around text-white text-2xl w-full">
+        <div className="h-screen sm:flex-row bg-red-500 flex flex-col items-center justify-around text-white text-2xl">
           <div className="pt-8">
             <Image
               src="/produc-1.png"
@@ -96,7 +96,7 @@ function Main() {
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" h-screen sm:flex-row bg-green-500 flex flex-col items-center justify-around text-white text-2xl">
+        <div className="h-screen sm:flex-row bg-green-500 flex flex-col items-center justify-around text-white text-2xl">
           <div className="pt-8">
             <Image
               src="/produc-3.png"

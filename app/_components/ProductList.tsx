@@ -2,11 +2,7 @@
 
 import { IProduct } from "../interfaces";
 
-interface ProductListProps {
-  products: IProduct[];
-}
-
-function ProductList({ products }: ProductListProps) {
+function ProductList({ products }: { products: IProduct[] }) {
   return (
     <div>
       {products.map((product) => {
