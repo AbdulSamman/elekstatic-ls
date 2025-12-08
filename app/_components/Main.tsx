@@ -4,8 +4,47 @@ import "swiper/css";
 import { Pagination } from "swiper/modules";
 import "swiper/css/pagination";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+
+import axiosClient from "../_utils/axiosClient";
 
 function Main() {
+  // introVideo
+  const [introVideoUrl, setintroVideoUrl] = useState<any>();
+  useEffect(() => {
+    const fetchIntroVideo = async () => {
+      try {
+        const _introVideo = (
+          await axiosClient.get("/api/mediapoints?populate=*")
+        ).data;
+
+        // Prüfe das Feldnamen
+        const firstItem = _introVideo.data[0];
+
+        // Video-Feld: ggf. video, introVideo, file
+        const videoField = firstItem.video || firstItem.introVideo;
+
+        // Video URL extrahieren
+        const url = videoField?.data?.attributes?.url || videoField?.url;
+        if (!url) {
+          console.warn("Keine Video URL gefunden!");
+          return;
+        }
+
+        const fullUrl = url.startsWith("http")
+          ? url
+          : `${
+              process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"
+            }${url}`;
+        setintroVideoUrl(fullUrl);
+      } catch (err) {
+        console.error("Fehler beim Laden des Videos:", err);
+      }
+    };
+
+    fetchIntroVideo();
+  }, []);
+
   return (
     <Swiper
       spaceBetween={20}
@@ -44,9 +83,10 @@ function Main() {
           </div>
           <div>
             <video
-              src="/media.mp4"
+              src={introVideoUrl}
               autoPlay={true}
               loop
+              muted
               playsInline
               className="w-screen h-screen object-cover"
             />
@@ -60,8 +100,8 @@ function Main() {
               src="/produc-1.png"
               loading="eager"
               alt="produc-1"
-              width={320}
-              height={320}
+              width={150}
+              height={100}
               className="object-contain"
               priority
             />

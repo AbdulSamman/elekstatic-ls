@@ -10,17 +10,30 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const [products, setProducts] = useState<IProduct[]>([]);
 
   //get products
+  // useEffect(() => {
+  //   try {
+  //     (async () => {
+  //       const rawProducts = (await axiosClient.get("/api/products?populate=*"))
+  //         .data;
+
+  //       setProducts(rawProducts.data);
+  //     })();
+  //   } catch (error) {
+  //     console.error("feld to fetch products", error);
+  //   }W
+  // }, []);
+
   useEffect(() => {
-    try {
-      (async () => {
+    (async () => {
+      try {
         const rawProducts = (await axiosClient.get("/api/products?populate=*"))
           .data;
 
         setProducts(rawProducts.data);
-      })();
-    } catch (error) {
-      console.error("feld to fetch products", error);
-    }
+      } catch (error) {
+        console.error("feld to fetch products", error);
+      }
+    })();
   }, []);
 
   return (

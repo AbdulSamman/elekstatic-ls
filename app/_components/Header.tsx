@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -7,6 +7,7 @@ function Header() {
   // nav background ändern
   const pathname = usePathname();
   const headerBg = pathname === "/" ? "bg-transparent" : "bg-blue-500";
+
   return (
     <header
       className={`${headerBg} border-t-6 border-primary absolute top-0 left-0 z-10 w-full`}>
