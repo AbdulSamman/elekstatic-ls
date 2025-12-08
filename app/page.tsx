@@ -6,7 +6,7 @@ import ProductSection from "./_components/ProductSection";
 
 export default function Home() {
   return (
-    <div className="h-full items-center justify-center bg-zinc-50 font-sans relative">
+    <div className="h-full items-center justify-center bg-[#f5f6fa] font-sans relative">
       <Main />
       <ProductSection />
       <ProductItem />

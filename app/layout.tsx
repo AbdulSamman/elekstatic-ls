@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 import { AppProvider } from "./AppContext";
+
 const geistSans = Roboto({
   variable: "--font-geist-sans",
   subsets: ["latin"],

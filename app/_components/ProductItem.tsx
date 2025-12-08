@@ -13,7 +13,7 @@ function ProductItem() {
         return (
           <div
             key={i}
-            className="flex flex-col justify-center items-center w-[300px] max-[605px]:w-full">
+            className="flex flex-col justify-center items-center w-[300px] max-[605px]:w-full bg-[#f8f9fa]">
             <div className="h-[350px] w-[300px] max-[605px]:w-full  flex items-center justify-center shadow-md ">
               <Image
                 src={product?.banner?.url || "/logo2.png"}

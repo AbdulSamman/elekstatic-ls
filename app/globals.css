@@ -1,8 +1,9 @@
 @import "tailwindcss";
+/* globals.css */
 
 @theme inline {
   /* hier Farbe hinzufügen statt tailwind.config.ts neu V6*/
-  --color-primary: #8c2f39;
+  --color-primary: #252422;
   --color-borderCol: #ff9b54;
 }
 
