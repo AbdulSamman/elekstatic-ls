@@ -1,5 +1,7 @@
 export interface IAppContext {
   products: IProduct[];
+  getProductById: (id: any) => void;
+  productDetails: any;
 }
 
 export interface IAppProvider {

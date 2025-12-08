@@ -7,10 +7,11 @@ function Header() {
   // nav background ändern
   const pathname = usePathname();
   const headerBg = pathname === "/" ? "bg-transparent" : "bg-blue-500";
+  const headerPos = pathname === "/" ? "absolute" : "static";
 
   return (
     <header
-      className={`${headerBg} border-t-6 border-primary absolute top-0 left-0 z-10 w-full`}>
+      className={`${headerBg} border-t-6 border-primary ${headerPos} top-0 left-0 z-10 w-full`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="lg:flex lg:items-center lg:gap-12">
