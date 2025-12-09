@@ -4,20 +4,21 @@ import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import Image from "next/image";
 import { List } from "lucide-react";
+import { IProduct } from "../interfaces";
 
-function ProductItem() {
-  const { products } = useContext(AppContext);
+function ProductItem({ filteredProducts }: any) {
+  //const { products } = useContext(AppContext); //products vonn appContext mit filterredProducts getauscht für similar products
   return (
     <div className="grid max-[725px]:grid-cols-1 max-[1070px]:grid-cols-2  max-[1430px]:grid-cols-3 max-[9999px]:grid-cols-4 gap-4 place-items-center p-2">
-      {products.map((product, i) => {
+      {filteredProducts.map((product: IProduct) => {
         return (
           <div
-            key={i}
+            key={product?.id}
             className="flex flex-col justify-center items-center w-[350px] max-[725px]:w-full bg-[#f8f9fa] ">
             <div className="h-[350px] w-[350px] max-[725px]:w-full flex items-center justify-center shadow-md group cursor-pointer">
               <Image
                 src={product?.banner?.url || "/logo2.png"}
-                alt={product.title || "bannerProducts"}
+                alt={product?.title || "bannerProducts"}
                 width={100}
                 height={100}
                 style={{ width: "auto", height: "340px" }}

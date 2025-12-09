@@ -11,6 +11,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
   const [productDetails, setProductDetails] = useState({});
 
+  const [productListCategory, setProductListCategory] = useState<any>([]);
   //get products
   useEffect(() => {
     (async () => {
@@ -32,10 +33,22 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         await axiosClient.get(`/api/products/${documentId}?populate=*`)
       ).data;
       setProductDetails(response.data);
-      console.log("productById", response.data.banner.url);
+
+      getProductsbyCategory(response.data.category);
     } catch (error: any) {
       console.error("failed to fetch productsId", error);
     }
+  };
+
+  // all categories holen
+  const getProductsbyCategory = async (category: string) => {
+    const response = (
+      await axiosClient.get(
+        `/api/products?filters[category][$eq]=${category}&populate=*`
+      )
+    ).data;
+
+    setProductListCategory(response.data);
   };
 
   return (
@@ -44,6 +57,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         products,
         getProductById,
         productDetails,
+
+        productListCategory,
       }}>
       {children}
     </AppContext.Provider>

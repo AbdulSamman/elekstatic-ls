@@ -4,12 +4,6 @@ import { IProduct } from "@/app/interfaces";
 import Image from "next/image";
 
 const ProductBanner = ({ productDetails }: any) => {
-  console.log("productDetails1", productDetails);
-  if (!productDetails) {
-    console.log("no yet");
-  } else {
-    console.log("here we are");
-  }
   return (
     <div className="productBanner ">
       {productDetails?.banner?.url ? (
