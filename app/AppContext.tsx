@@ -18,7 +18,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       try {
         const rawProducts = (await axiosClient.get("/api/products?populate=*"))
           .data;
-        console.log("products", rawProducts);
+        console.log("products", rawProducts.data);
         setProducts(rawProducts.data);
       } catch (error) {
         console.error("failed to fetch products", error);
@@ -32,6 +32,9 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       const response = (
         await axiosClient.get(`/api/products/${documentId}?populate=*`)
       ).data;
+
+
+  console.log("getProductById",response);
       setProductDetails(response.data);
 
       getProductsbyCategory(response.data.category);
@@ -40,6 +43,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     }
   };
 
+
+
   // all categories holen
   const getProductsbyCategory = async (category: string) => {
     const response = (
@@ -47,9 +52,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         `/api/products?filters[category][$eq]=${category}&populate=*`
       )
     ).data;
+console.log("getProductsbyCategory",response);
 
     setProductListCategory(response.data);
   };
+
+  console.log("productDetails",productDetails);
+  console.log("productListCategory",productListCategory);
 
   return (
     <AppContext.Provider

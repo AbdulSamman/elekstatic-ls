@@ -1,6 +1,6 @@
 export interface IAppContext {
   products: IProduct[];
-  getProductById: (id: any) => void;
+  getProductById: (id: string) => void;
   productDetails: any;
 
   productListCategory: string;

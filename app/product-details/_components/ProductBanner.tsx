@@ -1,6 +1,5 @@
 "use client";
 
-import { IProduct } from "@/app/interfaces";
 import Image from "next/image";
 
 const ProductBanner = ({ productDetails }: any) => {

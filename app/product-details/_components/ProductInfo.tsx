@@ -4,15 +4,15 @@ function ProductInfo({ productDetails }: any) {
   return (
     <>
       <div className="flex flex-col gap-2 px-2  w-full md:w-[600px] pt-8">
-        <h2 className="text-2xl">{productDetails.title}</h2>
+        <h2 className="text-2xl">{productDetails?.title}</h2>
         <h2 className="text-[15px] text-gray-400 italic">
-          {productDetails.category}
+          {productDetails?.category}
         </h2>
         <h2 className="text-[16px] text-gray-400">
           {productDetails?.description?.[0]?.children?.[0]?.text}
         </h2>
         <span className="text-[32px] text-primary mt-3  ">
-          € {productDetails.price}
+          € {productDetails?.price}
         </span>
       </div>
       <button className="flex items-center justify-center gap-2 border bg-yellow-600 hover:bg-amber-500 py-2 px-4 rounded-sm font-bold cursor-pointer">

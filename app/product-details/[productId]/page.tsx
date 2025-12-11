@@ -6,10 +6,12 @@ import BreadCrumb from "@/app/_components/BreadCrumb";
 import ProductBanner from "../_components/ProductBanner";
 import ProductInfo from "../_components/ProductInfo";
 import ProductItem from "@/app/_components/ProductItem";
+import { IProduct } from "@/app/interfaces";
 
 function ProductDetails({ params }: any) {
   const paramsId: any = use(params);
   const documentId = paramsId.productId;
+
   const { getProductById, productDetails, productListCategory, products }: any =
     useContext(AppContext);
 
@@ -23,7 +25,7 @@ function ProductDetails({ params }: any) {
   //ausgewählte product simiral product auftauchen || [] undefined zu vermeiden
   const filteredProducts =
     productListCategory?.filter(
-      (product: any) =>
+      (product: IProduct) =>
         product.category === productDetails?.category &&
         product.documentId !== productDetails?.documentId
     ) || [];
@@ -31,7 +33,7 @@ function ProductDetails({ params }: any) {
   //ausgewählte product nicht simiral product auftauchen
   const filteredProductsFrequently =
     products?.filter(
-      (product: any) =>
+      (product: IProduct) =>
         product.documentId !== productDetails?.documentId &&
         product.category !== productDetails?.category
     ) || [];

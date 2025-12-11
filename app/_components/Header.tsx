@@ -6,12 +6,13 @@ import { usePathname } from "next/navigation";
 function Header() {
   // nav background ändern
   const pathname = usePathname();
-  const headerBg = pathname === "/" ? "bg-transparent" : "bg-blue-500";
+  const headerBg = pathname === "/" ? "bg-transparent" : "bg-black";
   const headerPos = pathname === "/" ? "absolute" : "static";
 
   return (
     <header
-      className={`${headerBg} border-t-6 border-primary ${headerPos} top-0 left-0 z-10 w-full`}>
+      className={`${headerBg} border-t-6 border-primary ${headerPos} top-0 left-0 z-10 w-full`}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="lg:flex lg:items-center lg:gap-12">
@@ -36,7 +37,8 @@ function Header() {
                 <li>
                   <a
                     className="text-white transition hover:text-gray-400 "
-                    href="#">
+                    href="#"
+                  >
                     PRODUKTE
                   </a>
                 </li>
@@ -44,8 +46,8 @@ function Header() {
                 <li>
                   <a
                     className="text-white transition hover:text-gray-400"
-                    href="#">
-                    {" "}
+                    href="#"
+                  >
                     SAMMLUNGEN
                   </a>
                 </li>
@@ -53,7 +55,8 @@ function Header() {
                 <li>
                   <a
                     className="text-white transition hover:text-gray-400"
-                    href="#">
+                    href="#"
+                  >
                     UNTERSTÜTZUNG
                   </a>
                 </li>
@@ -61,7 +64,8 @@ function Header() {
                 <li>
                   <a
                     className="text-white transition hover:text-gray-400 "
-                    href="#">
+                    href="#"
+                  >
                     KONTAKT
                   </a>
                 </li>
@@ -69,14 +73,16 @@ function Header() {
                 <li>
                   <a
                     className="text-white transition hover:text-gray-400 "
-                    href="#">
+                    href="#"
+                  >
                     ERKUNDEN
                   </a>
                 </li>
                 <li>
                   <a
                     className="text-white transition hover:text-gray-400 "
-                    href="#">
+                    href="#"
+                  >
                     ÜBER UNS
                   </a>
                 </li>
@@ -88,13 +94,15 @@ function Header() {
             <div className="gap-4 flex">
               <a
                 className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow-sm"
-                href="#">
+                href="#"
+              >
                 Login
               </a>
 
               <a
                 className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary"
-                href="#">
+                href="#"
+              >
                 Register
               </a>
             </div>
@@ -107,11 +115,13 @@ function Header() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth="2">
+                  strokeWidth="2"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"></path>
+                    d="M4 6h16M4 12h16M4 18h16"
+                  ></path>
                 </svg>
               </button>
             </div>

@@ -26,6 +26,7 @@ function Main() {
 
         // Video URL extrahieren
         const url = videoField?.data?.attributes?.url || videoField?.url;
+    
         if (!url) {
           console.warn("Keine Video URL gefunden!");
           return;
