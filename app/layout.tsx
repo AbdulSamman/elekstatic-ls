@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Roboto, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "./_components/Header";
+import "../styles/site.scss";
 import Footer from "./_components/Footer";
 import { AppProvider } from "./AppContext";
+import Header from "./_components/Header";
 
 const geistSans = Roboto({
   variable: "--font-geist-sans",
@@ -28,7 +29,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <AppProvider>
           <Header />
           {children}

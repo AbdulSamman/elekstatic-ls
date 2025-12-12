@@ -26,7 +26,7 @@ function Main() {
 
         // Video URL extrahieren
         const url = videoField?.data?.attributes?.url || videoField?.url;
-    
+
         if (!url) {
           console.warn("Keine Video URL gefunden!");
           return;
@@ -52,7 +52,8 @@ function Main() {
       slidesPerView={1}
       loop={true}
       pagination={{ clickable: true }}
-      modules={[Pagination]}>
+      modules={[Pagination]}
+    >
       <SwiperSlide>
         <div className="flex items-center justify-end text-white text-2xl">
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center not-[]:">
@@ -71,13 +72,15 @@ function Main() {
             <div className="mt-4 flex gap-4 sm:mt-6">
               <a
                 className="inline-block rounded border border-yellow-600 bg-primary px-5 py-3 font-medium text-yellow-600 shadow-sm transition-colors hover:bg-yellow-700"
-                href="#">
+                href="#"
+              >
                 Get Started
               </a>
 
               <a
                 className="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-yellow-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-yellow-900"
-                href="#">
+                href="#"
+              >
                 Learn More
               </a>
             </div>

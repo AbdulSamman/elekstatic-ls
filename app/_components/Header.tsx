@@ -1,7 +1,10 @@
 "use client";
 
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 function Header() {
   // nav background ändern
@@ -9,16 +12,56 @@ function Header() {
   const headerBg = pathname === "/" ? "bg-transparent" : "bg-black";
   const headerPos = pathname === "/" ? "absolute" : "static";
 
+  // // menu
+  const menuRef = useRef<HTMLDivElement>(null); // Ref für das Menü-Element
+
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const handleToggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  // menu close außerhalb menuIsOpen
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Überprüfe, ob das geklickte Element nicht das Menü ist und schließe das Menü dann
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  // resize menu wenn geöffnet ist
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 767) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <header
-      className={`${headerBg} border-t-6 border-primary ${headerPos} top-0 left-0 z-10 w-full`}
+      className={`${headerBg} border-t-6 border-primary ${headerPos} top-0 left-0 z-2 w-full`}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="lg:flex lg:items-center lg:gap-12">
-            <a className="block text-teal-600" href="#">
-              <span className="sr-only">Home</span>
-              <div className="bg-primary border-4 border-borderCol rounded-b-4xl min-w-[100px] min-h-[100px]">
+            <div className="bg-primary border-4 border-borderCol rounded-b-4xl min-w-[100px] min-h-[100px]">
+              <Link href={"/"}>
                 <Image
                   src="/logo2.png"
                   width={100}
@@ -27,68 +70,79 @@ function Header() {
                   alt="logo"
                   className="pb-2"
                 />
-              </div>
-            </a>
+              </Link>
+            </div>
           </div>
 
-          <div className="hidden lg:block px-2 ">
-            <nav aria-label="Global">
-              <ul className="flex items-center gap-6 text-sm">
-                <li>
-                  <a
-                    className="text-white transition hover:text-gray-400 "
-                    href="#"
-                  >
-                    PRODUKTE
-                  </a>
-                </li>
+          <nav
+            aria-label="Global"
+            ref={menuRef}
+            className={`${isMenuOpen ? "menuIsOpen" : "hidden"}  lg:block`}
+          >
+            {isMenuOpen && (
+              <button
+                className="menuIcon text-white absolute right-0 t-0 m-6 cursor-pointer transition hover:text-gray-400 "
+                onClick={handleToggleMenu}
+              >
+                <X className="w-12 h-12" />
+              </button>
+            )}
 
-                <li>
-                  <a
-                    className="text-white transition hover:text-gray-400"
-                    href="#"
-                  >
-                    SAMMLUNGEN
-                  </a>
-                </li>
+            <ul className="flex items-center gap-6 text-sm">
+              <li>
+                <Link
+                  className="text-white transition hover:text-gray-400 "
+                  href="#"
+                >
+                  PRODUKTE
+                </Link>
+              </li>
 
-                <li>
-                  <a
-                    className="text-white transition hover:text-gray-400"
-                    href="#"
-                  >
-                    UNTERSTÜTZUNG
-                  </a>
-                </li>
+              <li>
+                <Link
+                  className="text-white transition hover:text-gray-400"
+                  href="#"
+                >
+                  SAMMLUNGEN
+                </Link>{" "}
+              </li>
 
-                <li>
-                  <a
-                    className="text-white transition hover:text-gray-400 "
-                    href="#"
-                  >
-                    KONTAKT
-                  </a>
-                </li>
+              <li>
+                <Link
+                  className="text-white transition hover:text-gray-400"
+                  href="#"
+                >
+                  UNTERSTÜTZUNG
+                </Link>{" "}
+              </li>
 
-                <li>
-                  <a
-                    className="text-white transition hover:text-gray-400 "
-                    href="#"
-                  >
-                    ERKUNDEN
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-white transition hover:text-gray-400 "
-                    href="#"
-                  >
-                    ÜBER UNS
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+              <li>
+                <Link
+                  className="text-white transition hover:text-gray-400 "
+                  href="#"
+                >
+                  ERKUNDEN
+                </Link>{" "}
+              </li>
+              <li>
+                <Link
+                  className="text-white transition hover:text-gray-400 "
+                  href="#"
+                >
+                  KONTAKT
+                </Link>{" "}
+              </li>
+
+              <li>
+                <Link
+                  className="text-white transition hover:text-gray-400 "
+                  href="#"
+                >
+                  ÜBER UNS
+                </Link>{" "}
+              </li>
+            </ul>
+          </nav>
 
           <div className="flex items-center gap-4">
             <div className="gap-4 flex">
@@ -107,22 +161,16 @@ function Header() {
               </a>
             </div>
 
-            <div className="block lg:hidden">
-              <button className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="size-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  ></path>
-                </svg>
+            <div className="flex items-center gap-4">
+              <button
+                className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 lg:hidden cursor-pointer "
+                onClick={handleToggleMenu}
+              >
+                {!isMenuOpen ? (
+                  <Menu className="menuIcon" />
+                ) : (
+                  <X className="menuIcon" />
+                )}
               </button>
             </div>
           </div>

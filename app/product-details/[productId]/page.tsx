@@ -46,7 +46,7 @@ function ProductDetails({ params }: any) {
         <ProductInfo productDetails={productDetails} />
       </div>
       <div className=" mt-10">
-        <h2 className="text-xl py-5 ">Similar Products</h2>
+        <h2 className="text-xl p-5">Similar Products</h2>
 
         {products.length > 0 && (
           <>
@@ -56,7 +56,7 @@ function ProductDetails({ params }: any) {
               <h3 className="mb-4">No Products Related To This Item!</h3>
             )}
             <div>
-              <h2 className="text-xl py-5">Frequently Bought Together</h2>
+              <h2 className="text-xl p-5">Frequently Bought Together</h2>
               <ProductItem filteredProducts={filteredProductsFrequently} />
             </div>
           </>
