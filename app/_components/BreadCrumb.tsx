@@ -3,19 +3,25 @@
 import Link from "next/link";
 
 const BreadCrumb = ({ path }: any) => {
+  const segments: any = path
+    .split("/")
+    .filter(Boolean)
+    .filter((segment: string | string[]) => segment.length < 15);
   return (
     <nav aria-label="Breadcrumb" className="flex">
-      <ol className="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600">
+      <ul className="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600">
         <li className="flex items-center">
           <Link
             href="/"
-            className="flex h-10 items-center gap-1.5 bg-gray-100 px-4 transition hover:text-gray-900">
+            className="flex h-10 items-center gap-1.5 bg-gray-100 px-4 transition hover:text-gray-900"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor">
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -33,21 +39,22 @@ const BreadCrumb = ({ path }: any) => {
 
           <a
             href="#"
-            className="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium transition hover:text-gray-900">
-            {path && path.split("/")[1] ? path.split("/")[1] : "home"}
+            className="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium transition hover:text-gray-900"
+          >
+            {path?.split("/")[1]}
           </a>
         </li>
 
-        <li className="relative flex items-center">
-          <span className="absolute inset-y-0 -start-px h-10 w-4 bg-gray-100 [clip-path:polygon(0_0,0%_100%,100%_50%)] rtl:rotate-180"></span>
+        {segments.map((segment: string, index: string) => (
+          <li key={index} className="relative flex items-center">
+            <span className="absolute inset-y-0 -start-px h-10 w-4 bg-gray-100 [clip-path:polygon(0_0,0%_100%,100%_50%)]"></span>
 
-          <a
-            href="#"
-            className="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium transition hover:text-gray-900">
-            {path?.split("/")[2] || ""}
-          </a>
-        </li>
-      </ol>
+            <span className="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium capitalize">
+              {segment.replace("-", " ")}
+            </span>
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 };

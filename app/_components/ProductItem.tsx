@@ -20,10 +20,10 @@ function ProductItem({ filteredProducts }: any) {
         return (
           <Link
             key={product?.id}
-            className="flex flex-col justify-center items-center w-[350px] max-[725px]:w-full bg-[#f8f9fa]"
+            className="flex flex-col justify-center items-center w-87.5 max-[725px]:w-full bg-[#f8f9fa]"
             href={`/product-details/${product?.documentId}`}
           >
-            <div className="h-[350px] w-[350px] max-[725px]:w-full flex items-center justify-center shadow-md group cursor-pointer">
+            <div className="h-87.5 max-[725px]:w-full flex items-center justify-center shadow-md group cursor-pointer">
               <Image
                 src={product?.banner?.url || "/logo2.png"}
                 alt={product?.title || "bannerProducts"}
@@ -35,7 +35,7 @@ function ProductItem({ filteredProducts }: any) {
               />
             </div>
 
-            <div className="flex flex-col w-full items-start justify-center h-[100px] p-3 gap-2 max-[605px]:w-full shadow-md rounded-b-lg">
+            <div className="flex flex-col w-full items-start justify-center h-25 p-3 gap-2 max-[605px]:w-full shadow-md rounded-b-lg">
               <h2 className="text-[16px] font-bold">{product.title}</h2>
               <div className="flex items-center justify-between italic w-full">
                 <h2 className="text-[14px] font-medium text-gray-400 flex gap-2 items-center">

@@ -121,14 +121,6 @@ function Header() {
                   className="text-white transition hover:text-gray-400 "
                   href="#"
                 >
-                  ERKUNDEN
-                </Link>{" "}
-              </li>
-              <li>
-                <Link
-                  className="text-white transition hover:text-gray-400 "
-                  href="#"
-                >
                   KONTAKT
                 </Link>{" "}
               </li>
