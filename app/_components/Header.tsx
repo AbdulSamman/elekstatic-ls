@@ -57,10 +57,10 @@ function Header() {
     <header
       className={`${headerBg} border-t-6 border-primary ${headerPos} top-0 left-0 z-2 w-full`}
     >
-      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-400 px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="lg:flex lg:items-center lg:gap-12">
-            <div className="bg-primary border-4 border-borderCol rounded-b-4xl min-w-[100px] min-h-[100px]">
+            <div className="bg-primary border-4 border-borderCol rounded-b-4xl min-w-25 min-h-25">
               <Link href={"/"}>
                 <Image
                   src="/logo2.png"

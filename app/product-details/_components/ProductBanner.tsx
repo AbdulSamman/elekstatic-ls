@@ -16,7 +16,7 @@ const ProductBanner = ({ productDetails }: any) => {
           alt="productDetailsBanner"
         />
       ) : (
-        <div className="h-[300px] lg:w-[450px] bg-slate-200 animate-pulse rounded-lg md:w-[300]"></div>
+        <div className="h-75 lg:w-112.5 bg-slate-200 animate-pulse rounded-lg md:w-[300]"></div>
       )}
     </div>
   );

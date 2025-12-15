@@ -9,7 +9,6 @@ export default function Home() {
     <div className="h-full items-center justify-center bg-[#f5f6fa] font-sans relative">
       <Main />
       <ProductSection />
-      <ProductItem filteredProducts={[]} />
     </div>
   );
 }
