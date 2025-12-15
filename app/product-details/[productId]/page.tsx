@@ -61,6 +61,7 @@ function ProductDetails({ params }: any) {
             )}
             <div>
               <h2 className="text-xl p-5">Frequently Bought Together</h2>
+
               <ProductItem filteredProducts={filteredProductsFrequently} />
             </div>
           </>

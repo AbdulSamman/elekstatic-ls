@@ -1,4 +1,5 @@
 import { Box } from "lucide-react";
+import SkeletonEffectProductInfo from "./SkeletonEffectProductInfo";
 
 function ProductInfo({ productDetails }: any) {
   return (
@@ -22,7 +23,7 @@ function ProductInfo({ productDetails }: any) {
           </button>
         </>
       ) : (
-        <div className="w-full md:w-150 bg-slate-200 animate-pulse rounded-lg h-75 mt-2"></div>
+        <SkeletonEffectProductInfo />
       )}
     </>
   );
