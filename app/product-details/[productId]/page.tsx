@@ -7,14 +7,11 @@ import ProductBanner from "../_components/ProductBanner";
 import ProductInfo from "../_components/ProductInfo";
 import ProductItem from "@/app/_components/ProductItem";
 import { IProduct } from "@/app/interfaces";
-import { usePathname } from "next/navigation";
 
 function ProductDetails({ params }: any) {
   const paramsId: any = use(params);
   const documentId = paramsId.productId;
   // for breadCrumb
-  const path = usePathname();
-  console.log("path", path);
 
   const { getProductById, productDetails, productListCategory, products }: any =
     useContext(AppContext);
@@ -44,7 +41,11 @@ function ProductDetails({ params }: any) {
 
   return (
     <div className="py-8 px-2">
-      <BreadCrumb path={path} />
+      <BreadCrumb
+        path={`/product-details/${documentId}/build-your-own`}
+        productName={productDetails?.title}
+        buildYourOwnName="...."
+      />
       <div className="flex flex-col items-center justify-center">
         <ProductBanner productDetails={productDetails} />
         <ProductInfo productDetails={productDetails} />

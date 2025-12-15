@@ -1,5 +1,6 @@
 import { Box } from "lucide-react";
 import SkeletonEffectProductInfo from "./SkeletonEffectProductInfo";
+import Link from "next/link";
 
 function ProductInfo({ productDetails }: any) {
   return (
@@ -18,9 +19,13 @@ function ProductInfo({ productDetails }: any) {
               € {productDetails?.price}
             </span>
           </div>
-          <button className="flex items-center justify-center gap-2 border bg-yellow-600 hover:bg-amber-500 py-2 px-4 rounded-sm font-bold cursor-pointer">
+
+          <Link
+            href={`/build-your-own/${productDetails.documentId}`}
+            className="flex items-center justify-center gap-2 border bg-yellow-600 hover:bg-amber-500 py-2 px-4 rounded-sm font-bold"
+          >
             <Box /> <span>BUILD YOUR OWN</span>
-          </button>
+          </Link>
         </>
       ) : (
         <SkeletonEffectProductInfo />
