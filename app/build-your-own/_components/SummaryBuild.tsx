@@ -27,7 +27,7 @@ const sections: Section[] = [
       {
         id: "parchment",
         label: "Parchment Gloss",
-        color: "#f3f4f6",
+        color: "#f3f4f8",
         isNew: true,
       },
     ],
@@ -120,9 +120,8 @@ export default function SummaryBuild({ productDetails }: any) {
                       }
                       className={`relative flex h-10 min-w-10 items-center justify-center rounded text-sm transition
                         ${
-                          value?.id === option.id
-                            ? "scale-110 border-black ring-2 ring-black"
-                            : "border-gray-300"
+                          value?.id === option.id &&
+                          "scale-115 border-black ring-2 ring-black"
                         }`}
                       style={{
                         backgroundColor: option.color ?? "transparent",

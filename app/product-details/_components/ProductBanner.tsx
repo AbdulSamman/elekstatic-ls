@@ -10,7 +10,7 @@ const ProductBanner = ({ productDetails }: any) => {
           src={productDetails?.banner?.url}
           width={100}
           height={100}
-          style={{ width: "auto", height: "340px" }}
+          style={{ width: "auto", height: "440px" }}
           priority
           className="object-contain transition duration-500 group-hover:scale-110 p-0.5 max-[605px]:w-full "
           alt="productDetailsBanner"
