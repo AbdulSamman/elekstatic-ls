@@ -4,6 +4,7 @@ import { use, useContext, useEffect } from "react";
 import { AppContext } from "../../AppContext";
 import BreadCrumb from "@/app/_components/BreadCrumb";
 import ProductBannerOwn from "../_components/ProductBannerOwn";
+import SummaryBuild from "../_components/SummaryBuild";
 
 export default function BuildYourOwn({ params }: any) {
   const paramsId: any = use(params);
@@ -23,14 +24,16 @@ export default function BuildYourOwn({ params }: any) {
       {productDetails?.title && (
         <BreadCrumb
           path={breadcrumbPath}
-          productName={productDetails.title} // ✅ direkt aus Context
+          productName={productDetails.title}
           buildYourOwnName="Build Your Own"
         />
       )}
 
-      <div className="mt-10 flex flex-col md:flex-row items-center justify-around">
+      <div className="mt-10 xl:px-20 flex flex-col md:flex-row items-center justify-between xl:justify-evenly gap-4">
         <ProductBannerOwn productDetails={productDetails} />
-        <h1>{productDetails?.title}</h1>
+        <div className="xl:w-2/5 md:w-2/3  flex items-start w-full">
+          <SummaryBuild productDetails={productDetails} />
+        </div>
       </div>
     </div>
   );

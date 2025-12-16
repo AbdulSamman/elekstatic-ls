@@ -4,15 +4,16 @@ import Image from "next/image";
 
 const ProductBannerOwn = ({ productDetails }: any) => {
   return (
-    <div className="ProductBannerOwn px-2 py-4">
+    <div className="productBanner">
+      {" "}
       {productDetails?.banner?.url ? (
         <Image
           src={productDetails?.banner?.url}
           width={100}
           height={100}
-          style={{ width: "auto", height: "440px" }}
+          style={{ width: "auto", height: "340px" }}
           priority
-          className="object-contain transition duration-500 group-hover:scale-110 p-0.5 max-[605px]:w-full "
+          className="object-contain p-0.5 max-[605px]:w-full"
           alt="ProductBannerOwn"
         />
       ) : (

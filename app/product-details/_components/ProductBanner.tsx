@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const ProductBanner = ({ productDetails }: any) => {
   return (
-    <div className="productBanner ">
+    <div className="productBanner">
       {productDetails?.banner?.url ? (
         <Image
           src={productDetails?.banner?.url}
