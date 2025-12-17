@@ -4,9 +4,9 @@ import { use, useContext, useEffect } from "react";
 import { AppContext } from "../../AppContext";
 import BreadCrumb from "@/app/_components/BreadCrumb";
 import ProductBannerOwn from "../_components/ProductBannerOwn";
-import SummaryBuild from "../_components/SummaryBuild";
+import BuildYourOwn from "../_components/BuildYourOwn";
 
-export default function BuildYourOwn({ params }: any) {
+export default function BuildYourOwnPage({ params }: any) {
   const paramsId: any = use(params);
   const productId = paramsId.productId;
 
@@ -32,7 +32,7 @@ export default function BuildYourOwn({ params }: any) {
       <div className="mt-10 xl:px-20 flex flex-col md:flex-row items-center justify-between xl:justify-evenly gap-4">
         <ProductBannerOwn productDetails={productDetails} />
         <div className="xl:w-2/5 md:w-2/3  flex items-start w-full">
-          <SummaryBuild productDetails={productDetails} />
+          <BuildYourOwn productDetails={productDetails} />
         </div>
       </div>
     </div>

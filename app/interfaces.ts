@@ -76,3 +76,22 @@ export interface IBannerFormats {
   url: string;
   width: number;
 }
+
+export interface BreadCrumbProps {
+  path: string;
+  productName: string;
+  buildYourOwnName?: string;
+}
+
+type Option = {
+  id: string;
+  label: string;
+  color?: string;
+  isNew?: boolean;
+};
+
+export interface Section {
+  id: string;
+  title: string;
+  options: Option[];
+}

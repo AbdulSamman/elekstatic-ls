@@ -1,37 +1,48 @@
 "use client";
 
 import Link from "next/link";
-
-interface BreadCrumbProps {
-  path: string; // aktuelle URL
-  productName: string; // Name des Produkts
-  buildYourOwnName?: string; // optionaler Name bei Build Your Own
-}
+import { useRouter } from "next/navigation";
+import { BreadCrumbProps } from "../interfaces";
 
 const BreadCrumb = ({
   path,
   productName,
   buildYourOwnName,
 }: BreadCrumbProps) => {
+  const router = useRouter();
   const segments = path.split("/").filter(Boolean);
 
-  const links: { name: string; href: string }[] = [];
+  const links: { name: string; href: string; useBack?: boolean }[] = [];
 
-  // Immer Home
+  // home
   links.push({ name: "Home", href: "/" });
 
-  // Product Details
-  if (segments.includes("product-details")) {
+  // product details
+  if (segments[0] === "product-details") {
     links.push({ name: "Product Details", href: "#" });
-    links.push({ name: productName, href: `/product-details/${segments[1]}` });
+    links.push({
+      name: productName,
+      href: `/product-details/${segments[1]}`,
+      useBack: true,
+    });
   }
 
-  // Build Your Own, falls in der URL
+  // Build Your Own kommt nur, wenn es in der URL ist
   if (segments.includes("build-your-own")) {
-    const href = `/build-your-own/${segments[segments.length - 1]}`;
-    links.push({ name: buildYourOwnName || "Build Your Own", href });
+    links.push({
+      name: buildYourOwnName || "Build Your Own",
+      href: `/product-details/${segments[1]}/build-your-own`,
+    });
   }
 
+  // View Summary kommt nur, wenn es in der URL ist UND Build Your Own davor existiert
+  if (segments.includes("view-summary")) {
+    links.push({
+      name: "View Summary",
+      href: `/product-details/${segments[1]}/build-your-own/view-summary`,
+    });
+  }
+  const clickableIndexes = [0, 2]; // 0 = Home, 2 = Product Title
   return (
     <nav aria-label="breadcrumb" className="flex">
       <ul className="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600">
@@ -40,17 +51,26 @@ const BreadCrumb = ({
             {index !== 0 && (
               <span className="absolute inset-y-0 -start-px h-10 w-4 bg-gray-100 [clip-path:polygon(0_0,0%_100%,100%_50%)]"></span>
             )}
-            {index === links.length - 1 ? (
+            {clickableIndexes.includes(index) ? (
+              index === 0 ? (
+                <Link
+                  href={link.href}
+                  className="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium capitalize hover:text-gray-900"
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <button
+                  onClick={() => router.back()}
+                  className="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium capitalize hover:text-gray-900 cursor-pointer"
+                >
+                  {link.name}
+                </button>
+              )
+            ) : (
               <span className="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium capitalize">
                 {link.name}
               </span>
-            ) : (
-              <Link
-                href={link.href}
-                className="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium capitalize hover:text-gray-900"
-              >
-                {link.name}
-              </Link>
             )}
           </li>
         ))}
