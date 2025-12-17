@@ -1,4 +1,4 @@
-import { Box } from "lucide-react";
+import { FiBox } from "react-icons/fi";
 import SkeletonEffectProductInfo from "./SkeletonEffectProductInfo";
 import Link from "next/link";
 
@@ -24,7 +24,7 @@ function ProductInfo({ productDetails }: any) {
             href={`/build-your-own/${productDetails.documentId}`}
             className="flex items-center justify-center gap-2 border bg-yellow-600 hover:bg-amber-500 py-2 px-4 rounded-sm font-bold"
           >
-            <Box /> <span>BUILD YOUR OWN</span>
+            <FiBox className="text-2xl" /> <span>BUILD YOUR OWN</span>
           </Link>
         </>
       ) : (

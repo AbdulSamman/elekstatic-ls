@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowRight, CircleMinus, CirclePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Section } from "@/app/interfaces";
+import { FaArrowRight } from "react-icons/fa6";
+import { LuCircleMinus, LuCirclePlus } from "react-icons/lu";
 
 export default function BuildYourOwn({ productDetails }: any) {
   const [sections, setSections] = useState<Section[]>([]);
@@ -40,8 +41,7 @@ export default function BuildYourOwn({ productDetails }: any) {
     const queryString = new URLSearchParams({
       selected: JSON.stringify(filledSelection),
     }).toString();
-
-    router.push(`/view-summary?${queryString}`);
+    router.push(`/view-summary/${productDetails.documentId}?${queryString}`);
   };
   return (
     <div className="w-full divide-y shadow-xl">
@@ -64,12 +64,12 @@ export default function BuildYourOwn({ productDetails }: any) {
             >
               {!isOpen ? (
                 <span className="flex gap-2 items-center justify-start w-50">
-                  <CirclePlus className="text-red-400" />
+                  <LuCirclePlus className="text-red-400 text-2xl" />
                   <span className="font-medium text-2xl">{section.title}</span>
                 </span>
               ) : (
                 <span className="flex gap-2 items-center justify-start w-50">
-                  <CircleMinus className="text-green-400" />
+                  <LuCircleMinus className="text-green-400 text-2xl" />
                   <span className="font-bold text-2xl">{section.title}</span>
                 </span>
               )}
@@ -120,7 +120,7 @@ export default function BuildYourOwn({ productDetails }: any) {
           className="w-full bg-slate-600 py-3 text-xl font-semibold text-white flex items-center justify-center gap-2"
         >
           <span>VIEW SUMMARY</span>
-          <ArrowRight />
+          <FaArrowRight />
         </button>
       </div>
     </div>

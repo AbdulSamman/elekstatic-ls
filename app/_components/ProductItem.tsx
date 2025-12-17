@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { List } from "lucide-react";
+import { CiCircleList } from "react-icons/ci";
 import { IProduct } from "../interfaces";
 import Link from "next/link";
 import { useContext } from "react";
@@ -43,7 +43,8 @@ function ProductItem({ filteredProducts }: any) {
               <h2 className="text-[16px] font-bold">{product.title}</h2>
               <div className="flex items-center justify-between italic w-full">
                 <h2 className="text-[14px] font-medium text-gray-400 flex gap-2 items-center">
-                  <List className="w-7 h-5" /> {product.category}
+                  <CiCircleList className="text-xl text-gray-600" />{" "}
+                  {product.category}
                 </h2>
                 <h2 className="font-medium px-4">{product.price} €</h2>
               </div>

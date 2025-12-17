@@ -1,6 +1,7 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { FiMenu, FiX } from "react-icons/fi";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -84,7 +85,7 @@ function Header() {
                 className="menuIcon text-white absolute right-0 t-0 m-6 cursor-pointer transition hover:text-gray-400 "
                 onClick={handleToggleMenu}
               >
-                <X className="w-12 h-12" />
+                <FiX className="w-12 h-12" />
               </button>
             )}
 
@@ -159,9 +160,9 @@ function Header() {
                 onClick={handleToggleMenu}
               >
                 {!isMenuOpen ? (
-                  <Menu className="menuIcon" />
+                  <FiMenu className="menuIcon" />
                 ) : (
-                  <X className="menuIcon" />
+                  <FiX className="menuIcon" />
                 )}
               </button>
             </div>

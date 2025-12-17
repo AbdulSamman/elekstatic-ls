@@ -1,9 +1,9 @@
 "use client";
 
-import ProductBannerOwn from "../build-your-own/_components/ProductBannerOwn";
+import ProductBannerOwn from "../../build-your-own/_components/ProductBannerOwn";
 import { useContext, useEffect } from "react";
-import { AppContext } from "../AppContext";
-import BreadCrumb from "../_components/BreadCrumb";
+import { AppContext } from "../../AppContext";
+import BreadCrumb from "../../_components/BreadCrumb";
 import { useParams, useSearchParams } from "next/navigation";
 
 export default function ViewSummaryPage() {
@@ -22,7 +22,7 @@ export default function ViewSummaryPage() {
   }, [productId]);
 
   return (
-    <div className="py-8 px-2">
+    <div className="py-10 px-2">
       {productDetails?.title && (
         <BreadCrumb
           path={`/product-details/${productId}/build-your-own/view-summary`}
@@ -30,12 +30,15 @@ export default function ViewSummaryPage() {
           buildYourOwnName="Build Your Own"
         />
       )}
-      <div>
+      <div className="mt-10 xl:px-20 flex flex-col md:flex-row items-center justify-evenly xl:justify-evenly gap-4">
         <ProductBannerOwn productDetails={productDetails} />
       </div>
 
       {Object.keys(selected).map((section) => (
-        <div key={section}>
+        <div
+          key={section}
+          className="xl:w-2/5 md:w-2/3  flex items-start w-full"
+        >
           <strong>{section}</strong>:{" "}
           <span
             className={`${
