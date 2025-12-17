@@ -45,7 +45,7 @@ export default function BuildYourOwn({ productDetails }: any) {
   };
   return (
     <div className="w-full divide-y shadow-xl">
-      <span className="text-red-500 border-none flex justify-center items-center h-6">
+      <span className="text-red-500 border-none flex justify-center items-center h-6 mb-3 sm:mb-0">
         {feldMeldungMsg}
       </span>
       <h2 className="p-4 text-3xl text-center bg-slate-800 text-gray-300">
