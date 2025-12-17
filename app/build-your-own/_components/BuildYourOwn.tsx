@@ -10,7 +10,7 @@ export default function BuildYourOwn({ productDetails }: any) {
   const [openSection, setOpenSection] = useState<string | null>("cabinet");
   const [selected, setSelected] = useState<Record<string, any>>({});
   const router = useRouter();
-
+  const [feldMeldungMsg, setFeldMeldungMsg] = useState<string>("");
   useEffect(() => {
     const fetchSections = async () => {
       const res = await fetch("http://localhost:1337/api/buildsummaries");
@@ -21,15 +21,14 @@ export default function BuildYourOwn({ productDetails }: any) {
     fetchSections();
   }, []);
 
-  // const handleViewSummary = () => {
-  //   if (Object.keys(selected).length === 0) return; // Keine Auswahl
-  //   const queryString = new URLSearchParams({
-  //     selected: JSON.stringify(selected),
-  //   }).toString();
-
-  //   router.push(`/view-summary?${queryString}`);
-  // };
   const handleViewSummary = () => {
+    if (Object.keys(selected).length === 0) {
+      setFeldMeldungMsg(
+        `Please select at least one option before viewing the summary.`
+      );
+      return;
+    }
+
     const filledSelection = { ...selected };
 
     sections.forEach((section) => {
@@ -46,6 +45,9 @@ export default function BuildYourOwn({ productDetails }: any) {
   };
   return (
     <div className="w-full divide-y shadow-xl">
+      <span className="text-red-500 border-none flex justify-center items-center h-6">
+        {feldMeldungMsg}
+      </span>
       <h2 className="p-4 text-3xl text-center bg-slate-800 text-gray-300">
         {productDetails.title}
       </h2>
@@ -62,17 +64,17 @@ export default function BuildYourOwn({ productDetails }: any) {
             >
               {!isOpen ? (
                 <span className="flex gap-2 items-center justify-start w-50">
-                  <CirclePlus className="text-green-400" />
+                  <CirclePlus className="text-red-400" />
                   <span className="font-medium text-2xl">{section.title}</span>
                 </span>
               ) : (
                 <span className="flex gap-2 items-center justify-start w-50">
-                  <CircleMinus className="text-red-400" />
+                  <CircleMinus className="text-green-400" />
                   <span className="font-bold text-2xl">{section.title}</span>
                 </span>
               )}
 
-              <span className="text-sm text-gray-400">
+              <span className="text-sm text-gray-400 ">
                 {value ? value.label : "Select"}
               </span>
             </button>

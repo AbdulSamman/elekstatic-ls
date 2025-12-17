@@ -36,7 +36,14 @@ export default function ViewSummaryPage() {
 
       {Object.keys(selected).map((section) => (
         <div key={section}>
-          <strong>{section}</strong>: {selected[section].label}
+          <strong>{section}</strong>:{" "}
+          <span
+            className={`${
+              selected[section].label === "None" ? "text-red-500" : "text-black"
+            }`}
+          >
+            {selected[section].label}
+          </span>
         </div>
       ))}
     </div>
