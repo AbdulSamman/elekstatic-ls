@@ -80,19 +80,18 @@ function Header() {
             <nav
               aria-label="Global"
               ref={menuRef}
-              className={`${isMenuOpen ? "menuIsOpen" : "hidden"}  lg:block`}
+              className={`menuBase ${isMenuOpen ? "menuIsOpen" : ""} lg:block`}
             >
               {isMenuOpen && (
                 <button
-                  className="menuIcon text-white absolute right-0 t-0 m-6 cursor-pointer transition hover:text-gray-400 "
+                  className=" text-white absolute right-0 t-0 m-6 cursor-pointer transition hover:text-gray-400 "
                   onClick={handleToggleMenu}
                 >
                   <FiX className="w-12 h-12" />
                 </button>
               )}
-
-              <ul className="flex items-center gap-6 text-sm">
-                <li>
+              <ul className="flex flex-col items-center justify-center gap-6 text-sm lg:flex-row h-full p-1">
+                <li className="text-2xl lg:text-sm p-0.5">
                   <Link
                     className="text-white transition hover:text-gray-400 "
                     href="#"
@@ -101,7 +100,7 @@ function Header() {
                   </Link>
                 </li>
 
-                <li>
+                <li className="text-2xl lg:text-sm p-0.5">
                   <Link
                     className="text-white transition hover:text-gray-400"
                     href="#"
@@ -110,7 +109,7 @@ function Header() {
                   </Link>{" "}
                 </li>
 
-                <li>
+                <li className="text-2xl lg:text-sm p-0.5">
                   <Link
                     className="text-white transition hover:text-gray-400"
                     href="#"
@@ -119,7 +118,7 @@ function Header() {
                   </Link>{" "}
                 </li>
 
-                <li>
+                <li className="text-2xl lg:text-sm p-0.5">
                   <Link
                     className="text-white transition hover:text-gray-400 "
                     href="#"
@@ -128,7 +127,7 @@ function Header() {
                   </Link>{" "}
                 </li>
 
-                <li>
+                <li className="text-2xl lg:text-sm p-0.5">
                   <Link
                     className="text-white transition hover:text-gray-400 "
                     href="#"
@@ -162,7 +161,7 @@ function Header() {
 
               <div className="flex items-center gap-4">
                 <button
-                  className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 lg:hidden cursor-pointer "
+                  className="block rounded bg-gray-100 p-2.5 text-gray-600 hover:text-gray-600/75 lg:hidden cursor-pointer"
                   onClick={handleToggleMenu}
                 >
                   {!isMenuOpen ? (

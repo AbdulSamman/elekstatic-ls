@@ -15,7 +15,7 @@ function ProductItem({ filteredProducts }: any) {
   const listToRender = filteredProducts?.length ? filteredProducts : products;
 
   return (
-    <div className="grid max-[725px]:grid-cols-1 max-[1070px]:grid-cols-2 max-[1430px]:grid-cols-3 max-[9999px]:grid-cols-4 gap-4 place-items-center p-2 ">
+    <div className="grid max-[725px]:grid-cols-1 max-[1440px]:grid-cols-2 max-[1780px]:grid-cols-3 max-[3000px]:grid-cols-4 gap-4 place-items-center p-2  lg:w-[80%] lg:justify-self-center">
       {listToRender?.map((product: IProduct) => {
         return (
           <div
