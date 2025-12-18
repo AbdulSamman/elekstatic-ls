@@ -27,4 +27,52 @@ body {
       width: auto;
     }
   }
+
+  //Clerk
+  .authSignIn {
+    .cl-card {
+      display: flex;
+      height: 500px;
+      .cl-internal-x0fvpz {
+        .cl-headerTitle {
+          color: red;
+        }
+      }
+      .cl-formButtonPrimary {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  .cl-card {
+    padding: 12px;
+    input {
+      min-height: 3rem;
+      font-size: 1rem;
+    }
+    span,
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .cl-socialButtonsRoot,
+  .cl-socialButtons,
+  .cl-formButtonPrimary {
+    height: 3rem;
+    font-size: 1rem;
+  }
+  .cl-formFieldLabel {
+    font-size: 1rem;
+  }
+
+  .cl-internal-1dauvpw {
+    display: none;
+  }
+  .cl-footerAction {
+    span,
+    a {
+      font-size: 1rem;
+    }
+  }
 }
