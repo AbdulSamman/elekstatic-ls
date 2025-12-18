@@ -5,6 +5,9 @@ import "../styles/site.scss";
 import Footer from "./_components/Footer";
 import { AppProvider } from "./AppContext";
 import Header from "./_components/Header";
+import { ClerkProvider } from "@clerk/nextjs";
+
+import "./globals.css";
 
 const geistSans = Roboto({
   variable: "--font-geist-sans",
@@ -27,16 +30,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <AppProvider>
-          <Header />
-          {children}
-          <Footer />
-        </AppProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <AppProvider>
+            <Header />
+            {children}
+            <Footer />
+          </AppProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
