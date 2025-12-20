@@ -5,7 +5,6 @@ import Image from "next/image";
 const ProductBannerOwn = ({ productDetails }: any) => {
   return (
     <div className="productBanner">
-      {" "}
       {productDetails?.banner?.url ? (
         <Image
           src={productDetails?.banner?.url}
@@ -17,7 +16,7 @@ const ProductBannerOwn = ({ productDetails }: any) => {
           alt="ProductBannerOwn"
         />
       ) : (
-        <div className="h-75 lg:w-112.5 bg-slate-200 animate-pulse rounded-lg md:w-[300]"></div>
+        <div className="h-75 lg:w-110 bg-slate-200 animate-pulse rounded-lg md:w-110 "></div>
       )}
     </div>
   );

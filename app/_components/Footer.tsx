@@ -171,12 +171,12 @@ export const Footer = () => {
           <div className="flex flex-col justify-between pt-5 pb-10 border-t border-deep-purple-accent-200 sm:flex-row items-center">
             <div className="text-sm text-gray-100 flex items-center gap-2 justify-center">
               <FaRegCopyright />{" "}
-              <span>Copyright 2026 Abdulrazak All rights reserved.</span>
+              <span>Copyright 2026 Electronics Inc.. All rights reserved </span>
             </div>
             <div className="flex items-center mt-4 space-x-4 sm:mt-0">
               <Link
                 href="/"
-                className="transition-colors duration-300 text-deep-purple-100 hover:text-teal-accent-400"
+                className="transition-colors duration-300 text-gray-500 hover:text-gray-200 hover:scale-120"
               >
                 <span className="text-2xl">
                   <FaTiktok />
@@ -184,7 +184,7 @@ export const Footer = () => {
               </Link>
               <Link
                 href="/"
-                className="transition-colors duration-300 text-deep-purple-100 hover:text-teal-accent-400"
+                className="transition-colors duration-300 text-gray-500 hover:text-gray-200 hover:scale-120"
               >
                 <span className="text-2xl">
                   <FaXTwitter />
@@ -192,7 +192,7 @@ export const Footer = () => {
               </Link>
               <Link
                 href="/"
-                className="transition-colors duration-300 text-deep-purple-100 hover:text-teal-accent-400"
+                className="transition-colors duration-300 text-gray-500 hover:text-gray-200 hover:scale-120"
               >
                 <span className="text-2xl">
                   <FaInstagram />
@@ -200,9 +200,9 @@ export const Footer = () => {
               </Link>
               <Link
                 href="/"
-                className="transition-colors duration-300 text-deep-purple-100 hover:text-teal-accent-400"
+                className="transition-colors duration-300 text-gray-500 hover:text-gray-200 hover:scale-120"
               >
-                <span className="text-2xl">
+                <span className="text-2xl ">
                   <FaFacebook />
                 </span>
               </Link>

@@ -29,9 +29,9 @@ export default function BuildYourOwnPage({ params }: any) {
         />
       )}
 
-      <div className="mt-10 xl:px-20 flex flex-col md:flex-row items-center justify-between xl:justify-evenly gap-4">
+      <div className="mt-10 xl:px-20 flex flex-col md:flex-row items-center md:justify-between xl:justify-evenly gap-4 md:ml-15">
         <ProductBannerOwn productDetails={productDetails} />
-        <div className="xl:w-2/5 md:w-2/3  flex items-start w-full">
+        <div className="xl:w-3/5 md:w-2/3  flex items-start w-full">
           <BuildYourOwn productDetails={productDetails} />
         </div>
       </div>

@@ -127,21 +127,24 @@ const BreadCrumb = ({
   const clickableIndexes = [0, 2]; // 0 = Home, 2 = Product Title
   return (
     <nav aria-label="breadcrumb" className="flex w-full">
-      <ul className="flex overflow-hidden rounded-lg border border-gray-200 text-gray-700">
+      <ul
+        className="flex flex-wrap gap-2
+         rounded-lg border border-gray-200 text-gray-700"
+      >
         {links.map((link, index) => (
-          <li key={index} className="relative flex items-center">
+          <li key={index} className="relative flex items-center ">
             {index !== 0 && (
               <span className="absolute inset-y-0 -start-px h-10 w-4 bg-gray-200 [clip-path:polygon(0_0,0%_100%,100%_50%)] "></span>
             )}
             {clickableIndexes.includes(index) ? (
               <Link
                 href={link.href}
-                className="flex h-12 items-center bg-white pe-3 ps-5 sm:pe-4 sm:ps-8 text-xs font-medium capitalize hover:text-gray-900"
+                className="flex h-10 items-center bg-white px-5 py-4 text-xs font-medium capitalize hover:text-gray-900 text-nowrap"
               >
                 {link.name}
               </Link>
             ) : (
-              <span className="flex h-10 items-center bg-white pe-3 ps-5 sm:pe-4 sm:ps-8 text-xs font-medium capitalize">
+              <span className="flex h-10 items-center bg-white px-5 py-4  text-xs font-medium capitalize text-nowrap">
                 {link.name}
               </span>
             )}

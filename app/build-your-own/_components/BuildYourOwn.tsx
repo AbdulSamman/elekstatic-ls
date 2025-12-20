@@ -34,7 +34,7 @@ export default function BuildYourOwn({ productDetails }: any) {
 
     sections.forEach((section) => {
       if (!filledSelection[section.id]) {
-        filledSelection[section.id] = { label: "None" };
+        filledSelection[section.id] = { label: "Black" };
       }
     });
 
@@ -44,7 +44,7 @@ export default function BuildYourOwn({ productDetails }: any) {
     router.push(`/view-summary/${productDetails.documentId}?${queryString}`);
   };
   return (
-    <div className="w-full divide-y shadow-xl">
+    <div className="w-full divide-y shadow-xl ">
       <span className="text-red-500 border-none flex justify-center items-center h-6 mb-3 sm:mb-0">
         {feldMeldungMsg}
       </span>
