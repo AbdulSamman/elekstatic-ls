@@ -6,7 +6,7 @@ function ProductInfo({ productDetails }: any) {
   return (
     <>
       {productDetails.title ? (
-        <>
+        <div className="flex flex-col gap-4 items-center">
           <div className="flex flex-col gap-2 px-2  w-full md:w-150 pt-8">
             <h2 className="text-2xl">{productDetails?.title}</h2>
             <h2 className="text-[15px] text-gray-400 italic">
@@ -22,11 +22,11 @@ function ProductInfo({ productDetails }: any) {
 
           <Link
             href={`/build-your-own/${productDetails.documentId}`}
-            className="flex items-center justify-center gap-2 border bg-yellow-600 hover:bg-amber-500 py-2 px-4 rounded-sm font-bold"
+            className="flex items-center justify-center gap-2 border bg-yellow-600 hover:bg-amber-500 py-2 px-4 rounded-sm font-bold mt-4"
           >
             <FiBox className="text-2xl" /> <span>BUILD YOUR OWN</span>
           </Link>
-        </>
+        </div>
       ) : (
         <SkeletonEffectProductInfo />
       )}

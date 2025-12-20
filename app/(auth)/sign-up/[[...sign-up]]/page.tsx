@@ -17,7 +17,7 @@ export default function Home() {
 
   if (!isSignedIn) {
     return (
-      <div className="mt-23.5 flex justify-center h-150">
+      <div className="mt-23.5 h-screen flex justify-center">
         <SignUp />
       </div>
     );

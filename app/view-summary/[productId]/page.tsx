@@ -4,7 +4,8 @@ import ProductBannerOwn from "../../build-your-own/_components/ProductBannerOwn"
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import BreadCrumb from "../../_components/BreadCrumb";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 export default function ViewSummaryPage() {
   const { productDetails, getProductById }: any = useContext(AppContext);
@@ -30,6 +31,17 @@ export default function ViewSummaryPage() {
     const _total = qty * productDetails.price;
     setTotal(_total);
   }, [qty, productDetails?.price]);
+
+  // add to Cart
+  const { user } = useUser();
+  const router = useRouter();
+  const handleAddToCart = () => {
+    if (!user) {
+      router.push("/sign-in");
+    } else {
+      // logik add to cart
+    }
+  };
 
   return (
     <div className="py-10 px-2">
@@ -125,7 +137,10 @@ export default function ViewSummaryPage() {
               <button className="bg-slate-600 text-white px-6 py-3 rounded w-full md:w-auto cursor-pointer">
                 Print Summary
               </button>
-              <button className="bg-gray-800 text-white px-6 py-3 rounded w-full md:w-auto cursor-pointer">
+              <button
+                className="bg-gray-800 text-white px-6 py-3 rounded w-full md:w-auto cursor-pointer"
+                onClick={() => handleAddToCart()}
+              >
                 Add to Wish List
               </button>
               <button className="bg-slate-500 text-white px-6 py-3 rounded w-full md:w-auto cursor-pointer">

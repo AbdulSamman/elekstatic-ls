@@ -117,7 +117,7 @@ export default function BuildYourOwn({ productDetails }: any) {
       <div className="p-4">
         <button
           onClick={handleViewSummary}
-          className="w-full bg-slate-600 py-3 text-xl font-semibold text-white flex items-center justify-center gap-2"
+          className="w-full bg-slate-600 py-3 text-xl font-semibold text-white flex items-center justify-center gap-2 cursor-pointer hover:bg-slate-700"
         >
           <span>VIEW SUMMARY</span>
           <FaArrowRight />
