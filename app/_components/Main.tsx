@@ -101,7 +101,7 @@ function Main() {
         <div className="h-screen sm:flex-row bg-red-500 flex flex-col items-center justify-around text-white text-2xl">
           <div className="pt-8">
             <Image
-              src="/produc-1.png"
+              src="/product-1.png"
               loading="eager"
               alt="produc-1"
               width={150}
@@ -122,7 +122,7 @@ function Main() {
         <div className=" h-screen bg-blue-500 flex flex-col sm:flex-row items-center justify-around text-white text-2xl">
           <div className="pt-8">
             <Image
-              src="/produc-2.png"
+              src="/product-2.png"
               loading="eager"
               alt="produc-2"
               width={250}
@@ -143,7 +143,7 @@ function Main() {
         <div className="h-screen sm:flex-row bg-green-500 flex flex-col items-center justify-around text-white text-2xl">
           <div className="pt-8">
             <Image
-              src="/produc-3.png"
+              src="/product-3.png"
               loading="eager"
               alt="produc-1"
               width={250}
