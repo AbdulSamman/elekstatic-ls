@@ -15,7 +15,7 @@ function Main() {
     const fetchIntroVideo = async () => {
       try {
         const _introVideo = (
-          await axiosClient.get("/api/media-points?populate=*")
+          await axiosClient.get("/api/mediapoints?populate=*")
         ).data;
 
         // Prüfe das Feldnamen
