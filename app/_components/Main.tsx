@@ -35,7 +35,7 @@ function Main() {
         const fullUrl = url.startsWith("http")
           ? url
           : `${
-              process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"
+              process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:1337"
             }${url}`;
         setintroVideoUrl(fullUrl);
       } catch (err) {
