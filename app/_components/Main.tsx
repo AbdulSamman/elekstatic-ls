@@ -103,8 +103,8 @@ function Main() {
             <Image
               src="/product-1.png"
               loading="eager"
-              alt="produc-1"
-              width={150}
+              alt="product-1"
+              width={200}
               height={100}
               className="object-contain"
               priority
@@ -124,8 +124,8 @@ function Main() {
             <Image
               src="/product-2.png"
               loading="eager"
-              alt="produc-2"
-              width={250}
+              alt="product-2"
+              width={200}
               height={100}
               className="object-contain"
               priority
@@ -145,8 +145,8 @@ function Main() {
             <Image
               src="/product-3.png"
               loading="eager"
-              alt="produc-1"
-              width={250}
+              alt="product-1"
+              width={200}
               height={100}
               className="object-contain"
               priority
