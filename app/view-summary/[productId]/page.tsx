@@ -4,11 +4,11 @@ import ProductBannerOwn from "../../build-your-own/_components/ProductBannerOwn"
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import BreadCrumb from "../../_components/BreadCrumb";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useUser } from "@clerk/nextjs";
+import { useParams, useSearchParams } from "next/navigation";
 
 export default function ViewSummaryPage() {
-  const { productDetails, getProductById }: any = useContext(AppContext);
+  const { productDetails, getProductById, handleAddToCart }: any =
+    useContext(AppContext);
 
   const { productId } = useParams<{ productId: string }>();
   const searchParams = useSearchParams();
@@ -16,7 +16,6 @@ export default function ViewSummaryPage() {
   const selected = JSON.parse(searchParams.get("selected") || "{}");
 
   // calculate price
-
   const [qty, setQty] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
   if (Object.keys(selected).length === 0) return <div>No selections made</div>;
@@ -32,14 +31,11 @@ export default function ViewSummaryPage() {
     setTotal(_total);
   }, [qty, productDetails?.price]);
 
-  // add to Cart
-  const { user } = useUser();
-  const router = useRouter();
-  const handleAddToCart = () => {
-    if (!user) {
-      router.push("/sign-in");
-    } else {
-      // logik add to cart
+  const handleQtyChange = (e: any) => {
+    const value = e.target.value;
+    if (value.length <= 2 && value <= 10) {
+      // maximal 2 Ziffern
+      setQty(Number(value));
     }
   };
 
@@ -73,8 +69,11 @@ export default function ViewSummaryPage() {
                   >
                     Items
                   </th>
-                  <th scope="col" className="px-4 py-3 text-lg text-center">
-                    Qty
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-lg text-center flex flex-col"
+                  >
+                    Qty <span className="text-xs">(max. 10)</span>
                   </th>
                   <th scope="col" className="px-4 py-3 text-lg text-center">
                     Price
@@ -109,10 +108,11 @@ export default function ViewSummaryPage() {
                   <td className="py-6 align-top text-center">
                     <input
                       type="number"
+                      maxLength={2}
                       min="1"
                       max="10"
                       value={qty}
-                      onChange={(e) => setQty(Number(e.target.value))}
+                      onChange={(e) => handleQtyChange(e)}
                       className="w-20 border border-gray-300 px-2 py-1 outline-none text-gray-800"
                     />
                   </td>
@@ -121,7 +121,6 @@ export default function ViewSummaryPage() {
                   <td className="py-6 align-top text-center">
                     <input
                       type="text"
-                      min="1"
                       value={total.toLocaleString("de-DE")}
                       disabled
                       className="w-20 border border-gray-300 px-2 py-1 outline-none text-gray-800"
@@ -139,7 +138,7 @@ export default function ViewSummaryPage() {
               </button>
               <button
                 className="bg-gray-800 text-white px-6 py-3 rounded w-full md:w-auto cursor-pointer"
-                onClick={() => handleAddToCart()}
+                onClick={() => handleAddToCart(productDetails)}
               >
                 Add to Wish List
               </button>

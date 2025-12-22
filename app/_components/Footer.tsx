@@ -54,7 +54,7 @@ export const Footer = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-4 items-center mt-auto py-2 px-2 w-full">
+          <div className="grid grid-cols-4 items-center mt-auto py-2 px-4 w-full">
             <div className="h-30 xl:justify-self-end justify-self-center">
               <p className="font-semibold tracking-wide text-teal-accent-400 underline">
                 Category
@@ -160,10 +160,12 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-between pt-5 pb-10 border-t border-deep-purple-accent-200 sm:flex-row items-center">
+        <div className="flex flex-col justify-between pt-5 pb-10 border-t border-deep-purple-accent-200 sm:flex-row items-center px-4">
           <div className="text-sm text-gray-100 flex items-center gap-2 justify-center">
-            <FaRegCopyright />{" "}
-            <span>Copyright 2026 Electronics Inc.. All rights reserved </span>
+            <FaRegCopyright />
+            <span className="px-1">
+              Copyright 2026 Electronics Inc.. All rights reserved
+            </span>
           </div>
           <div className="flex items-center mt-4 space-x-4 sm:mt-0">
             <Link

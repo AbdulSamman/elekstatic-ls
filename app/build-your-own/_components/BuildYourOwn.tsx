@@ -1,26 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Section } from "@/app/interfaces";
 import { FaArrowRight } from "react-icons/fa6";
 import { LuCircleMinus, LuCirclePlus } from "react-icons/lu";
 
+import { useContext, useState } from "react";
+import { AppContext } from "../../AppContext";
+
 export default function BuildYourOwn({ productDetails }: any) {
-  const [sections, setSections] = useState<Section[]>([]);
   const [openSection, setOpenSection] = useState<string | null>("cabinet");
   const [selected, setSelected] = useState<Record<string, any>>({});
   const router = useRouter();
   const [feldMeldungMsg, setFeldMeldungMsg] = useState<string>("");
-  useEffect(() => {
-    const fetchSections = async () => {
-      const res = await fetch("http://localhost:1337/api/buildsummaries");
-      const json = await res.json();
-      const data = json.data[0].options;
-      setSections(data);
-    };
-    fetchSections();
-  }, []);
+
+  const { sections } = useContext(AppContext);
 
   const handleViewSummary = () => {
     if (Object.keys(selected).length === 0) {

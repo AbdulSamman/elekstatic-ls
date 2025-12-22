@@ -4,9 +4,12 @@ import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { CiShoppingCart } from "react-icons/ci";
+
+import { AppContext } from "../AppContext";
+import Cart from "../cart/_components/Cart";
 
 function Header() {
   const { user } = useUser();
@@ -28,6 +31,7 @@ function Header() {
   // //     url.toString().includes("sign-in") || url.toString().includes("sign-up")
   // //   );
   // // });
+  const { cart } = useContext(AppContext);
 
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -65,7 +69,10 @@ function Header() {
   //     window.removeEventListener("resize", handleResize);
   //   };
   // }, []);
-
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const handleCartOpen = () => {
+    setIsCartOpen(!isCartOpen);
+  };
   return (
     <header
       className={`${headerBg} border-t-6 border-primary ${headerPos} top-0 left-0 z-2 w-full`}
@@ -168,10 +175,14 @@ function Header() {
             ) : (
               <div className="flex items-center justify-center gap-4">
                 <h2 className="flex items-center gap-1 cursor-pointer">
-                  <CiShoppingCart className="text-3xl text-gray-200" />
-                  (0)
+                  <CiShoppingCart
+                    className="text-3xl text-gray-200"
+                    onClick={handleCartOpen}
+                  />
+                  <span className="text-gray-300">({cart.length})</span>
                 </h2>
                 <UserButton />
+                {isCartOpen && <Cart setIsCartOpen={setIsCartOpen} />}
               </div>
             )}
 

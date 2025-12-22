@@ -2,8 +2,11 @@ export interface IAppContext {
   products: IProduct[];
   getProductById: (id: string) => void;
   productDetails: any;
-
   productListCategory: string;
+  handleAddToCart: (payload: any) => void;
+  sections: Section[];
+  cart: any;
+  handleDeleteCartItem: (id: any) => void;
 }
 
 export interface IAppProvider {
@@ -94,4 +97,8 @@ export interface Section {
   id: string;
   title: string;
   options: Option[];
+}
+
+export interface CartProps {
+  setIsCartOpen: (isCartOpen: boolean) => void;
 }
