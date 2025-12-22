@@ -5,7 +5,7 @@ export interface IAppContext {
   productListCategory: string;
   handleAddToCart: (payload: any) => void;
   sections: Section[];
-  cart: any;
+  cart: any[];
   handleDeleteCartItem: (id: any) => void;
 }
 

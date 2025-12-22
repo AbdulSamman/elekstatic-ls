@@ -1,13 +1,3 @@
-// import { SignUp } from "@clerk/nextjs";
-
-// export default function Page() {
-//   return (
-//     <div className="mt-23.5 flex justify-center h-150">
-//       <SignUp />
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { SignUp, useUser } from "@clerk/nextjs";

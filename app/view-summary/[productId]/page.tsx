@@ -142,7 +142,7 @@ export default function ViewSummaryPage() {
               >
                 Add to Wish List
               </button>
-              <button className="bg-slate-500 text-white px-6 py-3 rounded w-full md:w-auto cursor-pointer">
+              <button className="bg-slate-600 text-white px-6 py-3 rounded w-full md:w-auto cursor-pointer">
                 Find Dealer →
               </button>
             </div>

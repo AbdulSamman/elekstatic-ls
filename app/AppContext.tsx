@@ -91,7 +91,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         };
 
         const res = (await CartApis.addToCart(data)).data;
-        console.log("res", res);
 
         setCart((prevCart: any[]) => [
           ...prevCart,
@@ -122,7 +121,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             user?.primaryEmailAddress?.emailAddress
           )
         ).data.data;
-        console.log("responseOld", rawCart);
 
         // site refresh cart items bleiben
         rawCart.forEach((cartItem: any) => {
@@ -135,7 +133,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           };
           cartItems.push(_cartItem);
         });
-        //console.log("getCartItems", _cartItems);
 
         return setCart(cartItems);
       })();

@@ -58,7 +58,9 @@ function ProductDetails({ params }: any) {
             {filteredProducts.length > 0 ? (
               <ProductItem filteredProducts={filteredProducts} />
             ) : (
-              <h3 className="mb-4">No Products Related To This Item!</h3>
+              <h3 className="mb-4 px-5 text-gray-600 italic text-sm">
+                No Products Related To This Item!
+              </h3>
             )}
             <div>
               <h2 className="text-xl p-5">Frequently Bought Together</h2>

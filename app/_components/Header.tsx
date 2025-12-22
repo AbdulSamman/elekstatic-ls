@@ -7,9 +7,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useContext } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { CiShoppingCart } from "react-icons/ci";
-
+import { FaRegUserCircle } from "react-icons/fa";
 import { AppContext } from "../AppContext";
-import Cart from "../cart/_components/Cart";
 
 function Header() {
   const { user } = useUser();
@@ -156,33 +155,26 @@ function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            {!user ? (
-              <div className="gap-4 flex">
-                <Link
-                  className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow-sm"
-                  href="/sign-in"
-                >
-                  Login
-                </Link>
-
-                <Link
-                  className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary"
-                  href="/sign-up"
-                >
-                  Register
-                </Link>
-              </div>
-            ) : (
-              <div className="flex items-center justify-center gap-4">
-                <h2 className="flex items-center gap-1 cursor-pointer">
-                  <CiShoppingCart
-                    className="text-3xl text-gray-200"
-                    onClick={handleCartOpen}
-                  />
+            <div className="gap-6 flex items-center">
+              <Link
+                className="rounded text-sm text-gray-100"
+                href={`${user ? "/cart" : "/sign-in-cart"}`}
+              >
+                <h2 className="flex items-center cursor-pointer">
+                  <CiShoppingCart className="text-3xl text-gray-200" />
                   <span className="text-gray-300">({cart.length})</span>
                 </h2>
+              </Link>
+            </div>
+            {!user ? (
+              <Link href="sign-in">
+                <div className="flex items-center cursor-pointer">
+                  <FaRegUserCircle className="text-2xl text-gray-200" />
+                </div>
+              </Link>
+            ) : (
+              <div className="flex items-center justify-center gap-4">
                 <UserButton />
-                {isCartOpen && <Cart setIsCartOpen={setIsCartOpen} />}
               </div>
             )}
 

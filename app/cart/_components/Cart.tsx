@@ -1,6 +1,6 @@
 import { IoClose } from "react-icons/io5";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../AppContext";
 import Image from "next/image";
 import Link from "next/link";
