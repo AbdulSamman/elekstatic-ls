@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { ChevronsRight } from "lucide-react";
 
 function SectionImages() {
@@ -52,10 +51,10 @@ function SectionImages() {
     // </div>
 
     <section id="produkte" className="max-w-7xl mx-auto px-4 py-28">
-      <h2 className="text-3xl font-semibold my-12 text-neutral-300">
+      <h2 className="text-3xl font-semibold my-12 text-neutral-300 ">
         BRAND NEW
       </h2>
-      <div className="grid md:grid-cols-3 gap-10">
+      <div className="grid md:grid-cols-3 gap-10 px-4">
         {sectionImages.map((sectionImage) => {
           return (
             <Card

@@ -161,7 +161,7 @@ function Main() {
     //     </div>
     //   </SwiperSlide>
     // </Swiper>
-    <section className="max-w-7xl mx-auto py-28 grid md:grid-cols-2 gap-16 items-center bg-neutral-950">
+    <section className="max-w-7xl mx-auto p-2 py-28 grid md:grid-cols-2 gap-16 items-center bg-neutral-950">
       <div className=" px-4">
         <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white">
           Elektrotechnische Produkte{" "}
@@ -171,18 +171,18 @@ function Main() {
           Individuelle Fertigung statt Online‑Checkout. Konfigurieren Sie Maße,
           Farben und Optionen – wir erstellen Ihr persönliches Angebot.
         </p>
-        <div className="mt-10 flex gap-2 sm:gap-4 ">
-          <Button size="lg">Produkt konfigurieren</Button>
+        <div className="mt-10 flex gap-4 sm:gap-4 ">
+          <Button size="lg">Product Configuration</Button>
           <Button
             size="lg"
             variant="outline"
             className="bg-neutral-200 text-neutral-900"
           >
-            Kontakt aufnehmen
+            Contact
           </Button>
         </div>
       </div>
-      <div className="bg-neutral-900 rounded-2xl h-80 flex items-center justify-center border border-neutral-800 ">
+      <div className="bg-neutral-900 rounded-2xl h-80 flex items-center justify-center border border-neutral-800 p-1">
         <video
           src={introVideoUrl}
           autoPlay={true}
