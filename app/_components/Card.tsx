@@ -1,6 +1,7 @@
 import { CardContent } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { Card as UiCard } from "@/components/ui/card";
+
 function Card() {
   return (
     <div>

@@ -17,6 +17,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
   const [productListCategory, setProductListCategory] = useState<any>([]);
 
+  const [sectionImages, setSectionImages] = useState([]);
+
   //get products
   useEffect(() => {
     (async () => {
@@ -155,6 +157,20 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     }
   };
 
+  // get secion Images
+  useEffect(() => {
+    try {
+      (async () => {
+        const res = (await axiosClient.get("/api/sectionimages?populate=*"))
+          .data;
+        setSectionImages(res.data);
+        console.log("res", res);
+      })();
+    } catch (error) {
+      console.error("failed to fetch sectionImages", error);
+    }
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
@@ -166,6 +182,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         sections,
         cart,
         handleDeleteCartItem,
+        sectionImages,
       }}
     >
       {children}

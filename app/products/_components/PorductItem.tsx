@@ -2,16 +2,14 @@
 
 import Image from "next/image";
 import { CiCircleList } from "react-icons/ci";
-import { IProduct } from "../interfaces";
+import { IProduct } from "../../interfaces";
 import Link from "next/link";
 import { useContext } from "react";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../../AppContext";
 
-function ProductItem({ filteredProducts }: any) {
+function PorductItem({ filteredProducts }: any) {
   const { products } = useContext(AppContext);
 
-  // Wenn filteredProducts existiert → benutze sie
-  // Wenn nicht → benutze alle products aus dem Context
   const listToRender = filteredProducts?.length ? filteredProducts : products;
 
   return (
@@ -56,4 +54,4 @@ function ProductItem({ filteredProducts }: any) {
   );
 }
 
-export default ProductItem;
+export default PorductItem;

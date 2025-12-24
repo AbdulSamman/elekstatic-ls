@@ -1,15 +1,14 @@
 "use client";
 
-import ProductItem from "./ProductItem";
+import ProductItem from "./_components/PorductItem";
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
-import SkeletonEffectProducts from "./SkeletonEffectProducts";
+import SkeletonEffectProducts from "../_components/SkeletonEffectProducts";
 
-const ProductSection = () => {
+const page = () => {
   const { products }: any = useContext(AppContext);
   return (
     <div className="h-full pb-6">
-      <h1 className="p-6 text-xl">Brand Neu</h1>
       {products.length > 0 ? (
         <ProductItem filteredProducts={[]} />
       ) : (
@@ -19,4 +18,4 @@ const ProductSection = () => {
   );
 };
 
-export default ProductSection;
+export default page;

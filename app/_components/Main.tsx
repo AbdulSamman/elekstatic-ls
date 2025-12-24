@@ -192,7 +192,7 @@ function Main() {
           className="w-full h-full object-fill rounded-2xl"
           style={{
             filter:
-              "grayscale(100%) brightness(90%) sepia(100%) hue-rotate(200deg) saturate(200%)",
+              "grayscale(100%) brightness(50%) sepia(100%) hue-rotate(200deg) saturate(100%)",
           }}
         />
       </div>

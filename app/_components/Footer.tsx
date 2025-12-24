@@ -11,8 +11,8 @@ export const Footer = () => {
   const { user } = useUser();
   return (
     <div
-      className="relative mt-16 text-gray-600"
-      style={{ backgroundColor: "black", zIndex: 0 }}
+      className="relative mt-16 text-neutral-400"
+      style={{ backgroundColor: "#0a0a0a", zIndex: 0 }}
     >
       <svg
         className="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-deep-purple-accent-400 "
@@ -20,8 +20,8 @@ export const Footer = () => {
         viewBox="0 0 1440 54"
       >
         <path
-          stroke="rgb(00 00 00)"
-          fill="rgb(00 00 00)"
+          stroke="#0a0a0a"
+          fill="#0a0a0a"
           d="M0 22L120 17C240 11 480 1 720 1C960 1 1200 11 1320 17L1440 22V54H1320C1200 54 960 54 720 54C480 54 240 54 120 54H0V22Z"
         />
       </svg>

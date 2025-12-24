@@ -5,7 +5,7 @@ import { AppContext } from "../../AppContext";
 import BreadCrumb from "@/app/_components/BreadCrumb";
 import ProductBanner from "../_components/ProductBanner";
 import ProductInfo from "../_components/ProductInfo";
-import ProductItem from "@/app/_components/ProductItem";
+import ProductItem from "../../products/_components/PorductItem";
 import { IProduct } from "@/app/interfaces";
 
 function ProductDetails({ params }: any) {

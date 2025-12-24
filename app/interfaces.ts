@@ -7,6 +7,7 @@ export interface IAppContext {
   sections: Section[];
   cart: any[];
   handleDeleteCartItem: (id: any) => void;
+  sectionImages: any[];
 }
 
 export interface IAppProvider {
