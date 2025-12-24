@@ -55,6 +55,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         `/api/products?filters[category][$eq]=${category}&populate=*`
       )
     ).data;
+    console.log("categors", response);
 
     setProductListCategory(response.data);
   };
@@ -164,7 +165,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         const res = (await axiosClient.get("/api/sectionimages?populate=*"))
           .data;
         setSectionImages(res.data);
-        console.log("res", res);
       })();
     } catch (error) {
       console.error("failed to fetch sectionImages", error);

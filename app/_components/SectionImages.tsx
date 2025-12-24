@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ChevronsRight } from "lucide-react";
 
 function SectionImages() {
-  const { sectionImages } = useContext(AppContext);
+  const { sectionImages, productListCategory } = useContext(AppContext);
 
   return (
     // <div className="grid max-[725px]:grid-cols-1 max-[1440px]:grid-cols-2 max-[1780px]:grid-cols-3 max-[3000px]:grid-cols-4 gap-4 place-items-center p-2  lg:w-[80%] lg:justify-self-center">
@@ -86,7 +86,7 @@ function SectionImages() {
                 </p>
                 <Link
                   className="mt-4 w-full text-sm text-neutral-600 flex items-center justify-end"
-                  href="/products"
+                  href={`/products?category=${sectionImage.category}?populate=*`}
                 >
                   Discover Now <ChevronsRight className="" />
                 </Link>

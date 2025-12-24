@@ -40,7 +40,7 @@ export default function ViewSummaryPage() {
   };
 
   return (
-    <div className="py-10 px-2">
+    <div className="px-4 py-28">
       {productDetails?.title && (
         <BreadCrumb
           path={`/product-details/${productId}/build-your-own/view-summary`}

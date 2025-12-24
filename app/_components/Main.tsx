@@ -161,7 +161,7 @@ function Main() {
     //     </div>
     //   </SwiperSlide>
     // </Swiper>
-    <section className="max-w-7xl mx-auto p-2 py-28 grid md:grid-cols-2 gap-16 items-center bg-neutral-950">
+    <section className="max-w-7xl mx-auto px-2 py-28 grid md:grid-cols-2 gap-16 items-center bg-neutral-950">
       <div className=" px-4">
         <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white">
           Elektrotechnische Produkte{" "}

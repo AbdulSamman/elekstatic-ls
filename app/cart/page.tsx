@@ -28,7 +28,7 @@ const Cart = () => {
   };
 
   return (
-    <section className="h-screen">
+    <section className="px-4 py-28">
       <div className="mx-auto max-w-7xl py-6 sm:px-6 sm:py-12 lg:px-8">
         <div className="mx-auto max-w-3xl p-2 flex flex-col gap-6">
           <header className="text-center">

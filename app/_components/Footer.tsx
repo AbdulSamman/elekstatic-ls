@@ -18,10 +18,10 @@ export const Footer = () => {
       <svg
         className="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-deep-purple-accent-400 "
         preserveAspectRatio="none"
-        viewBox="0 0 1440 54"
+        viewBox="0 0 1440 55"
       >
         <path
-          stroke="#171717"
+          stroke="none"
           fill="#171717"
           d="M0 22L120 17C240 11 480 1 720 1C960 1 1200 11 1320 17L1440 22V54H1320C1200 54 960 54 720 54C480 54 240 54 120 54H0V22Z"
         />

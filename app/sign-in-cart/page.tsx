@@ -8,7 +8,7 @@ import { useUser } from "@clerk/nextjs";
 function page() {
   const { user } = useUser();
   return (
-    <div className="h-screen flex flex-col items-center gap-10 px-2 py-6">
+    <div className="h-screen flex flex-col items-center gap-10 px-4 py-28">
       <div>
         <CiShoppingCart className="text-[120px]" />
       </div>

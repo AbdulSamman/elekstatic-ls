@@ -40,7 +40,7 @@ function ProductDetails({ params }: any) {
     ) || [];
 
   return (
-    <div className="py-10 px-2">
+    <div className="px-4 py-28">
       <BreadCrumb
         path={`/product-details/${documentId}/build-your-own`}
         productName={productDetails?.title}

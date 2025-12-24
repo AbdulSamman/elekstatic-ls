@@ -22,7 +22,7 @@ function ProductInfo({ productDetails }: any) {
 
           <Link
             href={`/build-your-own/${productDetails.documentId}`}
-            className="flex items-center justify-center gap-2 border bg-yellow-600 hover:bg-amber-500 py-2 px-4 rounded-sm font-bold mt-4"
+            className="flex items-center justify-center gap-2 border  py-3 px-5 rounded-sm font-bold mt-4"
           >
             <FiBox className="text-2xl" /> <span>BUILD YOUR OWN</span>
           </Link>

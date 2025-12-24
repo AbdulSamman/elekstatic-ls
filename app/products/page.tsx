@@ -8,7 +8,8 @@ import SkeletonEffectProducts from "../_components/SkeletonEffectProducts";
 const page = () => {
   const { products }: any = useContext(AppContext);
   return (
-    <div className="h-full pb-6">
+    <div className="max-w-7xl mx-auto px-2 py-28">
+      <h2 className="text-3xl font-semibold mb-12 text-white">Produkte</h2>
       {products.length > 0 ? (
         <ProductItem filteredProducts={[]} />
       ) : (

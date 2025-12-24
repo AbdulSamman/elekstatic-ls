@@ -14,8 +14,8 @@ function Header() {
   const { user } = useUser();
   // nav background ändern
   const pathname = usePathname();
-  const headerBg = pathname === "/" ? "backdrop-bg-neutral-950/90" : "bg-black";
-  const headerPos = pathname === "/" ? "absolute" : "static";
+  // const headerBg = pathname === "/" ? "backdrop-bg-neutral-950/90" : "bg-black";
+  // const headerPos = pathname === "/" ? "absolute" : "static";
 
   // // menu
   const menuRef = useRef<HTMLDivElement>(null); // Ref für das Menü-Element
@@ -181,7 +181,7 @@ function Header() {
 
   return (
     <header
-      className={`fixed ${headerBg} border-b border-neutral-800 ${headerPos} backdrop-blur z-50 top-0 left-0 w-full bg-neutral-950/40`}
+      className={`fixed  border-b border-neutral-800 backdrop-blur z-50 top-0 left-0 w-full bg-neutral-950/40`}
     >
       <div className="mx-auto max-w-400 px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">

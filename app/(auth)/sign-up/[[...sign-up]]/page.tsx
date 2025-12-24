@@ -7,7 +7,7 @@ export default function Home() {
 
   if (!isSignedIn) {
     return (
-      <div className="mt-23.5 h-screen flex justify-center">
+      <div className="px-4 py-28 flex justify-center">
         <SignUp />
       </div>
     );
