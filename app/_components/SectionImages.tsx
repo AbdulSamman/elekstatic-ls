@@ -71,7 +71,7 @@ function SectionImages() {
                     alt="sectionImage"
                     width={390}
                     height={160}
-                    style={{ width: "390px", height: "180px" }}
+                    style={{ width: "345px", height: "180px" }}
                     priority
                     className="object-containt transition duration-500 group-hover:scale-105 p-0.5 max-[605px]:w-full rounded-lg"
                   />
