@@ -12,21 +12,10 @@ export const Footer = () => {
   const { user } = useUser();
   return (
     <div
-      className="relative mt-16 text-neutral-400"
-      style={{ backgroundColor: "#171717", zIndex: 0 }}
+      className="relative text-neutral-400 curved-top"
+      style={{ backgroundColor: "rgb(0 0 0 / 0.9)", zIndex: 0 }}
     >
-      <svg
-        className="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-deep-purple-accent-400 "
-        preserveAspectRatio="none"
-        viewBox="0 0 1440 55"
-      >
-        <path
-          stroke="none"
-          fill="#171717"
-          d="M0 22L120 17C240 11 480 1 720 1C960 1 1200 11 1320 17L1440 22V54H1320C1200 54 960 54 720 54C480 54 240 54 120 54H0V22Z"
-        />
-      </svg>
-      <div className="pt-12">
+      <div className="pt-2">
         <div className="flex flex-col items-start justify-between w-full xl:flex-row gap-2 ">
           <div className="p-2 h-50 ">
             <div className="flex items-center gap-2">
