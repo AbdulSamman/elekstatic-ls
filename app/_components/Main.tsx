@@ -182,7 +182,7 @@ function Main() {
           </Button>
         </div>
       </div>
-      <div className="bg-neutral-900 rounded-2xl h-80 flex items-center justify-self-center border border-neutral-800 w-120 ">
+      <div className="bg-neutral-900 rounded-2xl h-80 flex items-center justify-center border border-neutral-800 p-1 mx-1">
         <video
           src={introVideoUrl}
           autoPlay={true}

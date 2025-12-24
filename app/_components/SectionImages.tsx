@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ChevronsRight } from "lucide-react";
 
 function SectionImages() {
   const { sectionImages } = useContext(AppContext);
@@ -61,7 +62,7 @@ function SectionImages() {
               key={sectionImage?.documentId}
               className="bg-neutral-900 border-neutral-800"
             >
-              <CardContent className="p-2 flex flex-col justify-self-center gap-2">
+              <CardContent className="p-4 flex flex-col justify-self-center gap-2">
                 <div className="h-40 flex items-center justify-center group cursor-pointer rounded-lg">
                   <Link href={`#`} className="h-40 mb-4">
                     <Image
@@ -83,12 +84,12 @@ function SectionImages() {
                     descItem.children?.map((child: any) => child.text).join(" ")
                   )}
                 </p>
-                <Button
-                  className="mt-4 w-full bg-neutral-200"
-                  variant="outline"
+                <Link
+                  className="mt-4 w-full text-sm text-neutral-600 flex items-center justify-end"
+                  href="#"
                 >
-                  Konfigurieren
-                </Button>
+                  Discover Now <ChevronsRight className="" />
+                </Link>
               </CardContent>
             </Card>
           );
