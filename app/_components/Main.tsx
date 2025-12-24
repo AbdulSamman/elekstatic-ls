@@ -182,14 +182,14 @@ function Main() {
           </Button>
         </div>
       </div>
-      <div className="bg-neutral-900 rounded-2xl h-80 flex items-center justify-center border border-neutral-800">
+      <div className="bg-neutral-900 rounded-2xl h-80 flex items-center justify-self-center border border-neutral-800 w-120 ">
         <video
           src={introVideoUrl}
           autoPlay={true}
           loop
           muted
           playsInline
-          className="w-full h-full object-fill rounded-2xl"
+          className="w-full h-full object-cover rounded-2xl"
           style={{
             filter:
               "grayscale(100%) brightness(50%) sepia(100%) hue-rotate(200deg) saturate(100%)",
