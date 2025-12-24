@@ -172,11 +172,13 @@ function Main() {
           Farben und Optionen – wir erstellen Ihr persönliches Angebot.
         </p>
         <div className="mt-10 flex gap-4 sm:gap-4 ">
-          <Button size="lg">Product Configuration</Button>
+          <Button size="lg" className="px-10 py-6 w-41">
+            Get STARTED
+          </Button>
           <Button
             size="lg"
             variant="outline"
-            className="bg-neutral-200 text-neutral-900"
+            className="bg-neutral-200 text-neutral-900 px-10 py-6 w-41"
           >
             Contact
           </Button>

@@ -186,7 +186,7 @@ function Header() {
       <div className="mx-auto max-w-400 px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="lg:flex lg:items-center lg:gap-12">
-            <div className="bg-black  border-4  border-gray-700 rounded-b-4xl min-w-12 min-h-12 flex items-center justify-center">
+            <div className="bg-black  border-4  border-neutral-800 rounded-b-4xl min-w-12 min-h-12 flex items-center justify-center">
               <Link href={"/"}>
                 <Image
                   src="/logo2.png"
@@ -219,27 +219,27 @@ function Header() {
             <ul className="flex flex-col items-center justify-center gap-8 text-sm lg:flex-row h-full p-1">
               <li className="text-2xl lg:text-sm">
                 <Link className="hover:text-white transition" href="#">
-                  PRODUKTE
+                  PRODUCTS
                 </Link>
               </li>
               <li className="text-2xl lg:text-sm">
                 <Link className="hover:text-white transition" href="#">
-                  SAMMLUNGEN
+                  COLLECTION
                 </Link>
               </li>
               <li className="text-2xl lg:text-sm">
                 <Link className="hover:text-white transition" href="#">
-                  UNTERSTÜTZUNG
+                  SUPPORT
                 </Link>
               </li>
               <li className="text-2xl lg:text-sm">
                 <Link className="hover:text-white transition" href="#">
-                  KONTAKT
+                  CONTAKT
                 </Link>
               </li>
               <li className="text-2xl lg:text-sm">
                 <Link className="hover:text-white transition" href="#">
-                  ÜBER UNS
+                  ABOUT US
                 </Link>
               </li>
             </ul>

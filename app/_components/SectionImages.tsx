@@ -50,11 +50,14 @@ function SectionImages() {
     //   })}
     // </div>
 
-    <section id="produkte" className="max-w-7xl mx-auto px-4 py-28">
+    <section
+      id="produkte"
+      className="max-w-7xl mx-auto px-4 py-28 bg-neutral-950/70"
+    >
       <h2 className="text-3xl font-semibold my-12 text-neutral-300 ">
-        BRAND NEW
+        FRONT PANEL MARKINGS
       </h2>
-      <div className="grid md:grid-cols-3 gap-10 px-4">
+      <div className="grid md:grid-cols-3 gap-10 px-4 ">
         {sectionImages.map((sectionImage) => {
           return (
             <Card
@@ -62,18 +65,16 @@ function SectionImages() {
               className="bg-neutral-900 border-neutral-800"
             >
               <CardContent className="p-4 flex flex-col justify-self-center gap-2">
-                <div className="h-40 flex items-center justify-center group cursor-pointer rounded-lg">
-                  <Link href={`#`} className="h-40 mb-4">
-                    <Image
-                      src={sectionImage?.banner?.url || "/logo2.png"}
-                      alt="sectionImage"
-                      width={390}
-                      height={160}
-                      style={{ width: "390px", height: "180px" }}
-                      priority
-                      className="object-fill transition duration-500 group-hover:scale-110 p-0.5 max-[605px]:w-full rounded-lg"
-                    />
-                  </Link>
+                <div className="h-40 flex items-center justify-center group rounded-lg">
+                  <Image
+                    src={sectionImage?.banner?.url || "/logo2.png"}
+                    alt="sectionImage"
+                    width={390}
+                    height={160}
+                    style={{ width: "390px", height: "180px" }}
+                    priority
+                    className="object-containt transition duration-500 group-hover:scale-105 p-0.5 max-[605px]:w-full rounded-lg"
+                  />
                 </div>
                 <h3 className="font-medium text-white mt-6">
                   {sectionImage.title}
@@ -85,7 +86,7 @@ function SectionImages() {
                 </p>
                 <Link
                   className="mt-4 w-full text-sm text-neutral-600 flex items-center justify-end"
-                  href="#"
+                  href="/products"
                 >
                   Discover Now <ChevronsRight className="" />
                 </Link>
