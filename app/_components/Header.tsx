@@ -14,7 +14,7 @@ function Header() {
   const { user } = useUser();
   // nav background ändern
   const pathname = usePathname();
-  const headerBg = pathname === "/" ? "bg-transparent" : "bg-black";
+  const headerBg = pathname === "/" ? "backdrop-bg-neutral-950/90" : "bg-black";
   const headerPos = pathname === "/" ? "absolute" : "static";
 
   // // menu
@@ -55,39 +55,146 @@ function Header() {
     };
   }, [isMenuOpen]);
 
-  // // resize menu wenn geöffnet ist
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     if (window.innerWidth > 767) {
-  //       setIsMenuOpen(false);
-  //     }
-  //   };
+  // return (
+  //   <header
+  //     className={`${headerBg} border-t-6 border-primary ${headerPos} top-0 left-0 z-2 w-full`}
+  //   >
+  //     <div className="mx-auto max-w-400 px-4 sm:px-6 lg:px-8">
+  //       <div className="flex h-16 items-center justify-between">
+  //         <div className="lg:flex lg:items-center lg:gap-12">
+  //           <div className="bg-primary border-4 border-borderCol rounded-b-4xl min-w-25 min-h-25">
+  //             <Link href={"/"}>
+  //               <Image
+  //                 src="/logo2.png"
+  //                 width={100}
+  //                 height={100}
+  //                 loading="eager"
+  //                 alt="logo"
+  //                 className="pb-2"
+  //               />
+  //             </Link>
+  //           </div>
+  //         </div>
 
-  //   window.addEventListener("resize", handleResize);
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
-  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
-  const handleCartOpen = () => {
-    setIsCartOpen(!isCartOpen);
-  };
+  //         <nav
+  //           aria-label="Global"
+  //           ref={menuRef}
+  //           className={`menuBase ${isMenuOpen ? "menuIsOpen" : ""} lg:block`}
+  //         >
+  //           {isMenuOpen && (
+  //             <button
+  //               className=" text-white absolute right-0 t-0 m-6 cursor-pointer transition hover:text-gray-400 "
+  //               onClick={handleToggleMenu}
+  //             >
+  //               <FiX className="w-12 h-12" />
+  //             </button>
+  //           )}
+  //           <ul className="flex flex-col items-center justify-center gap-6 text-sm lg:flex-row h-full p-1">
+  //             <li className="text-2xl lg:text-sm p-0.5">
+  //               <Link
+  //                 className="text-white transition hover:text-gray-400 "
+  //                 href="#"
+  //               >
+  //                 PRODUKTE
+  //               </Link>
+  //             </li>
+
+  //             <li className="text-2xl lg:text-sm p-0.5">
+  //               <Link
+  //                 className="text-white transition hover:text-gray-400"
+  //                 href="#"
+  //               >
+  //                 SAMMLUNGEN
+  //               </Link>{" "}
+  //             </li>
+
+  //             <li className="text-2xl lg:text-sm p-0.5">
+  //               <Link
+  //                 className="text-white transition hover:text-gray-400"
+  //                 href="#"
+  //               >
+  //                 UNTERSTÜTZUNG
+  //               </Link>{" "}
+  //             </li>
+
+  //             <li className="text-2xl lg:text-sm p-0.5">
+  //               <Link
+  //                 className="text-white transition hover:text-gray-400 "
+  //                 href="#"
+  //               >
+  //                 KONTAKT
+  //               </Link>{" "}
+  //             </li>
+
+  //             <li className="text-2xl lg:text-sm p-0.5">
+  //               <Link
+  //                 className="text-white transition hover:text-gray-400 "
+  //                 href="#"
+  //               >
+  //                 ÜBER UNS
+  //               </Link>{" "}
+  //             </li>
+  //           </ul>
+  //         </nav>
+
+  //         <div className="flex items-center gap-4">
+  //           <div className="gap-6 flex items-center">
+  //             <Link
+  //               className="rounded text-sm text-gray-100"
+  //               href={`${user ? "/cart" : "/sign-in-cart"}`}
+  //             >
+  //               <h2 className="flex items-center cursor-pointer">
+  //                 <CiShoppingCart className="text-3xl text-gray-200" />
+  //                 <span className="text-gray-300">({cart.length})</span>
+  //               </h2>
+  //             </Link>
+  //           </div>
+  //           {!user ? (
+  //             <Link href="sign-in">
+  //               <div className="flex items-center cursor-pointer">
+  //                 <FaRegUserCircle className="text-2xl text-gray-200" />
+  //               </div>
+  //             </Link>
+  //           ) : (
+  //             <div className="flex items-center justify-center gap-4">
+  //               <UserButton />
+  //             </div>
+  //           )}
+
+  //           <div className="flex items-center gap-4">
+  //             <button
+  //               className="block rounded bg-gray-100 p-2.5 text-gray-600 hover:text-gray-600/75 lg:hidden cursor-pointer"
+  //               onClick={handleToggleMenu}
+  //             >
+  //               {!isMenuOpen ? (
+  //                 <FiMenu className="menuIcon" />
+  //               ) : (
+  //                 <FiX className="menuIcon" />
+  //               )}
+  //             </button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </header>
+  // );
+
   return (
     <header
-      className={`${headerBg} border-t-6 border-primary ${headerPos} top-0 left-0 z-2 w-full`}
+      className={`fixed ${headerBg} border-b border-neutral-800 ${headerPos} backdrop-blur z-50 top-0 left-0 w-full bg-neutral-950/40`}
     >
       <div className="mx-auto max-w-400 px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="lg:flex lg:items-center lg:gap-12">
-            <div className="bg-primary border-4 border-borderCol rounded-b-4xl min-w-25 min-h-25">
+            <div className="bg-black  border-4  border-gray-700 rounded-b-4xl min-w-12 min-h-12 flex items-center justify-center">
               <Link href={"/"}>
                 <Image
                   src="/logo2.png"
-                  width={100}
-                  height={100}
+                  width={64}
+                  height={64}
                   loading="eager"
                   alt="logo"
-                  className="pb-2"
+                  className="object-contain"
                 />
               </Link>
             </div>
@@ -96,60 +203,44 @@ function Header() {
           <nav
             aria-label="Global"
             ref={menuRef}
-            className={`menuBase ${isMenuOpen ? "menuIsOpen" : ""} lg:block`}
+            className={`menuBase ${
+              isMenuOpen ? "menuIsOpen" : ""
+            } lg:block bg-neutral-950 lg:bg-transparent text-sm text-neutral-300`}
           >
             {isMenuOpen && (
               <button
-                className=" text-white absolute right-0 t-0 m-6 cursor-pointer transition hover:text-gray-400 "
+                className="absolute right-6 top-6 cursor-pointer text-neutral-800 hover:text-white transition"
                 onClick={handleToggleMenu}
               >
-                <FiX className="w-12 h-12" />
+                <FiX className="w-10 h-10 text-neutral-100" />
               </button>
             )}
-            <ul className="flex flex-col items-center justify-center gap-6 text-sm lg:flex-row h-full p-1">
-              <li className="text-2xl lg:text-sm p-0.5">
-                <Link
-                  className="text-white transition hover:text-gray-400 "
-                  href="#"
-                >
+
+            <ul className="flex flex-col items-center justify-center gap-8 text-sm lg:flex-row h-full p-1">
+              <li className="text-2xl lg:text-sm">
+                <Link className="hover:text-white transition" href="#">
                   PRODUKTE
                 </Link>
               </li>
-
-              <li className="text-2xl lg:text-sm p-0.5">
-                <Link
-                  className="text-white transition hover:text-gray-400"
-                  href="#"
-                >
+              <li className="text-2xl lg:text-sm">
+                <Link className="hover:text-white transition" href="#">
                   SAMMLUNGEN
-                </Link>{" "}
+                </Link>
               </li>
-
-              <li className="text-2xl lg:text-sm p-0.5">
-                <Link
-                  className="text-white transition hover:text-gray-400"
-                  href="#"
-                >
+              <li className="text-2xl lg:text-sm">
+                <Link className="hover:text-white transition" href="#">
                   UNTERSTÜTZUNG
-                </Link>{" "}
+                </Link>
               </li>
-
-              <li className="text-2xl lg:text-sm p-0.5">
-                <Link
-                  className="text-white transition hover:text-gray-400 "
-                  href="#"
-                >
+              <li className="text-2xl lg:text-sm">
+                <Link className="hover:text-white transition" href="#">
                   KONTAKT
-                </Link>{" "}
+                </Link>
               </li>
-
-              <li className="text-2xl lg:text-sm p-0.5">
-                <Link
-                  className="text-white transition hover:text-gray-400 "
-                  href="#"
-                >
+              <li className="text-2xl lg:text-sm">
+                <Link className="hover:text-white transition" href="#">
                   ÜBER UNS
-                </Link>{" "}
+                </Link>
               </li>
             </ul>
           </nav>
@@ -160,16 +251,17 @@ function Header() {
                 className="rounded text-sm text-gray-100"
                 href={`${user ? "/cart" : "/sign-in-cart"}`}
               >
-                <h2 className="flex items-center cursor-pointer">
-                  <CiShoppingCart className="text-3xl text-gray-200" />
-                  <span className="text-gray-300">({cart.length})</span>
+                <h2 className="flex items-center cursor-pointer text-neutral-100 hover:text-neutral-300  transition">
+                  <CiShoppingCart className="text-3xl" />
+                  <span className="text-sm">({cart.length})</span>
                 </h2>
               </Link>
             </div>
+
             {!user ? (
               <Link href="sign-in">
-                <div className="flex items-center cursor-pointer">
-                  <FaRegUserCircle className="text-2xl text-gray-200" />
+                <div className="flex items-center cursor-pointer text-neutral-100 hover:text-neutral-300 transition">
+                  <FaRegUserCircle className="text-2xl" />
                 </div>
               </Link>
             ) : (
@@ -180,11 +272,11 @@ function Header() {
 
             <div className="flex items-center gap-4">
               <button
-                className="block rounded bg-gray-100 p-2.5 text-gray-600 hover:text-gray-600/75 lg:hidden cursor-pointer"
+                className="block lg:hidden rounded-lg border border-neutral-400 p-2 text-neutral-100 hover:text-neutral-300  transition cursor-pointer"
                 onClick={handleToggleMenu}
               >
                 {!isMenuOpen ? (
-                  <FiMenu className="menuIcon" />
+                  <FiMenu className="menuIcon text-neutral-100" />
                 ) : (
                   <FiX className="menuIcon" />
                 )}

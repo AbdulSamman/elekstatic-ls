@@ -1,0 +1,30 @@
+import { CardContent } from "@/components/ui/card";
+import { Check } from "lucide-react";
+import { Card as UiCard } from "@/components/ui/card";
+function Card() {
+  return (
+    <div>
+      <section className="bg-neutral-900/50 py-24">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+          {[
+            "Individuelle Maße",
+            "Flexible Farbwahl",
+            "Direkter Herstellerkontakt",
+          ].map((item) => (
+            <UiCard key={item} className="bg-neutral-900 border-neutral-800">
+              <CardContent className="p-8">
+                <Check className="mb-4 text-white" />
+                <h3 className="font-semibold text-lg text-white">{item}</h3>
+                <p className="mt-2 text-sm text-neutral-400">
+                  Maßgeschneiderte Lösungen ohne komplizierten Online‑Shop.
+                </p>
+              </CardContent>
+            </UiCard>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default Card;

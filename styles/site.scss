@@ -1,14 +1,16 @@
 body {
   font-weight: bold;
-
+  background-color: rgb(10 10 10);
+  color: rgb(229 229 229);
   .menuBase {
     position: fixed;
     top: 0;
     right: 0;
     width: 60%;
-    height: 100%;
-    background: black;
-    z-index: 2;
+    background-color: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(0px);
+    z-index: 10;
+    height: 100vh;
 
     /* STARTPOSITION (geschlossen) */
     transform: translateX(100%);

@@ -5,9 +5,9 @@ import { Pagination } from "swiper/modules";
 import "swiper/css/pagination";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
 import axiosClient from "../_utils/axiosClient";
 
+import { Button } from "@/components/ui/button";
 function Main() {
   // introVideo
   const [introVideoUrl, setintroVideoUrl] = useState<any>();
@@ -47,120 +47,156 @@ function Main() {
   }, []);
 
   return (
-    <Swiper
-      spaceBetween={20}
-      slidesPerView={1}
-      loop={true}
-      pagination={{ clickable: true }}
-      modules={[Pagination]}
-    >
-      <SwiperSlide>
-        <div className="flex items-center justify-end text-white text-2xl">
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center not-[]:">
-            <h1 className="text-3xl font-bold text-gray-900 sm:text-5xl">
-              Understand user flow and
-              <strong className="text-yellow-600"> increase </strong>
-              conversions
-            </h1>
+    // <Swiper
+    //   spaceBetween={20}
+    //   slidesPerView={1}
+    //   loop={true}
+    //   pagination={{ clickable: true }}
+    //   modules={[Pagination]}
+    // >
+    //   <SwiperSlide>
+    //     <div className="flex items-center justify-end text-white text-2xl">
+    //       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center not-[]:">
+    //         <h1 className="text-3xl font-bold text-gray-900 sm:text-5xl">
+    //           Understand user flow and
+    //           <strong className="text-yellow-600"> increase </strong>
+    //           conversions
+    //         </h1>
 
-            <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque,
-              nisi. Natus, provident accusamus impedit minima harum corporis
-              iusto.
-            </p>
+    //         <p className="mt-4 text-base text-pretty text-gray-700 sm:text-lg/relaxed">
+    //           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque,
+    //           nisi. Natus, provident accusamus impedit minima harum corporis
+    //           iusto.
+    //         </p>
 
-            <div className="mt-4 flex gap-4 sm:mt-6">
-              <a
-                className="inline-block rounded border border-yellow-600 bg-primary px-5 py-3 font-medium text-yellow-600 shadow-sm transition-colors hover:bg-yellow-700"
-                href="#"
-              >
-                Get Started
-              </a>
+    //         <div className="mt-4 flex gap-4 sm:mt-6">
+    //           <a
+    //             className="inline-block rounded border border-yellow-600 bg-primary px-5 py-3 font-medium text-yellow-600 shadow-sm transition-colors hover:bg-yellow-700"
+    //             href="#"
+    //           >
+    //             Get Started
+    //           </a>
 
-              <a
-                className="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-yellow-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-yellow-900"
-                href="#"
-              >
-                Learn More
-              </a>
-            </div>
-          </div>
-          <div>
-            <video
-              src={introVideoUrl}
-              autoPlay={true}
-              loop
-              muted
-              playsInline
-              className="w-screen h-screen object-cover"
-            />
-          </div>
+    //           <a
+    //             className="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-yellow-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-yellow-900"
+    //             href="#"
+    //           >
+    //             Learn More
+    //           </a>
+    //         </div>
+    //       </div>
+    //       <div>
+    //         <video
+    //           src={introVideoUrl}
+    //           autoPlay={true}
+    //           loop
+    //           muted
+    //           playsInline
+    //           className="w-screen h-screen object-cover"
+    //         />
+    //       </div>
+    //     </div>
+    //   </SwiperSlide>
+    //   <SwiperSlide>
+    //     <div className="h-screen sm:flex-row bg-red-500 flex flex-col items-center justify-around text-white text-2xl">
+    //       <div className="pt-8">
+    //         <Image
+    //           src="/product-1.png"
+    //           loading="eager"
+    //           alt="product-1"
+    //           width={200}
+    //           height={100}
+    //           className="object-contain"
+    //           priority
+    //         />
+    //       </div>
+    //       <p className="text-2xl p-2 text-center sm:w-4xl ">
+    //         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima eum
+    //         obcaecati consectetur eveniet veritatis recusandae iste unde tempora
+    //         libero quod sed architecto, officia corrupti facere natus!
+    //         Laudantium totam tenetur atque?
+    //       </p>
+    //     </div>
+    //   </SwiperSlide>
+    //   <SwiperSlide>
+    //     <div className=" h-screen bg-blue-500 flex flex-col sm:flex-row items-center justify-around text-white text-2xl">
+    //       <div className="pt-8">
+    //         <Image
+    //           src="/product-2.png"
+    //           loading="eager"
+    //           alt="product-2"
+    //           width={200}
+    //           height={100}
+    //           className="object-contain"
+    //           priority
+    //         />
+    //       </div>
+    //       <p className="text-2xl p-2 text-center sm:w-4xl ">
+    //         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima eum
+    //         obcaecati consectetur eveniet veritatis recusandae iste unde tempora
+    //         libero quod sed architecto, officia corrupti facere natus!
+    //         Laudantium totam tenetur atque?
+    //       </p>
+    //     </div>
+    //   </SwiperSlide>
+    //   <SwiperSlide>
+    //     <div className="h-screen sm:flex-row bg-green-500 flex flex-col items-center justify-around text-white text-2xl">
+    //       <div className="pt-8">
+    //         <Image
+    //           src="/product-3.png"
+    //           loading="eager"
+    //           alt="product-1"
+    //           width={200}
+    //           height={100}
+    //           className="object-contain"
+    //           priority
+    //         />
+    //       </div>
+    //       <p className="text-2xl p-2 text-center sm:w-4xl ">
+    //         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima eum
+    //         obcaecati consectetur eveniet veritatis recusandae iste unde tempora
+    //         libero quod sed architecto, officia corrupti facere natus!
+    //         Laudantium totam tenetur atque?
+    //       </p>
+    //     </div>
+    //   </SwiperSlide>
+    // </Swiper>
+    <section className="max-w-7xl mx-auto px-4 py-28 grid md:grid-cols-2 gap-16 items-center bg-neutral-950">
+      <div>
+        <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white">
+          Elektrotechnische Produkte{" "}
+          <span className="text-neutral-400">nach Maß</span>
+        </h1>
+        <p className="mt-6 text-neutral-300 max-w-xl">
+          Individuelle Fertigung statt Online‑Checkout. Konfigurieren Sie Maße,
+          Farben und Optionen – wir erstellen Ihr persönliches Angebot.
+        </p>
+        <div className="mt-10 flex gap-2 sm:gap-4">
+          <Button size="lg">Produkt konfigurieren</Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="bg-neutral-200 text-neutral-900"
+          >
+            Kontakt aufnehmen
+          </Button>
         </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="h-screen sm:flex-row bg-red-500 flex flex-col items-center justify-around text-white text-2xl">
-          <div className="pt-8">
-            <Image
-              src="/product-1.png"
-              loading="eager"
-              alt="product-1"
-              width={200}
-              height={100}
-              className="object-contain"
-              priority
-            />
-          </div>
-          <p className="text-2xl p-2 text-center sm:w-4xl ">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima eum
-            obcaecati consectetur eveniet veritatis recusandae iste unde tempora
-            libero quod sed architecto, officia corrupti facere natus!
-            Laudantium totam tenetur atque?
-          </p>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className=" h-screen bg-blue-500 flex flex-col sm:flex-row items-center justify-around text-white text-2xl">
-          <div className="pt-8">
-            <Image
-              src="/product-2.png"
-              loading="eager"
-              alt="product-2"
-              width={200}
-              height={100}
-              className="object-contain"
-              priority
-            />
-          </div>
-          <p className="text-2xl p-2 text-center sm:w-4xl ">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima eum
-            obcaecati consectetur eveniet veritatis recusandae iste unde tempora
-            libero quod sed architecto, officia corrupti facere natus!
-            Laudantium totam tenetur atque?
-          </p>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="h-screen sm:flex-row bg-green-500 flex flex-col items-center justify-around text-white text-2xl">
-          <div className="pt-8">
-            <Image
-              src="/product-3.png"
-              loading="eager"
-              alt="product-1"
-              width={200}
-              height={100}
-              className="object-contain"
-              priority
-            />
-          </div>
-          <p className="text-2xl p-2 text-center sm:w-4xl ">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima eum
-            obcaecati consectetur eveniet veritatis recusandae iste unde tempora
-            libero quod sed architecto, officia corrupti facere natus!
-            Laudantium totam tenetur atque?
-          </p>
-        </div>
-      </SwiperSlide>
-    </Swiper>
+      </div>
+      <div className="bg-neutral-900 rounded-2xl h-80 flex items-center justify-center border border-neutral-800">
+        <video
+          src={introVideoUrl}
+          autoPlay={true}
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-fill rounded-2xl"
+          style={{
+            filter:
+              "grayscale(100%) brightness(90%) sepia(100%) hue-rotate(200deg) saturate(200%)",
+          }}
+        />
+      </div>
+    </section>
   );
 }
 
