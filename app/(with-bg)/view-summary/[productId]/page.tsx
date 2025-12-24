@@ -2,8 +2,8 @@
 
 import ProductBannerOwn from "../../build-your-own/_components/ProductBannerOwn";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../AppContext";
-import BreadCrumb from "../../_components/BreadCrumb";
+import { AppContext } from "../../../AppContext";
+import BreadCrumb from "../../../_components/BreadCrumb";
 import { useParams, useSearchParams } from "next/navigation";
 
 export default function ViewSummaryPage() {

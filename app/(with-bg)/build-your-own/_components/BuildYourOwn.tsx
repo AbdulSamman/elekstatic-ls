@@ -5,7 +5,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { LuCircleMinus, LuCirclePlus } from "react-icons/lu";
 
 import { useContext, useState } from "react";
-import { AppContext } from "../../AppContext";
+import { AppContext } from "../../../AppContext";
 
 export default function BuildYourOwn({ productDetails }: any) {
   const [openSection, setOpenSection] = useState<string | null>("cabinet");

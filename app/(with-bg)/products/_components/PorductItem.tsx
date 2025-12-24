@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { CiCircleList } from "react-icons/ci";
-import { IProduct } from "../../interfaces";
+import { IProduct } from "../../../interfaces";
 import Link from "next/link";
 import { useContext } from "react";
-import { AppContext } from "../../AppContext";
+import { AppContext } from "../../../AppContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 

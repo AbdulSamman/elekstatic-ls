@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useEffect, use } from "react";
-import { AppContext } from "../../AppContext";
+import { AppContext } from "../../../AppContext";
 import BreadCrumb from "@/app/_components/BreadCrumb";
 import ProductBanner from "../_components/ProductBanner";
 import ProductInfo from "../_components/ProductInfo";

@@ -2,8 +2,8 @@
 
 import ProductItem from "./_components/PorductItem";
 import { useContext } from "react";
-import { AppContext } from "../AppContext";
-import SkeletonEffectProducts from "../_components/SkeletonEffectProducts";
+import { AppContext } from "../../AppContext";
+import SkeletonEffectProducts from "../../_components/SkeletonEffectProducts";
 
 const page = () => {
   const { products }: any = useContext(AppContext);
