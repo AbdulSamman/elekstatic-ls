@@ -1,11 +1,12 @@
 "use client";
 
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { FaXTwitter, FaTiktok, FaRegCopyright } from "react-icons/fa6";
+import { FaXTwitter, FaTiktok } from "react-icons/fa6";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
+import { Copyright } from "lucide-react";
 
 export const Footer = () => {
   const { user } = useUser();
@@ -162,9 +163,10 @@ export const Footer = () => {
         </div>
         <div className="flex flex-col justify-between pt-5 pb-10 border-t border-deep-purple-accent-200 sm:flex-row items-center px-4">
           <div className="text-sm text-gray-100 flex items-center gap-2 justify-center">
-            <FaRegCopyright />
+            <Copyright />
             <span className="px-1">
-              Copyright 2026 Electronics Inc.. All rights reserved
+              ABULRAZAK SAMMAN Copyright 2026 Electronics Inc.. All rights
+              reserved
             </span>
           </div>
           <div className="flex items-center mt-4 space-x-4 sm:mt-0">
