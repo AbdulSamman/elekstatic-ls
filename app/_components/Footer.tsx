@@ -44,11 +44,11 @@ export const Footer = () => {
                   className="w-20 h-auto"
                 />
               </Link>
-              <span className="ml-2 text-xl font-bold tracking-wide text-gray-400 uppercase">
+              <span className="ml-2 text-xl font-bold tracking-wide text-neutral-400 uppercase">
                 L.S.I 26
               </span>
             </div>
-            <p className="text-sm text-gray-400 p-2 w-full sm:w-130">
+            <p className="text-sm text-neutral-400 p-2 w-full sm:w-130">
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
               accusantium doloremque laudantium, totam rem aperiam. Eaque ipsa
               quae ab illo inventore veritatis et quasi architecto beatae
@@ -162,17 +162,16 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col justify-between pt-5 pb-10 border-t border-deep-purple-accent-200 sm:flex-row items-center px-4">
-          <div className="text-sm text-gray-100 flex items-center gap-2 justify-center">
+          <div className="text-sm text-neutral-200 flex items-center gap-2 justify-center">
             <Copyright />
-            <span className="px-1">
-              ABULRAZAK SAMMAN Copyright 2026 Electronics Inc.. All rights
-              reserved
+            <span className="px-1 text-center">
+              Copyright 2026 SAMMAN Electronics Inc.. All rights reserved
             </span>
           </div>
           <div className="flex items-center mt-4 space-x-4 sm:mt-0">
             <Link
               href="/"
-              className="transition-colors duration-300 text-gray-500 hover:text-gray-200 hover:scale-120"
+              className="transition-colors duration-300 text-neutral-500 hover:text-neutral-200 hover:scale-120"
             >
               <span className="text-2xl">
                 <FaTiktok />
@@ -180,7 +179,7 @@ export const Footer = () => {
             </Link>
             <Link
               href="/"
-              className="transition-colors duration-300 text-gray-500 hover:text-gray-200 hover:scale-120"
+              className="transition-colors duration-300 text-neutral-500 hover:text-neutral-200 hover:scale-120"
             >
               <span className="text-2xl">
                 <FaXTwitter />
@@ -188,7 +187,7 @@ export const Footer = () => {
             </Link>
             <Link
               href="/"
-              className="transition-colors duration-300 text-gray-500 hover:text-gray-200 hover:scale-120"
+              className="transition-colors duration-300 text-neutral-500 hover:text-neutral-200 hover:scale-120"
             >
               <span className="text-2xl">
                 <FaInstagram />
@@ -196,7 +195,7 @@ export const Footer = () => {
             </Link>
             <Link
               href="/"
-              className="transition-colors duration-300 text-gray-500 hover:text-gray-200 hover:scale-120"
+              className="transition-colors duration-300 text-neutral-500 hover:text-neutral-200 hover:scale-120"
             >
               <span className="text-2xl ">
                 <FaFacebook />

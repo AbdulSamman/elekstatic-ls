@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ChevronsRight } from "lucide-react";
 
 function SectionImages() {
-  const { sectionImages, productListCategory } = useContext(AppContext);
+  const { sectionImages } = useContext(AppContext);
 
   return (
     // <div className="grid max-[725px]:grid-cols-1 max-[1440px]:grid-cols-2 max-[1780px]:grid-cols-3 max-[3000px]:grid-cols-4 gap-4 place-items-center p-2  lg:w-[80%] lg:justify-self-center">
@@ -54,7 +54,7 @@ function SectionImages() {
       id="produkte"
       className="max-w-7xl mx-auto px-4 py-28 bg-neutral-950/70"
     >
-      <h2 className="text-3xl font-semibold my-12 text-neutral-300 ">
+      <h2 className="text-2xl font-semibold my-12 text-neutral-300 ">
         FRONT PANEL MARKINGS
       </h2>
       <div className="grid md:grid-cols-3 gap-10 px-4 ">
