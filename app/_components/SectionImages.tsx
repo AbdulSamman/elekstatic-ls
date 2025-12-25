@@ -54,15 +54,15 @@ function SectionImages() {
       id="produkte"
       className="max-w-7xl mx-auto px-4 py-28 bg-neutral-950/70"
     >
-      <h2 className="text-2xl font-semibold my-12 text-neutral-300 ">
+      <h2 className="text-2xl font-semibold my-12 text-neutral-400 ">
         FRONT PANEL MARKINGS
       </h2>
-      <div className="grid md:grid-cols-3 gap-10 px-4 ">
+      <div className="grid md:grid-cols-3 gap-10 px-4">
         {sectionImages.map((sectionImage) => {
           return (
             <Card
               key={sectionImage?.documentId}
-              className="bg-neutral-900 border-neutral-800"
+              className="bg-neutral-900/50 border-neutral-800 pb-0"
             >
               <CardContent className="p-4 flex flex-col justify-self-center gap-2">
                 <div className="h-40 flex items-center justify-center group rounded-lg">

@@ -54,15 +54,15 @@ function PorductItem({ filteredProducts }: any) {
     //   })}
     // </div>
 
-    <section id="produkte">
+    <section id="produkte" className="bg-neutral-950/10">
       <div className="grid md:grid-cols-3 gap-10 ">
         {listToRender.map((product: IProduct) => (
           <Card
             key={product.documentId}
-            className="bg-neutral-900 border-neutral-800 transition duration-500 hover:scale-105"
+            className="bg-neutral-900/50 border-neutral-800 transition duration-500 hover:scale-105"
           >
             <CardContent className="product-6">
-              <div className="h-40 bg-neutral-800 rounded-lg mb-4">
+              <div className="h-40 rounded-lg mb-4">
                 <Link
                   href={`/product-details/${product?.documentId}`}
                   className=" max-[725px]:w-full shadow-md"

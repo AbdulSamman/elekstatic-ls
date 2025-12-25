@@ -14,11 +14,13 @@ function Card() {
           <UiCard key={item} className="bg-neutral-900 border-neutral-800">
             <CardContent className="p-8">
               <div className="flex items-center gap-4 my-4">
-                <Check className="text-white" />
-                <h3 className="font-semibold text-lg text-white">{item}</h3>
+                <Check className="text-neutral-200" />
+                <h3 className="font-semibold text-lg text-neutral-200">
+                  {item}
+                </h3>
               </div>
               <p className="mt-2 text-sm text-neutral-400">
-                Maßgeschneiderte Lösungen ohne komplizierten Online‑Shop.
+                Maßgeschneiderte Lösungen ohne komplizierten Online - Shop.
               </p>
             </CardContent>
           </UiCard>

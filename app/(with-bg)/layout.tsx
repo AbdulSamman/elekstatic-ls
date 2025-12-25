@@ -12,7 +12,7 @@ export default function WithBackgroundLayout({
       }}
     >
       {/* dunkles Overlay für Lesbarkeit */}
-      <div className="min-h-screen bg-black/60">{children}</div>
+      <div className="min-h-screen bg-black/80">{children}</div>
     </div>
   );
 }
