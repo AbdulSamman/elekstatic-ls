@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axiosClient from "../_utils/axiosClient";
 
 import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 function Main() {
   // introVideo
   const [introVideoUrl, setintroVideoUrl] = useState<any>();
@@ -171,15 +172,22 @@ function Main() {
           Individuelle Fertigung statt Online‑Checkout. Konfigurieren Sie Maße,
           Farben und Optionen – wir erstellen Ihr persönliches Angebot.
         </p>
-        <div className="mt-10 flex gap-4 sm:gap-4 ">
-          <Button size="lg" className="px-10 py-6 w-40 text-xl">
-            GET STARTED
+        <div className="mt-10 flex gap-4 sm:gap-4 flex-wrap ">
+          <Button
+            size="lg"
+            className="px-15 py-6 text-[18px] bg-neutral-100 text-black rounded-none w-full xl:w-auto"
+          >
+            <span className="flex items-center justify-center gap-2">
+              GET STARTED <ChevronRight />
+            </span>
           </Button>
           <Button
             size="lg"
-            className="bg-neutral-200/80 text-neutral-900 px-10 py-6 w-40 text-xl"
+            className=" text-neutral-100 px-15 py-6 text-xl rounded-none text-[18px] bg-transparent border border-white w-full xl:w-auto"
           >
-            CONTACT
+            <span className="flex items-center justify-center gap-2">
+              CONTACT SALES <ChevronRight />
+            </span>
           </Button>
         </div>
       </div>
