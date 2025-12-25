@@ -99,9 +99,15 @@ const BreadCrumb = ({
   // home
   links.push({ name: "Home", href: "/" });
 
+  //products
+  links.push({
+    name: "Products",
+    href: "/products",
+  });
+
   // product details
   if (segments[0] === "product-details") {
-    links.push({ name: "Product Details", href: "#" });
+    links.push({ name: "Details", href: "#" });
     links.push({
       name: productName,
       href: `/product-details/${segments[1]}`,
@@ -124,7 +130,7 @@ const BreadCrumb = ({
       href: `/product-details/${segments[1]}/build-your-own/view-summary`,
     });
   }
-  const clickableIndexes = [0, 2]; // 0 = Home, 2 = Product Title
+  const clickableIndexes = [0, 1, 3]; // 0 = Home, 2 = Product Title
   return (
     <nav aria-label="breadcrumb" className="flex px-1">
       <ul className="flex flex-wrap gap-1 text-neutral-400 px-1">

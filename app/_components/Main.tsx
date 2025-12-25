@@ -172,18 +172,18 @@ function Main() {
           Farben und Optionen – wir erstellen Ihr persönliches Angebot.
         </p>
         <div className="mt-10 flex gap-4 sm:gap-4 ">
-          <Button size="lg" className="px-10 py-6 w-41 text-xl">
-            Get Started
+          <Button size="lg" className="px-10 py-6 w-40 text-xl">
+            GET STARTED
           </Button>
           <Button
             size="lg"
-            className="bg-neutral-200 text-neutral-900 px-10 py-6 w-41 text-xl"
+            className="bg-neutral-200/80 text-neutral-900 px-10 py-6 w-40 text-xl"
           >
-            Contact
+            CONTACT
           </Button>
         </div>
       </div>
-      <div className="bg-neutral-900 rounded-2xl h-80 flex items-center justify-center border border-neutral-800 p-1">
+      <div className="bg-neutral-900 rounded-2xl h-80 flex items-center justify-center border border-neutral-800">
         <video
           src={introVideoUrl}
           autoPlay={true}
