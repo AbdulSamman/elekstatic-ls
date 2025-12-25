@@ -12,7 +12,7 @@ const ProductBannerOwn = ({ productDetails }: any) => {
           height={100}
           style={{ width: "auto" }}
           priority
-          className="object-contain transition-transform duration-500 hover:scale-[1.1]  max-w-full h-80 sm:h-140"
+          className="object-contain transition-transform duration-500 hover:scale-[1.1] p-2  max-w-full h-80 sm:h-140"
           alt="ProductBannerOwn"
         />
       ) : (

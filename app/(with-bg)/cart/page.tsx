@@ -31,16 +31,16 @@ const Cart = () => {
   };
 
   return (
-    <section className="pb-26">
-      <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-3xl p-2 flex flex-col gap-6">
-          <header className="text-center">
-            <h1 className="text-3xl font-bold text-slate-500 sm:text-5xl pt-30 uppercase">
+    <section className="pb-26 flex items-center justify-center mt-24">
+      <div className="mx-auto">
+        <div className="flex flex-col gap-6  w-screen items-center bg-neutral-900/70 pb-10">
+          <header className="text-center py-10">
+            <h1 className="text-3xl font-bold text-slate-500 sm:text-5xl uppercase">
               Your Selection
             </h1>
           </header>
           {cart.length === 0 ? (
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-4 ">
               <div>
                 <CiShoppingCart className="text-[120px]" />
               </div>
@@ -50,56 +50,60 @@ const Cart = () => {
               </h2>
             </div>
           ) : (
-            <div className="mt-8">
+            <div className="max-w-7xl">
               <ul className="space-y-4">
                 {cart?.map((cartItem: any) => {
                   return (
                     <li
-                      className="flex items-center gap-4 p-2"
+                      className="flex flex-col items-center gap-4 p-2 sm:flex-row"
                       key={cartItem.documentId}
                     >
-                      {cartItem?.cart?.product?.banner?.url && (
-                        <Image
-                          src={cartItem?.cart?.product?.banner?.url}
-                          alt="cartImage"
-                          width={65}
-                          height={70}
-                          className="cartImage object-contain rounded w-35 h-25"
-                          priority={true}
-                        />
-                      )}
-
                       <div>
-                        <h3 className="text-xl text-slate-600 line-clamp-1">
-                          {cartItem?.cart?.product?.title}
-                        </h3>
-
-                        <div className="my-0.5 space-y-px text-md text-gray-400">
-                          <div>
-                            Category: {cartItem?.cart?.product?.category}
-                          </div>
-                          <input
-                            type="text"
-                            disabled
-                            className="h-7 w-9 bg-gray-100 text-center rounded-md"
-                            value={`${cartItem?.cart?.qty}x`}
+                        {cartItem?.cart?.product?.banner?.url && (
+                          <Image
+                            src={cartItem?.cart?.product?.banner?.url}
+                            alt="cartImage"
+                            width={65}
+                            height={70}
+                            className="cartImage object-contain rounded w-35 h-25"
+                            priority={true}
                           />
-                        </div>
+                        )}
                       </div>
 
-                      <div className="flex flex-1 items-center justify-end gap-2 px-1">
-                        <div className="bg-gray-100 p-2 rounded-md text-gray-500 w-20">
-                          {cartItem?.cart?.product?.price} €
+                      <div className="flex w-full">
+                        <div>
+                          <h3 className="text-xl text-slate-600 line-clamp-1">
+                            {cartItem?.cart?.product?.title}
+                          </h3>
+
+                          <div className="my-0.5 space-y-px text-md text-gray-400">
+                            <div>
+                              Category: {cartItem?.cart?.product?.category}
+                            </div>
+                            <input
+                              type="text"
+                              disabled
+                              className="h-7 w-9 bg-gray-100 text-center rounded-md"
+                              value={`${cartItem?.cart?.qty}x`}
+                            />
+                          </div>
                         </div>
 
-                        <button
-                          className=" transition hover:text-red-500 hover:scale-110 text-[20px]"
-                          onClick={() =>
-                            handleDeleteCartItem(cartItem.documentId)
-                          }
-                        >
-                          <FaRegTrashCan />
-                        </button>
+                        <div className="flex flex-1 items-center justify-end gap-2 px-1">
+                          <div className="bg-gray-100 p-2 rounded-md text-gray-500 w-20">
+                            {cartItem?.cart?.product?.price} €
+                          </div>
+
+                          <button
+                            className=" transition hover:text-red-500 hover:scale-110 text-[20px]"
+                            onClick={() =>
+                              handleDeleteCartItem(cartItem.documentId)
+                            }
+                          >
+                            <FaRegTrashCan />
+                          </button>
+                        </div>
                       </div>
                     </li>
                   );
