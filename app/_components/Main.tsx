@@ -166,7 +166,7 @@ function Main() {
       <div className=" px-4">
         <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white">
           Elektrotechnische Produkte{" "}
-          <span className="text-neutral-400">nach Maß</span>
+          <span className="text-neutral-600">nach Maß</span>
         </h1>
         <p className="mt-6 text-neutral-300 max-w-xl">
           Individuelle Fertigung statt Online ‑ Checkout. Konfigurieren Sie
