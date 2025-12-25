@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const ProductBannerOwn = ({ productDetails }: any) => {
   return (
-    <div className=" max-w-full mx-auto block xl:pt-40">
+    <div className=" max-w-full mx-auto block my-auto">
       {productDetails?.banner?.url ? (
         <Image
           src={productDetails.banner.url}
@@ -12,7 +12,7 @@ const ProductBannerOwn = ({ productDetails }: any) => {
           height={100}
           style={{ width: "auto" }}
           priority
-          className="object-contain transition-transform duration-500 hover:scale-[1.1] p-2 max-w-full h-110 sm:h-60"
+          className="object-contain transition-transform duration-500 hover:scale-[1.1]  max-w-full h-80 sm:h-140"
           alt="ProductBannerOwn"
         />
       ) : (

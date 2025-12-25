@@ -169,8 +169,8 @@ function Main() {
           <span className="text-neutral-400">nach Maß</span>
         </h1>
         <p className="mt-6 text-neutral-300 max-w-xl">
-          Individuelle Fertigung statt Online‑Checkout. Konfigurieren Sie Maße,
-          Farben und Optionen – wir erstellen Ihr persönliches Angebot.
+          Individuelle Fertigung statt Online ‑ Checkout. Konfigurieren Sie
+          Maße, Farben und Optionen – wir erstellen Ihr persönliches Angebot.
         </p>
         <div className="mt-10 flex gap-4 sm:gap-4 flex-wrap ">
           <Button

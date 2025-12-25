@@ -20,14 +20,14 @@ function ProductInfo({ productDetails }: any) {
               {productDetails?.description?.[0]?.children?.[0]?.text}
             </p>
 
-            <span className="text-3xl font-bold text-primary mt-4">
+            <span className="text-3xl font-bold text-slate-500 mt-4">
               € {productDetails.price}
             </span>
           </div>
 
           <Link
             href={`/build-your-own/${productDetails.documentId}`}
-            className="flex items-center justify-center gap-3 border border-neutral-700 hover:border-primary transition px-6 py-3 rounded-md font-semibold tracking-wide mt-4 hover:bg-neutral-900/40"
+            className="flex items-center justify-center gap-3 border border-neutral-100 hover:border-gray-400 transition px-6 py-3 font-semibold tracking-wide mt-4 hover:bg-neutral-900/40"
           >
             <FiBox className="text-xl" />
             <span>BUILD YOUR OWN</span>

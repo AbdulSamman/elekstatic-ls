@@ -47,7 +47,7 @@ function ProductDetails({ params }: any) {
       </div>
 
       <div className="mt-20 ">
-        <h2 className="text-3xl font-semibold px-5 mb-6 text-neutral-400 xl:px-50  ">
+        <h2 className="text-2xl font-semibold px-5 mb-6 text-neutral-400  ">
           Similar Products
         </h2>
 
@@ -56,12 +56,12 @@ function ProductDetails({ params }: any) {
             {filteredProducts.length > 0 ? (
               <ProductItem filteredProducts={filteredProducts} />
             ) : (
-              <h3 className="mb-6 px-5 text-neutral-500 italic text-md xl:px-50">
+              <h3 className="mb-6 px-5 text-neutral-500 italic text-md  ">
                 No Products Related To This Item
               </h3>
             )}
 
-            <h2 className="text-3xl font-semibold px-5 mt-20 mb-6 text-neutral-400 xl:px-50">
+            <h2 className="text-2xl font-semibold px-5 mt-20 mb-6 text-neutral-400 ">
               Frequently Bought Together
             </h2>
 

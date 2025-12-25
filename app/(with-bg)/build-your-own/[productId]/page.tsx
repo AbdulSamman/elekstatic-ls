@@ -20,7 +20,7 @@ export default function BuildYourOwnPage({ params }: any) {
   const breadcrumbPath = `/product-details/${productId}/build-your-own`;
 
   return (
-    <div className="pb-26">
+    <div className="pb-26 px-2">
       {productDetails?.title && (
         <BreadCrumb
           path={breadcrumbPath}
