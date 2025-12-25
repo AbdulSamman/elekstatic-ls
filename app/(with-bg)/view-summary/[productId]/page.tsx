@@ -110,13 +110,13 @@ export default function ViewSummaryPage() {
                   {/* Qty */}
                   <td className="py-8 align-top text-center">
                     <input
-                      type="number"
+                      type="text"
                       maxLength={2}
                       min="1"
                       max="10"
                       value={qty}
                       onChange={(e) => handleQtyChange(e)}
-                      className="w-20 bg-neutral-900 border border-neutral-700 px-2 py-1 text-center text-neutral-200 outline-none focus:border-neutral-400 rounded"
+                      className="w-15 bg-neutral-900 border border-neutral-700 px-2 py-1 text-center text-neutral-200 outline-none focus:border-neutral-400 rounded"
                     />
                   </td>
 
@@ -124,7 +124,7 @@ export default function ViewSummaryPage() {
                   <td className="py-8 align-top text-center">
                     <input
                       type="text"
-                      value={total.toFixed(2)}
+                      value={total}
                       disabled
                       className="w-24 bg-neutral-900 border border-neutral-700 px-2 py-1 text-center text-neutral-300 rounded"
                     />

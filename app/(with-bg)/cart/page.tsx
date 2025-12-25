@@ -56,7 +56,7 @@ const Cart = () => {
                 {cart?.map((cartItem: any) => {
                   return (
                     <li
-                      className="flex flex-col items-center gap-10 px-2 sm:flex-row bg-neutral-900/30 mx-2 py-5"
+                      className="flex flex-col items-center  px-2 sm:flex-row bg-neutral-900/30 mx-2 py-5"
                       key={cartItem.documentId}
                     >
                       <div className="">
@@ -66,7 +66,7 @@ const Cart = () => {
                             alt="cartImage"
                             width={100}
                             height={100}
-                            className="cartImage object-contain rounded w-200 h-65"
+                            className="cartImage object-contain rounded w-200 h-50"
                             priority={true}
                           />
                         )}
