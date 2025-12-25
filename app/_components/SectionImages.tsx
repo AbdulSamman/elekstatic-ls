@@ -54,44 +54,54 @@ function SectionImages() {
       <h2 className="text-3xl font-semibold text-neutral-400 text-center pb-15">
         FRONT PANEL MARKINGS
       </h2>
-      <div className="grid md:grid-cols-3 gap-10 px-4">
-        {sectionImages.map((sectionImage) => {
-          return (
-            <Card
-              key={sectionImage?.documentId}
-              className="bg-neutral-900/50 border-neutral-800 pb-0"
-            >
-              <CardContent className="p-4 flex flex-col justify-self-center gap-2">
-                <div className="h-40 flex items-center justify-center group rounded-lg">
-                  <Image
-                    src={sectionImage?.banner?.url || "/logo2.png"}
-                    alt="sectionImage"
-                    width={390}
-                    height={160}
-                    style={{ width: "345px", height: "180px" }}
-                    priority
-                    className="object-containt transition duration-500 group-hover:scale-105 p-0.5 max-[605px]:w-full rounded-lg"
-                  />
-                </div>
-                <h3 className="font-medium text-white mt-6">
-                  {sectionImage.title}
-                </h3>
-                <p className="text-sm text-neutral-400 mt-1 h-15">
-                  {sectionImage.description?.map((descItem: any) =>
-                    descItem.children?.map((child: any) => child.text).join(" ")
-                  )}
-                </p>
-                <Link
-                  className="mt-4 w-full text-sm text-neutral-600 flex items-center justify-end"
-                  href={`/products?category=${sectionImage.category}?populate=*`}
-                >
-                  Discover Now <ChevronsRight className="" />
-                </Link>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
+      {sectionImages.length > 0 ? (
+        <div className="grid md:grid-cols-3 gap-10 px-4">
+          {sectionImages.map((sectionImage) => {
+            return (
+              <Card
+                key={sectionImage?.documentId}
+                className="bg-neutral-900/50 border-neutral-800 pb-0"
+              >
+                <CardContent className="p-4 flex flex-col justify-self-center gap-2">
+                  <div className="h-40 flex items-center justify-center group rounded-lg">
+                    <Image
+                      src={sectionImage?.banner?.url || "/logo2.png"}
+                      alt="sectionImage"
+                      width={390}
+                      height={160}
+                      style={{ width: "345px", height: "180px" }}
+                      priority
+                      className="object-containt transition duration-500 group-hover:scale-105 p-0.5 max-[605px]:w-full rounded-lg"
+                    />
+                  </div>
+                  <h3 className="font-medium text-white mt-6">
+                    {sectionImage.title}
+                  </h3>
+                  <p className="text-sm text-neutral-400 mt-1 h-15">
+                    {sectionImage.description?.map((descItem: any) =>
+                      descItem.children
+                        ?.map((child: any) => child.text)
+                        .join(" ")
+                    )}
+                  </p>
+                  <Link
+                    className="mt-4 w-full text-sm text-neutral-600 flex items-center justify-end"
+                    href={`/products?category=${sectionImage.category}?populate=*`}
+                  >
+                    Discover Now <ChevronsRight className="" />
+                  </Link>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="gap-6 flex  items-center justify-center px-4  flex-wrap">
+          <div className="h-50 sm:w-70 bg-neutral-800 animate-pulse rounded-lg  w-full"></div>
+          <div className="h-50  sm:w-70 bg-neutral-800 animate-pulse rounded-lg w-full"></div>
+          <div className="h-50  sm:w-70 bg-neutral-800 animate-pulse rounded-lg w-full"></div>
+        </div>
+      )}
     </section>
   );
 }

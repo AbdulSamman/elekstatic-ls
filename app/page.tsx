@@ -6,7 +6,7 @@ import SectionImages from "./_components/SectionImages";
 
 export default function Home() {
   return (
-    <div className="items-center justify-center font-sans relative ">
+    <div className="items-center justify-center font-sans ">
       <Main />
       <Card />
       <SectionImages />
