@@ -133,6 +133,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             cart: {
               id: cartItem.products.documentId,
               product: cartItem?.products[0],
+              qty: cartItem.cart?.qty ?? 1,
             },
           };
           cartItems.push(_cartItem);

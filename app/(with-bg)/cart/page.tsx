@@ -8,8 +8,9 @@ import { CiShoppingCart } from "react-icons/ci";
 
 const Cart = () => {
   const { cart, handleDeleteCartItem } = useContext(AppContext);
-
+  console.log("CART RAW:", cart);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+
   useEffect(() => {
     getTotalPrice();
   }, [cart]);
@@ -71,9 +72,9 @@ const Cart = () => {
                         )}
                       </div>
 
-                      <div className="flex items-center w-full px-5">
+                      <div className="flex flex-col  sm:flex-row sm:items-center w-full px-5">
                         <div>
-                          <h3 className="text-xl text-slate-600 line-clamp-1 py-2">
+                          <h3 className="text-xl text-slate-600 py-2">
                             {cartItem?.cart?.product?.title}
                           </h3>
 
@@ -91,7 +92,7 @@ const Cart = () => {
                         </div>
 
                         <div className="flex flex-1 items-center justify-end gap-4 px-1">
-                          <div className="bg-neutral-800/40 p-3 text-neutral-400 w-25 line-clamp-1 text-center">
+                          <div className="bg-neutral-800/40 p-3 text-neutral-400 w-25 line-clamp-1 text-center shrink-0">
                             {cartItem?.cart?.product?.price} €
                           </div>
 
