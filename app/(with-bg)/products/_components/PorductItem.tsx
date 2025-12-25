@@ -55,7 +55,7 @@ function PorductItem({ filteredProducts }: any) {
     //   })}
     // </div>
 
-    <section id="produkte" className="bg-neutral-950/80 w-full p-4">
+    <section id="produkte" className="bg-neutral-950/50 w-full p-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-350 mx-auto">
         {listToRender.map((product: IProduct) => (
           <Card

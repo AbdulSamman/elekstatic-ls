@@ -56,7 +56,7 @@ const Cart = () => {
                 {cart?.map((cartItem: any) => {
                   return (
                     <li
-                      className="flex flex-col items-center  px-2 sm:flex-row bg-neutral-900/30 mx-2 py-5"
+                      className="flex flex-col items-center  px-2 sm:flex-row bg-neutral-900/50 mx-2 py-5"
                       key={cartItem.documentId}
                     >
                       <div className="">
