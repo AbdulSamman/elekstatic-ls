@@ -51,7 +51,7 @@ function SectionImages() {
     // </div>
 
     <section id="produkte" className="max-w-7xl mx-auto sm:px-4 py-15 mb-20">
-      <h2 className="text-3xl font-semibold text-neutral-400 text-center py-10">
+      <h2 className="text-3xl font-semibold text-neutral-400 text-center pb-15">
         FRONT PANEL MARKINGS
       </h2>
       <div className="grid md:grid-cols-3 gap-10 px-4">

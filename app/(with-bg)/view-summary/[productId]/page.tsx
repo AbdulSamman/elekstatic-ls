@@ -40,7 +40,7 @@ export default function ViewSummaryPage() {
   };
 
   return (
-    <div className="px-4 py-28">
+    <div className="pb-26">
       {productDetails?.title && (
         <BreadCrumb
           path={`/product-details/${productId}/build-your-own/view-summary`}
@@ -124,7 +124,7 @@ export default function ViewSummaryPage() {
                   <td className="py-8 align-top text-center">
                     <input
                       type="text"
-                      value={total.toLocaleString("de-DE")}
+                      value={total.toFixed(2)}
                       disabled
                       className="w-24 bg-neutral-900 border border-neutral-700 px-2 py-1 text-center text-neutral-300 rounded"
                     />
@@ -144,7 +144,7 @@ export default function ViewSummaryPage() {
 
               <button
                 className="bg-neutral-800 text-neutral-200 px-6 py-3 rounded-md font-semibold hover:bg-neutral-700 transition w-full md:w-auto"
-                onClick={() => handleAddToCart(productDetails)}
+                onClick={() => handleAddToCart({ ...productDetails, qty })}
               >
                 Add to Wish List
               </button>

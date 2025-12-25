@@ -11,15 +11,17 @@ const page = () => {
 
   const breadcrumbPath = `/products`;
   return (
-    <div className="py-28">
+    <div className="">
       <BreadCrumb
         path={breadcrumbPath}
         productName={products.title}
         buildYourOwnName="PRODUCTS"
       />
 
-      <div className="flex flex-col items-center justify-center">
-        <h2 className="text-4xl font-semibold text-neutral-400">PRODUCTS</h2>
+      <div className="flex flex-col items-center justify-center pb-28 ">
+        <h2 className="text-4xl font-semibold text-neutral-400 pt-10">
+          PRODUCTS
+        </h2>
         <p className="max-w-2xl text-center py-10">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni eaque
           provident amet quo rem autem dolor itaque! Consequatur, incidunt

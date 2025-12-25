@@ -132,7 +132,7 @@ const BreadCrumb = ({
   }
   const clickableIndexes = [0, 1, 3]; // 0 = Home, 2 = Product Title
   return (
-    <nav aria-label="breadcrumb" className="flex px-1">
+    <nav aria-label="breadcrumb" className="flex px-1 pt-20 xl:pt-24">
       <ul className="flex flex-wrap gap-1 text-neutral-400 px-1">
         {links.map((link, index) => (
           <li key={index} className="relative flex items-center ">

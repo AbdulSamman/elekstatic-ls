@@ -34,20 +34,20 @@ function ProductDetails({ params }: any) {
     ) || [];
 
   return (
-    <div className="py-28">
+    <div className="pb-26">
       <BreadCrumb
         path={`/product-details/${documentId}/build-your-own`}
         productName={productDetails?.title}
         buildYourOwnName="...."
       />
 
-      <div className="my-24 xl:px-20 flex flex-col lg:flex-row items-center justify-center gap-2 sm:gap-32">
+      <div className="my-14 xl:px-20 flex flex-col lg:flex-row items-center xl:justify-evenly gap-10">
         <ProductBanner productDetails={productDetails} />
         <ProductInfo productDetails={productDetails} />
       </div>
 
-      <div className="mt-20">
-        <h2 className="text-2xl font-semibold px-5 mb-6 text-neutral-400">
+      <div className="mt-20 ">
+        <h2 className="text-3xl font-semibold px-5 mb-6 text-neutral-400 xl:px-50  ">
           Similar Products
         </h2>
 
@@ -56,12 +56,12 @@ function ProductDetails({ params }: any) {
             {filteredProducts.length > 0 ? (
               <ProductItem filteredProducts={filteredProducts} />
             ) : (
-              <h3 className="mb-6 px-5 text-neutral-500 italic text-sm">
+              <h3 className="mb-6 px-5 text-neutral-500 italic text-md xl:px-50">
                 No Products Related To This Item
               </h3>
             )}
 
-            <h2 className="text-2xl font-semibold px-5 mt-20 mb-6 text-neutral-400">
+            <h2 className="text-3xl font-semibold px-5 mt-20 mb-6 text-neutral-400 xl:px-50">
               Frequently Bought Together
             </h2>
 

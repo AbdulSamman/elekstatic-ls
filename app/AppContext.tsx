@@ -101,6 +101,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             documentId: res?.data?.documentId,
             cart: {
               product: product,
+              qty: product.qty ?? 1,
             },
           },
         ]);

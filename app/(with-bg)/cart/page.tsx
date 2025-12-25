@@ -8,6 +8,7 @@ import { CiShoppingCart } from "react-icons/ci";
 
 const Cart = () => {
   const { cart, handleDeleteCartItem } = useContext(AppContext);
+
   const [totalPrice, setTotalPrice] = useState<number>(0);
   useEffect(() => {
     getTotalPrice();
@@ -17,7 +18,9 @@ const Cart = () => {
     try {
       const prices: number[] = [];
       cart.forEach((item: any) => {
-        prices.push(parseFloat(item?.cart?.product?.price) * 1);
+        const price = parseFloat(item?.cart?.product?.price ?? 0);
+        const qty = item?.cart?.qty ?? 1;
+        prices.push(price * qty);
       });
       setTotalPrice(
         prices.reduce((total: number, price: number) => total + price, 0)
@@ -28,12 +31,12 @@ const Cart = () => {
   };
 
   return (
-    <section className="px-4 py-28">
-      <div className="mx-auto max-w-7xl py-6 sm:px-6 sm:py-12 lg:px-8">
+    <section className="pb-26">
+      <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl p-2 flex flex-col gap-6">
           <header className="text-center">
-            <h1 className="text-xl font-bold text-gray-900 sm:text-3xl">
-              Your Cart
+            <h1 className="text-3xl font-bold text-slate-500 sm:text-5xl pt-30 uppercase">
+              Your Selection
             </h1>
           </header>
           {cart.length === 0 ? (
@@ -61,17 +64,17 @@ const Cart = () => {
                           alt="cartImage"
                           width={65}
                           height={70}
-                          className="cartImage object-contain rounded w-25 h-20"
+                          className="cartImage object-contain rounded w-35 h-25"
                           priority={true}
                         />
                       )}
 
                       <div>
-                        <h3 className="text-md text-gray-900 line-clamp-1">
+                        <h3 className="text-xl text-slate-600 line-clamp-1">
                           {cartItem?.cart?.product?.title}
                         </h3>
 
-                        <div className="mt-0.5 space-y-px text-[14px] text-gray-600">
+                        <div className="my-0.5 space-y-px text-md text-gray-400">
                           <div>
                             Category: {cartItem?.cart?.product?.category}
                           </div>
@@ -79,7 +82,7 @@ const Cart = () => {
                             type="text"
                             disabled
                             className="h-7 w-9 bg-gray-100 text-center rounded-md"
-                            placeholder="1x"
+                            value={`${cartItem?.cart?.qty}x`}
                           />
                         </div>
                       </div>

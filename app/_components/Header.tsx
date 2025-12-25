@@ -234,7 +234,7 @@ function Header() {
               </li>
               <li className="text-2xl lg:text-sm">
                 <Link className="hover:text-white transition" href="#">
-                  CONTAKT
+                  CONTACT
                 </Link>
               </li>
               <li className="text-2xl lg:text-sm">

@@ -10,9 +10,9 @@ const ProductBanner = ({ productDetails }: any) => {
           src={productDetails.banner.url}
           width={100}
           height={100}
-          style={{ width: "auto", height: "440px" }}
+          style={{ width: "auto" }}
           priority
-          className="object-contain transition-transform duration-500 hover:scale-[1.03] p-2 max-w-full"
+          className="object-contain transition-transform duration-500 hover:scale-[1.1] p-2 max-w-full h-60 sm:h-90"
           alt="productDetailsBanner"
         />
       ) : (
