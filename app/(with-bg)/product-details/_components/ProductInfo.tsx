@@ -6,25 +6,31 @@ function ProductInfo({ productDetails }: any) {
   return (
     <>
       {productDetails.title ? (
-        <div className="flex flex-col gap-4 items-center">
-          <div className="flex flex-col gap-2 px-2  w-full md:w-150 pt-8">
-            <h2 className="text-2xl">{productDetails?.title}</h2>
-            <h2 className="text-[15px] text-gray-400 italic">
-              {productDetails?.category}
+        <div className="flex flex-col gap-6 items-center text-center lg:text-left">
+          <div className="flex flex-col gap-3 px-2 w-full md:w-150 pt-8">
+            <h2 className="text-3xl font-semibold tracking-tight text-white">
+              {productDetails.title}
             </h2>
-            <h2 className="text-[16px] text-gray-400">
+
+            <h2 className="text-sm uppercase tracking-wider text-neutral-400">
+              {productDetails.category}
+            </h2>
+
+            <p className="text-[15px] leading-relaxed text-neutral-300">
               {productDetails?.description?.[0]?.children?.[0]?.text}
-            </h2>
-            <span className="text-[32px] text-primary mt-3  ">
-              € {productDetails?.price}
+            </p>
+
+            <span className="text-3xl font-bold text-primary mt-4">
+              € {productDetails.price}
             </span>
           </div>
 
           <Link
             href={`/build-your-own/${productDetails.documentId}`}
-            className="flex items-center justify-center gap-2 border  py-3 px-5 rounded-sm font-bold mt-4"
+            className="flex items-center justify-center gap-3 border border-neutral-700 hover:border-primary transition px-6 py-3 rounded-md font-semibold tracking-wide mt-4 hover:bg-neutral-900/40"
           >
-            <FiBox className="text-2xl" /> <span>BUILD YOUR OWN</span>
+            <FiBox className="text-xl" />
+            <span>BUILD YOUR OWN</span>
           </Link>
         </div>
       ) : (

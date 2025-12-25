@@ -142,12 +142,12 @@ const BreadCrumb = ({
             {clickableIndexes.includes(index) ? (
               <Link
                 href={link.href}
-                className="flex  items-center justify-center bg-neutral-900 px-6 py-2 text-xs font-medium capitalize hover:text-neutral-500 text-nowrap  rounded-xl"
+                className="flex  items-center justify-center bg-neutral-900/50 px-6 py-2 text-xs font-medium capitalize hover:text-neutral-500 text-nowrap  rounded-xl"
               >
                 {link.name}
               </Link>
             ) : (
-              <span className="flex  items-center justify-center bg-neutral-900  px-6 py-2 text-xs font-medium capitalize text-nowrap hover:text-neutral-500  rounded-xl">
+              <span className="flex  items-center justify-center bg-neutral-900/50  px-6 py-2 text-xs font-medium capitalize text-nowrap hover:text-neutral-500  rounded-xl">
                 {link.name}
               </span>
             )}

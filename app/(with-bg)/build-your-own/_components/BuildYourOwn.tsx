@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa6";
 import { LuCircleMinus, LuCirclePlus } from "react-icons/lu";
-
 import { useContext, useState } from "react";
 import { AppContext } from "../../../AppContext";
 
@@ -18,7 +17,7 @@ export default function BuildYourOwn({ productDetails }: any) {
   const handleViewSummary = () => {
     if (Object.keys(selected).length === 0) {
       setFeldMeldungMsg(
-        `Please select at least one option before viewing the summary.`
+        "Please select at least one option before viewing the summary."
       );
       return;
     }
@@ -34,14 +33,17 @@ export default function BuildYourOwn({ productDetails }: any) {
     const queryString = new URLSearchParams({
       selected: JSON.stringify(filledSelection),
     }).toString();
+
     router.push(`/view-summary/${productDetails.documentId}?${queryString}`);
   };
+
   return (
-    <div className="w-full divide-y shadow-xl ">
-      <span className="text-red-500 border-none flex justify-center items-center h-6 mb-3 sm:mb-0">
+    <div className="w-full divide-y divide-neutral-800 border border-neutral-800 rounded-xl shadow-lg bg-neutral-900/40 max-w-3xl">
+      <span className="text-red-400 flex justify-center items-center h-6 text-sm p-4">
         {feldMeldungMsg}
       </span>
-      <h2 className="p-4 text-3xl text-center bg-slate-800 text-gray-300">
+
+      <h2 className="p-5 text-2xl text-center font-semibold tracking-wide bg-neutral-900/50 text-neutral-200 border-b border-neutral-800">
         {productDetails.title}
       </h2>
 
@@ -53,27 +55,32 @@ export default function BuildYourOwn({ productDetails }: any) {
           <div key={section.id}>
             <button
               onClick={() => setOpenSection(section.id)}
-              className="flex w-full items-center justify-between px-4 py-6 text-left"
+              className="flex w-full items-center justify-between px-5 py-6 text-left hover:bg-neutral-800/40 transition cursor-pointer"
             >
-              {!isOpen ? (
-                <span className="flex gap-2 items-center justify-start w-50">
-                  <LuCirclePlus className="text-red-400 text-2xl" />
-                  <span className="font-medium text-2xl">{section.title}</span>
+              <span className="flex gap-3 items-center w-50">
+                {isOpen ? (
+                  <LuCircleMinus className="text-neutral-200 text-xl" />
+                ) : (
+                  <LuCirclePlus className="text-neutral-500 text-xl" />
+                )}
+                <span
+                  className={`text-xl  ${
+                    isOpen
+                      ? "font-semibold text-neutral-100"
+                      : "text-neutral-300"
+                  }`}
+                >
+                  {section.title}
                 </span>
-              ) : (
-                <span className="flex gap-2 items-center justify-start w-50">
-                  <LuCircleMinus className="text-green-400 text-2xl" />
-                  <span className="font-bold text-2xl">{section.title}</span>
-                </span>
-              )}
+              </span>
 
-              <span className="text-sm text-gray-400 ">
+              <span className="text-md text-neutral-400 ">
                 {value ? value.label : "Select"}
               </span>
             </button>
 
             {isOpen && (
-              <div className="px-4 pb-4 flex flex-wrap gap-3">
+              <div className="px-5 pb-6 flex flex-wrap gap-3 ">
                 {section.options.map((option: any) => (
                   <button
                     key={option.id}
@@ -83,19 +90,23 @@ export default function BuildYourOwn({ productDetails }: any) {
                         [section.id]: option,
                       }))
                     }
-                    className={`relative flex h-10 min-w-10 items-center justify-center rounded text-sm transition
+                    className={`relative flex h-10 min-w-10 items-center justify-center rounded-md text-sm border transition cursor-pointer
                       ${
-                        value?.id === option.id &&
-                        "scale-115 border-black ring-2 ring-black"
+                        value?.id === option.id
+                          ? "border-neutral-200 ring-2 ring-neutral-200"
+                          : "border-neutral-700 hover:border-neutral-500"
                       }`}
                     style={{
                       backgroundColor: option.color ?? "transparent",
                       color: option.color ? "transparent" : "inherit",
                     }}
                   >
-                    {!option.color && option.label}
+                    <span className="p-2 text-neutral-400">
+                      {!option.color && option.label}
+                    </span>
+
                     {option.isNew && (
-                      <span className="absolute -top-2 -right-2 rounded-full bg-red-600 text-[10px] w-8 h-8 text-white flex items-center justify-center">
+                      <span className="absolute -top-2 -right-2 rounded-full bg-neutral-200 text-[10px] w-7 h-7 text-neutral-900 flex items-center justify-center font-semibold">
                         NEW
                       </span>
                     )}
@@ -107,10 +118,10 @@ export default function BuildYourOwn({ productDetails }: any) {
         );
       })}
 
-      <div className="p-4">
+      <div className="p-5">
         <button
           onClick={handleViewSummary}
-          className="w-full bg-slate-600 py-3 text-xl font-semibold text-white flex items-center justify-center gap-2 cursor-pointer hover:bg-slate-700"
+          className="w-full py-3 text-lg font-semibold text-neutral-900 bg-neutral-200/50 hover:bg-neutral-400 transition flex items-center justify-center gap-2 rounded-md cursor-pointer"
         >
           <span>VIEW SUMMARY</span>
           <FaArrowRight />

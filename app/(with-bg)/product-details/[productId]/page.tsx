@@ -11,19 +11,14 @@ import { IProduct } from "@/app/interfaces";
 function ProductDetails({ params }: any) {
   const paramsId: any = use(params);
   const documentId = paramsId.productId;
-  // for breadCrumb
 
   const { getProductById, productDetails, productListCategory, products }: any =
     useContext(AppContext);
 
   useEffect(() => {
-    if (!documentId) return;
-    if (documentId) {
-      getProductById(documentId);
-    }
+    if (documentId) getProductById(documentId);
   }, [documentId]);
 
-  //ausgewählte product simiral product auftauchen || [] undefined zu vermeiden
   const filteredProducts =
     productListCategory?.filter(
       (product: IProduct) =>
@@ -31,7 +26,6 @@ function ProductDetails({ params }: any) {
         product.documentId !== productDetails?.documentId
     ) || [];
 
-  //ausgewählte product nicht simiral product auftauchen
   const filteredProductsFrequently =
     products?.filter(
       (product: IProduct) =>
@@ -46,27 +40,32 @@ function ProductDetails({ params }: any) {
         productName={productDetails?.title}
         buildYourOwnName="...."
       />
-      <div className="my-20 xl:px-20 flex flex-col lg:flex-row items-center lg:justify-between xl:justify-evenly gap-4 lg:ml-15 ">
+
+      <div className="my-24 xl:px-20 flex flex-col lg:flex-row items-center justify-center gap-2 sm:gap-32">
         <ProductBanner productDetails={productDetails} />
         <ProductInfo productDetails={productDetails} />
       </div>
-      <div className=" mt-10">
-        <h2 className="text-xl p-5">Similar Products</h2>
+
+      <div className="mt-20">
+        <h2 className="text-2xl font-semibold px-5 mb-6 text-neutral-400">
+          Similar Products
+        </h2>
 
         {products.length > 0 && (
           <>
             {filteredProducts.length > 0 ? (
               <ProductItem filteredProducts={filteredProducts} />
             ) : (
-              <h3 className="mb-4 px-5 text-neutral-600 italic text-sm">
-                No Products Related To This Item!
+              <h3 className="mb-6 px-5 text-neutral-500 italic text-sm">
+                No Products Related To This Item
               </h3>
             )}
-            <div>
-              <h2 className="text-xl p-5">Frequently Bought Together</h2>
 
-              <ProductItem filteredProducts={filteredProductsFrequently} />
-            </div>
+            <h2 className="text-2xl font-semibold px-5 mt-20 mb-6 text-neutral-400">
+              Frequently Bought Together
+            </h2>
+
+            <ProductItem filteredProducts={filteredProductsFrequently} />
           </>
         )}
       </div>

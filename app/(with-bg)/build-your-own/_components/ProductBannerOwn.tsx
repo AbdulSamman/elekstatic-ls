@@ -4,19 +4,19 @@ import Image from "next/image";
 
 const ProductBannerOwn = ({ productDetails }: any) => {
   return (
-    <div className="productBanner">
+    <div className="object-contain p-2   mx-auto block">
       {productDetails?.banner?.url ? (
         <Image
-          src={productDetails?.banner?.url}
+          src={productDetails.banner.url}
           width={100}
           height={100}
           style={{ width: "auto", height: "440px" }}
           priority
-          className="object-contain p-0.5 max-[605px]:w-full"
+          className="object-contain p-2 "
           alt="ProductBannerOwn"
         />
       ) : (
-        <div className="h-75 lg:w-110 bg-slate-200 animate-pulse rounded-lg md:w-110 "></div>
+        <div className="h-75 w-full max-w-md bg-neutral-800/40 animate-pulse rounded-xl" />
       )}
     </div>
   );
