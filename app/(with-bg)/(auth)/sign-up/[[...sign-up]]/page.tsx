@@ -8,7 +8,14 @@ export default function Home() {
   if (!isSignedIn) {
     return (
       <div className="px-4 py-28 flex justify-center">
-        <SignUp />
+        <SignUp
+          appearance={{
+            variables: {
+              colorText: "#ffffff",
+              colorBackground: "#0a0a0ab3",
+            },
+          }}
+        />
       </div>
     );
   }

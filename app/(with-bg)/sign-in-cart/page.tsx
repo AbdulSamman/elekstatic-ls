@@ -25,14 +25,14 @@ function page() {
       )}
       <div className="flex flex-col items-center justify-between gap-15 sm:flex-row sm:w-auto w-full text-center">
         <Link
-          className="rounded-md bg-gray-200 px-15 py-3 text-md font-medium text-primary shadow-sm sm:w-auto w-full"
+          className=" bg-gray-200 px-15 py-3 text-lg font-medium text-primary  sm:w-70 w-full hover:bg-transparent hover:text-neutral-100 hover:border "
           href="/"
         >
           Back Home
         </Link>
 
         <Link
-          className="rounded-md bg-slate-600 px-15 py-3 text-md font-medium text-gray-200 sm:w-auto w-full"
+          className="bg-transparent hover:bg-neutral-300 hover:text-neutral-950 border border-neutral-100 px-15 py-3 text-lg font-medium text-neutral-200 sm:w-70 w-full"
           href="/sign-in"
         >
           Sign In

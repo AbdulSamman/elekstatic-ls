@@ -33,25 +33,52 @@ body {
 
   //Clerk
   .authSignIn {
+    h1 {
+      font-size: 2rem;
+      color: slategray;
+    }
     .cl-card {
       display: flex;
       height: 500px;
+      background-color: rgba(10, 10, 10, 0.7);
+      border: 2px solid gray;
+      border-radius: 15px;
 
       .cl-formButtonPrimary {
         margin-top: 1rem;
+      }
+    }
+    .cl-main {
+      .cl-socialButtonsBlockButton {
+        border: 1px solid gray;
       }
     }
   }
 
   .cl-card {
     padding: 12px;
+
     input {
       min-height: 3rem;
       font-size: 1rem;
+      background-color: rgba(10, 10, 10, 0.7);
+    }
+
+    label {
+      color: gray;
     }
     span,
     p {
       font-size: 1rem;
+      color: gray;
+    }
+  }
+  .cl-formButtonPrimary {
+    background-color: rgba(10, 10, 10, 0.7);
+    display: flex;
+    align-items: center;
+    span {
+      font-size: 1.5rem;
     }
   }
 
@@ -70,9 +97,18 @@ body {
     display: none;
   }
   .cl-footerAction {
-    span,
+    display: flex;
+    justify-items: center;
+    align-items: center;
+
+    span {
+      font-size: 0.9rem;
+      color: gray;
+    }
+
     a {
-      font-size: 1rem;
+      color: rgb(206, 205, 205);
+      font-size: 1.1rem;
     }
   }
   .cl-userButtonPopoverMain {

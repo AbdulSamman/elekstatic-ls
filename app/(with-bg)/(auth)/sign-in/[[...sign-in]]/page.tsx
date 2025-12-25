@@ -2,10 +2,17 @@ import { SignIn } from "@clerk/nextjs";
 
 export default function Page() {
   return (
-    <section className="px-4 py-28 authSignIn">
+    <section className="px-4 py-28 authSignIn ">
       <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
         <div className="max-w-xl lg:max-w-3xl">
-          <SignIn />
+          <SignIn
+            appearance={{
+              variables: {
+                colorText: "#ffffff",
+                colorBackground: "#0a0a0ab3",
+              },
+            }}
+          />
         </div>
       </main>
     </section>
