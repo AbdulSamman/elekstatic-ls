@@ -33,7 +33,7 @@ const Cart = () => {
   return (
     <section className="pb-26 flex items-center justify-center mt-24">
       <div className="mx-auto">
-        <div className="flex flex-col gap-6  w-screen items-center bg-neutral-900/70 pb-10">
+        <div className="flex flex-col gap-6  w-screen items-center bg-neutral-950/50 pb-10">
           <header className="text-center py-10">
             <h1 className="text-3xl font-bold text-slate-500 sm:text-5xl uppercase">
               Your Selection
@@ -51,52 +51,52 @@ const Cart = () => {
             </div>
           ) : (
             <div className="max-w-7xl">
-              <ul className="space-y-4">
+              <ul className="space-y-4 ">
                 {cart?.map((cartItem: any) => {
                   return (
                     <li
-                      className="flex flex-col items-center gap-4 p-2 sm:flex-row"
+                      className="flex flex-col items-center gap-10 px-2 sm:flex-row bg-neutral-900/30 mx-2 py-5"
                       key={cartItem.documentId}
                     >
-                      <div>
+                      <div className="">
                         {cartItem?.cart?.product?.banner?.url && (
                           <Image
                             src={cartItem?.cart?.product?.banner?.url}
                             alt="cartImage"
-                            width={65}
-                            height={70}
-                            className="cartImage object-contain rounded w-35 h-25"
+                            width={100}
+                            height={100}
+                            className="cartImage object-contain rounded w-200 h-65"
                             priority={true}
                           />
                         )}
                       </div>
 
-                      <div className="flex w-full">
+                      <div className="flex items-center w-full px-5">
                         <div>
-                          <h3 className="text-xl text-slate-600 line-clamp-1">
+                          <h3 className="text-xl text-slate-600 line-clamp-1 py-2">
                             {cartItem?.cart?.product?.title}
                           </h3>
 
                           <div className="my-0.5 space-y-px text-md text-gray-400">
-                            <div>
+                            <div className="my-4">
                               Category: {cartItem?.cart?.product?.category}
                             </div>
                             <input
                               type="text"
                               disabled
-                              className="h-7 w-9 bg-gray-100 text-center rounded-md"
+                              className="bg-neutral-800/40 text-center p-2 text-neutral-400 w-15 "
                               value={`${cartItem?.cart?.qty}x`}
                             />
                           </div>
                         </div>
 
-                        <div className="flex flex-1 items-center justify-end gap-2 px-1">
-                          <div className="bg-gray-100 p-2 rounded-md text-gray-500 w-20">
+                        <div className="flex flex-1 items-center justify-end gap-4 px-1">
+                          <div className="bg-neutral-800/40 p-3 text-neutral-400 w-25 line-clamp-1 text-center">
                             {cartItem?.cart?.product?.price} €
                           </div>
 
                           <button
-                            className=" transition hover:text-red-500 hover:scale-110 text-[20px]"
+                            className=" transition hover:text-neutral-400 hover:scale-110 text-[20px] cursor-pointer"
                             onClick={() =>
                               handleDeleteCartItem(cartItem.documentId)
                             }
@@ -127,8 +127,9 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
-              <h2 className="text-red-400 text-[12px] bg-gray-200 p-2 rounded-md mb-2">
-                Note: All Items will be sent together and with same color.
+              <h2 className="text-red-800 text-md bg-neutral-500/10 p-2 rounded-md mb-2 mx-2">
+                Note: All Items will be sent together and with same color if you
+                dont choose your color.
               </h2>
             </div>
           )}
