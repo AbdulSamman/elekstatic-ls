@@ -40,7 +40,7 @@ function ProductDetails({ params }: any) {
     ) || [];
 
   return (
-    <div className="px-4 py-28">
+    <div className="py-28">
       <BreadCrumb
         path={`/product-details/${documentId}/build-your-own`}
         productName={productDetails?.title}
@@ -58,7 +58,7 @@ function ProductDetails({ params }: any) {
             {filteredProducts.length > 0 ? (
               <ProductItem filteredProducts={filteredProducts} />
             ) : (
-              <h3 className="mb-4 px-5 text-gray-600 italic text-sm">
+              <h3 className="mb-4 px-5 text-neutral-600 italic text-sm">
                 No Products Related To This Item!
               </h3>
             )}

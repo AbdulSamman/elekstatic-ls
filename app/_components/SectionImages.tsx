@@ -50,11 +50,8 @@ function SectionImages() {
     //   })}
     // </div>
 
-    <section
-      id="produkte"
-      className="max-w-7xl mx-auto px-4 py-28 bg-neutral-950/70"
-    >
-      <h2 className="text-2xl font-semibold my-12 text-neutral-400 ">
+    <section id="produkte" className="max-w-7xl mx-auto sm:px-4 py-15 mb-20">
+      <h2 className="text-3xl font-semibold text-neutral-400 text-center py-10">
         FRONT PANEL MARKINGS
       </h2>
       <div className="grid md:grid-cols-3 gap-10 px-4">

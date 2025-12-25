@@ -54,20 +54,20 @@ function PorductItem({ filteredProducts }: any) {
     //   })}
     // </div>
 
-    <section id="produkte" className="bg-neutral-950/10">
-      <div className="grid md:grid-cols-3 gap-10 ">
+    <section id="produkte" className="bg-neutral-950/70 w-full p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-350 mx-auto">
         {listToRender.map((product: IProduct) => (
           <Card
             key={product.documentId}
-            className="bg-neutral-900/50 border-neutral-800 transition duration-500 hover:scale-105"
+            className="bg-neutral-900/50 border-neutral-800 transition duration-500 hover:scale-105 w-full"
           >
             <CardContent className="product-6">
               <div className="h-40 rounded-lg mb-4">
                 <Link
                   href={`/product-details/${product?.documentId}`}
-                  className=" max-[725px]:w-full shadow-md"
+                  className="w-full"
                 >
-                  <div className="max-[725px]:w-full flex items-center justify-center group cursor-pointer">
+                  <div className="w-full flex items-center justify-center group cursor-pointer">
                     <Image
                       src={product?.banner?.url || "/logo2.png"}
                       alt={product?.title || "bannerProducts"}
@@ -75,7 +75,7 @@ function PorductItem({ filteredProducts }: any) {
                       height={100}
                       style={{ width: "auto", height: "160px" }}
                       priority
-                      className="object-cover  p-0.5 max-[605px]:w-full"
+                      className="object-cover w-full"
                     />
                   </div>
                 </Link>
