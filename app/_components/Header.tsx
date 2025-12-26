@@ -9,6 +9,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import { CiShoppingCart } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { AppContext } from "../AppContext";
+import { LayoutDashboard } from "lucide-react";
 
 function Header() {
   const { user } = useUser();
@@ -246,6 +247,11 @@ function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
+            <div>
+              <Link href="/dashboard">
+                <LayoutDashboard />
+              </Link>
+            </div>
             <div className="gap-6 flex items-center">
               <Link
                 className="rounded text-sm text-gray-100"
