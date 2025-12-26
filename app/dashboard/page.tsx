@@ -15,12 +15,12 @@ import { useState } from "react";
 const data = [
   { name: "Jan", sales: 400 },
   { name: "Feb", sales: 300 },
-  { name: "Mar", sales: 500 },
+  { name: "Mar", sales: 300 },
   { name: "Apr", sales: 200 },
 ];
 
 export default function Dashboard() {
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const menuItems = [
     { name: "Dashboard", icon: <PieChart size={16} />, href: "#dashboard" },
