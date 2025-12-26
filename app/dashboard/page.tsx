@@ -30,17 +30,28 @@ export default function Dashboard() {
     { name: "Settings", icon: <Settings size={16} />, href: "#settings" },
   ];
 
+  const handleMenuToggle = () => {
+    setMenuOpen(!menuOpen);
+    if (window.innerWidth < 768) {
+      setMenuOpen(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 flex mt-16 pb-5">
       {/* Sidebar Menu */}
       <aside
         className={`min-h-screen bg-neutral-900 border-r border-neutral-800 p-4 transition-all duration-300 overflow-hidden ${
-          menuOpen ? "w-60" : "w-16"
+          menuOpen && window.innerWidth > 768 ? "w-60" : "w-14"
         }`}
       >
-        <div className="flex flex-col h-full">
-          <div className="flex justify-between items-center mb-6">
-            <Button onClick={() => setMenuOpen(!menuOpen)}>
+        <div className="flex flex-col items-start">
+          <div className="flex justify-between items-start mb-6">
+            <Button
+              onClick={handleMenuToggle}
+              className="bg-transparent"
+              style={{ padding: 0 }}
+            >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </Button>
           </div>
