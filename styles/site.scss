@@ -118,7 +118,11 @@ body {
     }
     width: 300px;
   }
-
+  .cl-userButtonPopoverActions {
+    .cl-userButtonPopoverActionButton {
+      color: white;
+    }
+  }
   .cl-userButtonPopoverCard {
     width: 300px;
   }

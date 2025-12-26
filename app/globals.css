@@ -47,16 +47,6 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-.swiper-pagination-bullet {
-  background-color: white !important;
-  opacity: 0.5;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: red !important;
-  opacity: 1;
-}
-
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
