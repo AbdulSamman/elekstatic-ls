@@ -259,6 +259,7 @@ function Header() {
               >
                 <h2 className="flex items-center cursor-pointer text-neutral-100 hover:text-neutral-300  transition">
                   <CiShoppingCart className="text-3xl" />
+
                   <span className="text-sm">({cart.length})</span>
                 </h2>
               </Link>

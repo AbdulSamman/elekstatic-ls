@@ -113,8 +113,13 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
   // [user] => wenn user sich ändert, soll cart auch geändert werden
   useEffect(() => {
-    user && getCartItems();
+    if (user) {
+      getCartItems();
+    } else {
+      setCart([]);
+    }
   }, [user]);
+
   // get products from Cart
   const getCartItems = () => {
     try {
