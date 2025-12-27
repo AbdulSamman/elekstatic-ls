@@ -84,24 +84,31 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       router.push("/sign-in");
     } else {
       try {
-        const data = {
+        const payload = {
           data: {
             userName: user.fullName,
             email: user.primaryEmailAddress?.emailAddress,
-            products: [product?.documentId],
-            selectedOptions: sections,
+            products: [
+              {
+                id: product.id, // numeric ID aus Strapi, nicht documentId
+                qty: product.qty ?? 1,
+                selectedOptions: product.selectedOptions ?? [],
+              },
+            ],
           },
         };
 
-        const res = (await CartApis.addToCart(data)).data;
+        const res = (await CartApis.addToCart(payload)).data;
 
         setCart((prevCart: any[]) => [
           ...prevCart,
           {
-            documentId: res?.data?.documentId,
+            documentId: res?.documentId, // <-- Strapi generiert id
+
             cart: {
               product: product,
               qty: product.qty ?? 1,
+              selectedOptions: product.selectedOptions ?? [],
             },
           },
         ]);
@@ -115,39 +122,36 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   useEffect(() => {
     if (user) {
       getCartItems();
-    } else {
-      setCart([]);
     }
   }, [user]);
 
   // get products from Cart
-  const getCartItems = () => {
+  const getCartItems = async () => {
+    if (!user) return;
+
     try {
-      (async () => {
-        const cartItems: any = [];
-        const rawCart = (
-          await CartApis.getUserCartItems(
-            user?.primaryEmailAddress?.emailAddress
-          )
-        ).data.data;
+      const rawCart = (
+        await CartApis.getUserCartItems(user.primaryEmailAddress?.emailAddress)
+      ).data.data;
 
-        // site refresh cart items bleiben
-        rawCart.forEach((cartItem: any) => {
-          const _cartItem: any = {
-            ...cartItem,
-            cart: {
-              id: cartItem.products.documentId,
-              product: cartItem?.products[0],
-              qty: cartItem.cart?.qty ?? 1,
-            },
-          };
-          cartItems.push(_cartItem);
-        });
+      const cartItems = rawCart.map((cartItem: any) => {
+        const product = cartItem.products?.[0] || {}; // erstes Produkt aus Array
+        const selected = cartItem.selectedOptions?.[0] || {}; // erstes selectedOption-Objekt
 
-        return setCart(cartItems);
-      })();
+        return {
+          documentId: cartItem.documentId,
+          cart: {
+            product: product,
+            qty: selected.qty ?? 1,
+            selectedOptions: selected.selectedOptions ?? [],
+          },
+        };
+      });
+
+      setCart(cartItems);
     } catch (error) {
-      console.error("Error fetching orders", error);
+      console.error("Error fetching cart items", error);
+      setCart([]);
     }
   };
 

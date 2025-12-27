@@ -24,9 +24,19 @@ export default function BuildYourOwn({ productDetails }: any) {
 
     const filledSelection = { ...selected };
 
-    sections.forEach((section) => {
+    // sections.forEach((section) => {
+    //   if (!filledSelection[section.id]) {
+    //     filledSelection[section.id] = { label: "Black" };
+    //   }
+    // });
+    sections.forEach((section: any) => {
       if (!filledSelection[section.id]) {
-        filledSelection[section.id] = { label: "Black" };
+        // Prüfe, ob Section Farboptionen hat
+        const hasColor = section.options?.some((opt: any) => opt.color);
+        filledSelection[section.id] = {
+          label: hasColor ? "Black" : "None",
+          ...(hasColor ? { color: "#000000" } : {}), // nur Farbe hinzufügen, wenn Farboption
+        };
       }
     });
 

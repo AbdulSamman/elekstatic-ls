@@ -7,14 +7,37 @@ import BreadCrumb from "../../../_components/BreadCrumb";
 import { useParams, useSearchParams } from "next/navigation";
 
 export default function ViewSummaryPage() {
-  const { productDetails, getProductById, handleAddToCart }: any =
+  const { productDetails, getProductById, handleAddToCart, sections }: any =
     useContext(AppContext);
 
   const { productId } = useParams<{ productId: string }>();
   const searchParams = useSearchParams();
 
-  const selected = JSON.parse(searchParams.get("selected") || "{}");
+  // Füge title für jede Section hinzu
+  const selectedFromUrl = JSON.parse(searchParams.get("selected") || "{}");
+  // Map: sectionId -> Section Title
+  const sectionMap: Record<string, string> = {};
+  sections?.forEach((section: any) => {
+    sectionMap[section.id] = section.title;
+  });
 
+  // --- Neu: selected mit korrektem title aufbauen ---
+  const selected: Record<string, any> = {};
+  Object.keys(selectedFromUrl).forEach((key) => {
+    selected[key] = {
+      ...selectedFromUrl[key],
+      title: sectionMap[key] ?? key, // Section Name als title setzen
+    };
+  });
+
+  // // Füge title für jede Section hinzu
+  // const selected: Record<string, any> = {};
+  // Object.keys(selectedFromUrl).forEach((key) => {
+  //   selected[key] = {
+  //     ...selectedFromUrl[key],
+  //     title: selectedFromUrl[key].title ?? selectedFromUrl[key].label,
+  //   };
+  // });
   // calculate price
   const [qty, setQty] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
@@ -144,7 +167,16 @@ export default function ViewSummaryPage() {
 
               <button
                 className="bg-neutral-800 text-neutral-200 px-6 py-3 rounded-md font-semibold hover:bg-neutral-700 transition w-full md:w-auto"
-                onClick={() => handleAddToCart({ ...productDetails, qty })}
+                onClick={() =>
+                  handleAddToCart({
+                    ...productDetails,
+                    qty,
+                    selectedOptions: Object.keys(selected).map((key) => ({
+                      ...selected[key],
+                      title: selected[key].title, // <-- eingefügt: title bleibt Section Name
+                    })),
+                  })
+                }
               >
                 Add to Wish List
               </button>

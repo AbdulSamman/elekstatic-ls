@@ -40,7 +40,7 @@ const Cart = () => {
               Your Selection
             </h1>
           </header>
-          {cart.length === 0 ? (
+          {cart?.length === 0 ? (
             <div className="flex flex-col items-center gap-4 ">
               <div>
                 <CiShoppingCart className="text-[120px]" />
@@ -53,11 +53,11 @@ const Cart = () => {
           ) : (
             <div className="max-w-7xl">
               <ul className="space-y-4 ">
-                {cart?.map((cartItem: any) => {
+                {cart?.map((cartItem: any, i: any) => {
                   return (
                     <li
                       className="flex flex-col items-center  px-2 sm:flex-row bg-neutral-900/50 mx-2 py-5"
-                      key={cartItem.documentId}
+                      key={i}
                     >
                       <div className="">
                         {cartItem?.cart?.product?.banner?.url && (
@@ -77,7 +77,22 @@ const Cart = () => {
                           <h3 className="text-xl text-slate-600 py-2">
                             {cartItem?.cart?.product?.title}
                           </h3>
+                          {/* selectedOptions anzeigen */}
+                          {cartItem?.cart?.selectedOptions?.map(
+                            (option: any, idx: number) => {
+                              console.log("ss", option);
 
+                              return (
+                                <div
+                                  key={idx}
+                                  className="text-sm text-neutral-400"
+                                >
+                                  <strong>{option?.title}</strong>:{" "}
+                                  {option?.label}
+                                </div>
+                              );
+                            }
+                          )}
                           <div className="my-0.5 space-y-px text-md text-gray-400">
                             <div className="my-4">
                               Category: {cartItem?.cart?.product?.category}
