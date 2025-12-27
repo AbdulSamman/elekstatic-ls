@@ -122,6 +122,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   useEffect(() => {
     if (user) {
       getCartItems();
+    } else {
+      setCart([]);
     }
   }, [user]);
 
