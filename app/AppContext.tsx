@@ -55,7 +55,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         `/api/products?filters[category][$eq]=${category}&populate=*`
       )
     ).data;
-    console.log("categors", response);
 
     setProductListCategory(response.data);
   };
@@ -184,6 +183,146 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     }
   }, []);
 
+  // dashboard
+  const [fillDashbaord, setFillDashboard] = useState<any[]>([]);
+
+  // const handleSendToDashboard = async () => {
+  //   if (!user || cart.length === 0) return;
+
+  //   const payload = {
+  //     userId: user.id,
+  //     userName: user.fullName,
+  //     email: user.primaryEmailAddress?.emailAddress,
+  //     items: cart.map((item: any) => ({
+  //       product: item.cart.product,
+  //       qty: item.cart.qty,
+  //       selectedOptions: item.cart.selectedOptions,
+  //     })),
+  //     orderStatus: "pending",
+  //   };
+
+  //   try {
+  //     const res = (await CartApis.sendCartToDashboard(payload)).data;
+
+  //     setFillDashboard((prev) => [res.data, ...prev]);
+  //   } catch (err) {
+  //     console.error("Failed to send order to dashboard:", err);
+  //   }
+  // };
+
+  // const handleSendToDashboard = async () => {
+  //   if (!user || cart.length === 0) return;
+
+  //   const payload = {
+  //     userId: user.id,
+  //     userName: user.fullName,
+  //     email: user.primaryEmailAddress?.emailAddress,
+  //     items: cart.map((item: any) => ({
+  //       product: item.cart.product,
+  //       qty: item.cart.qty,
+  //       selectedOptions: item.cart.selectedOptions,
+  //     })),
+  //     orderStatus: "pending",
+  //   };
+
+  //   try {
+  //     const res = (await CartApis.sendCartToDashboard(payload)).data;
+
+  //     // Transformiere in die gleiche Struktur wie getDashboardItems
+  //     const dashboardItem = {
+  //       documentId: res.documentId,
+  //       cart: {
+  //         product: payload.items[0].product,
+  //         qty: payload.items[0].qty,
+  //         selectedOptions: payload.items[0].selectedOptions,
+  //       },
+  //       items: payload.items,
+  //       userName: user.fullName,
+  //       email: user.primaryEmailAddress?.emailAddress,
+  //       orderStatus: "pending",
+  //     };
+
+  //     setFillDashboard((prev) => [...prev, dashboardItem]);
+  //   } catch (err) {
+  //     console.error("Failed to send order to dashboard:", err);
+  //   }
+  // };
+
+  const handleSendToDashboard = async () => {
+    if (!user || cart.length === 0) return;
+
+    const payload = {
+      userId: user.id,
+      userName: user.fullName,
+      email: user.primaryEmailAddress?.emailAddress,
+      items: cart.map((item: any) => ({
+        product: item.cart.product,
+        qty: item.cart.qty,
+        selectedOptions: item.cart.selectedOptions,
+      })),
+      orderStatus: "pending",
+    };
+
+    try {
+      const res = (await CartApis.sendCartToDashboard(payload)).data;
+
+      const optimisticOrder = {
+        documentId: res.documentId,
+        items: res.items,
+        userName: res.userName,
+        email: res.email,
+        orderStatus: res.orderStatus,
+      };
+
+      setFillDashboard((prev) => [optimisticOrder, ...prev]);
+
+      getDashboardItems();
+    } catch (err) {
+      console.error("Failed to send order to dashboard:", err);
+    }
+  };
+
+  // const getDashboardItems = async () => {
+  //   if (!user) return;
+  //   const res = (
+  //     await CartApis.getCartDashboard("/api/dashboard-orders?populate=*")
+  //   ).data;
+  //   console.log("Dashboard Response:", res.data);
+  //   setFillDashboard(res.data); // fallback auf leeres Array
+  //};
+  useEffect(() => {
+    getDashboardItems();
+  }, [user]);
+
+  const getDashboardItems = async () => {
+    try {
+      const res = (
+        await CartApis.getCartDashboard("/api/dashboard-orders?populate=*")
+      ).data;
+
+      const dashboardItems = res.data.map((item: any) => {
+        const firstProduct = item.items?.[0] || {};
+        return {
+          documentId: item.documentId,
+          cart: {
+            product: firstProduct.product,
+            qty: firstProduct.qty ?? 1,
+            selectedOptions: firstProduct.selectedOptions ?? [],
+          },
+          items: item.items,
+          userName: item.userName,
+          email: item.email,
+          orderStatus: item.orderStatus,
+        };
+      });
+
+      setFillDashboard(dashboardItems);
+      console.log("Dashboard Response:", dashboardItems);
+    } catch (err) {
+      console.error("Failed to fetch dashboard orders:", err);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -196,6 +335,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         cart,
         handleDeleteCartItem,
         sectionImages,
+        handleSendToDashboard,
+        fillDashbaord,
       }}
     >
       {children}

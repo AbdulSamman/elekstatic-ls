@@ -15,8 +15,18 @@ const deleteCartItem = async (documentId: any) => {
   return await axiosClient.delete(`/api/carts/${documentId}`);
 };
 
+const sendCartToDashboard = async (payload: any) => {
+  return await axiosClient.post("/api/dashboard-orders", { data: payload });
+};
+
+const getCartDashboard = async (email: any) => {
+  return await axiosClient.get(`/api/dashboard-orders`);
+};
+
 export default {
   addToCart,
   getUserCartItems,
   deleteCartItem,
+  sendCartToDashboard,
+  getCartDashboard,
 };

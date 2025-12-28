@@ -1,4 +1,5 @@
 "use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Mail, Settings, PieChart, Users, Menu, X } from "lucide-react";
@@ -10,7 +11,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AppContext } from "../AppContext";
 
 const data = [
   { name: "Jan", sales: 400 },
@@ -21,6 +23,7 @@ const data = [
 
 export default function Dashboard() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { fillDashbaord } = useContext(AppContext);
 
   const menuItems = [
     { name: "Dashboard", icon: <PieChart size={16} />, href: "#dashboard" },
@@ -32,14 +35,12 @@ export default function Dashboard() {
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
-    if (window.innerWidth < 768) {
-      setMenuOpen(false);
-    }
+    if (window.innerWidth < 768) setMenuOpen(false);
   };
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 flex mt-16 pb-5">
-      {/* Sidebar Menu */}
+      {/* Sidebar */}
       <aside
         className={`min-h-screen bg-neutral-900 border-r border-neutral-800 p-4 transition-all duration-300 overflow-hidden ${
           menuOpen && window.innerWidth > 768 ? "w-60" : "w-14"
@@ -74,14 +75,11 @@ export default function Dashboard() {
       </aside>
 
       {/* Main Content */}
-      <div
-        className={`flex-1 p-6 transition-all duration-300  
-        }`}
-      >
+      <div className="flex-1 p-6 transition-all duration-300">
         {/* Header */}
         <header className="flex items-center justify-between mb-10 flex-wrap gap-4">
           <h1 className="text-3xl font-bold">BOFFMAN LS DASHBOARD</h1>
-          <nav className="flex gap-4 ">
+          <nav className="flex gap-4">
             <Button variant="outline" className="bg-transparent">
               <Users size={16} /> Users
             </Button>
@@ -146,30 +144,70 @@ export default function Dashboard() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pb-10">
-          <Button
-            size="lg"
-            className="flex items-center gap-2 bg-transparent"
-            variant="outline"
-          >
-            <Mail size={16} /> Send Newsletter
-          </Button>
-          <Button
-            size="lg"
-            className="flex items-center gap-2 bg-transparent"
-            variant="outline"
-          >
-            <Settings size={16} /> Manage Products
-          </Button>
-          <Button
-            size="lg"
-            className="flex items-center gap-2 bg-transparent"
-            variant="outline"
-          >
-            <Users size={16} /> Manage Users
-          </Button>
+        <div className="text-xl py-5 text-center uppercase">
+          there are{" "}
+          <span className="text-orange-500">{fillDashbaord.length}</span> orders
         </div>
+        {/* Orders List */}
+        {fillDashbaord.length === 0 ? (
+          <div className="text-center text-neutral-400">No orders yet.</div>
+        ) : (
+          fillDashbaord.map((order: any, i: any) => (
+            <div key={i} className="mb-4 p-4 border rounded bg-neutral-900/20">
+              <div>
+                <strong>User:</strong> {order.userName} ({order.email})
+              </div>
+              <div>
+                <strong>Status:</strong> {order.orderStatus}
+              </div>
+              <div>
+                <strong>Products:</strong>
+              </div>
+              <ul className="ml-4 mt-2">
+                {order.items?.map((productItem: any, idx: number) => (
+                  <li
+                    key={idx}
+                    className="mb-3 p-2 border rounded bg-neutral-800/40"
+                  >
+                    <div className="flex items-center gap-4">
+                      {productItem.product.banner?.url && (
+                        <img
+                          src={productItem.product.banner.url}
+                          alt={productItem.product.title}
+                          className="w-20 h-20 object-contain rounded"
+                        />
+                      )}
+                      <div>
+                        <div>
+                          <strong>Title:</strong> {productItem.product.title}
+                        </div>
+                        <div>
+                          <strong>Qty:</strong> {productItem.qty}
+                        </div>
+                        <div className="mt-1">
+                          <strong>Selected Options:</strong>
+                          <ul className="ml-4 mt-1">
+                            {productItem.selectedOptions?.map(
+                              (option: any, oIdx: number) => (
+                                <li
+                                  key={oIdx}
+                                  className="text-sm text-neutral-300"
+                                >
+                                  {option.title}: {option.label}{" "}
+                                  {option.color ? `(${option.color})` : ""}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

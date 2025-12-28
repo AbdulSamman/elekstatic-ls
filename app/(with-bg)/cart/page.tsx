@@ -5,9 +5,11 @@ import Image from "next/image";
 import { useContext } from "react";
 import { AppContext } from "../../AppContext";
 import { CiShoppingCart } from "react-icons/ci";
+import { Button } from "@/components/ui/button";
 
 const Cart = () => {
-  const { cart, handleDeleteCartItem } = useContext(AppContext);
+  const { cart, handleDeleteCartItem, handleSendToDashboard } =
+    useContext(AppContext);
   console.log("CART RAW:", cart);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
@@ -80,8 +82,6 @@ const Cart = () => {
                           {/* selectedOptions anzeigen */}
                           {cartItem?.cart?.selectedOptions?.map(
                             (option: any, idx: number) => {
-                              console.log("ss", option);
-
                               return (
                                 <div
                                   key={idx}
@@ -150,6 +150,7 @@ const Cart = () => {
             </div>
           )}
         </div>
+        <Button onClick={handleSendToDashboard}>Submit Order</Button>
       </div>
     </section>
   );
