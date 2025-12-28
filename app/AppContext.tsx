@@ -184,7 +184,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   }, []);
 
   // dashboard
-  const [fillDashbaord, setFillDashboard] = useState<any[]>([]);
 
   // const handleSendToDashboard = async () => {
   //   if (!user || cart.length === 0) return;
@@ -228,25 +227,21 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   //   try {
   //     const res = (await CartApis.sendCartToDashboard(payload)).data;
 
-  //     // Transformiere in die gleiche Struktur wie getDashboardItems
-  //     const dashboardItem = {
+  //     const optimisticOrder = {
   //       documentId: res.documentId,
-  //       cart: {
-  //         product: payload.items[0].product,
-  //         qty: payload.items[0].qty,
-  //         selectedOptions: payload.items[0].selectedOptions,
-  //       },
-  //       items: payload.items,
-  //       userName: user.fullName,
-  //       email: user.primaryEmailAddress?.emailAddress,
-  //       orderStatus: "pending",
+  //       items: res.items,
+  //       userName: res.userName,
+  //       email: res.email,
+  //       orderStatus: res.orderStatus,
   //     };
 
-  //     setFillDashboard((prev) => [...prev, dashboardItem]);
+  //     setFillDashboard((prev) => [optimisticOrder, ...prev]);
+
   //   } catch (err) {
   //     console.error("Failed to send order to dashboard:", err);
   //   }
   // };
+  const [fillDashbaord, setFillDashboard] = useState<any[]>([]);
 
   const handleSendToDashboard = async () => {
     if (!user || cart.length === 0) return;
@@ -266,48 +261,44 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     try {
       const res = (await CartApis.sendCartToDashboard(payload)).data;
 
-      const optimisticOrder = {
+      const firstItem = payload.items[0];
+
+      const dashboardItem = {
         documentId: res.documentId,
-        items: res.items,
-        userName: res.userName,
-        email: res.email,
-        orderStatus: res.orderStatus,
+        cart: {
+          product: firstItem.product,
+          qty: firstItem.qty,
+          selectedOptions: firstItem.selectedOptions,
+        },
+        items: payload.items,
+        userName: payload.userName,
+        email: payload.email,
+        orderStatus: "pending",
       };
 
-      setFillDashboard((prev) => [optimisticOrder, ...prev]);
-
-      getDashboardItems();
+      setFillDashboard((prev) => [dashboardItem, ...prev]);
     } catch (err) {
       console.error("Failed to send order to dashboard:", err);
     }
   };
 
-  // const getDashboardItems = async () => {
-  //   if (!user) return;
-  //   const res = (
-  //     await CartApis.getCartDashboard("/api/dashboard-orders?populate=*")
-  //   ).data;
-  //   console.log("Dashboard Response:", res.data);
-  //   setFillDashboard(res.data); // fallback auf leeres Array
-  //};
   useEffect(() => {
-    getDashboardItems();
+    if (user) {
+      getDashboardItems();
+    }
   }, [user]);
 
   const getDashboardItems = async () => {
     try {
-      const res = (
-        await CartApis.getCartDashboard("/api/dashboard-orders?populate=*")
-      ).data;
+      const res = (await CartApis.getCartDashboard()).data;
 
       const dashboardItems = res.data.map((item: any) => {
-        const firstProduct = item.items?.[0] || {};
         return {
           documentId: item.documentId,
           cart: {
-            product: firstProduct.product,
-            qty: firstProduct.qty ?? 1,
-            selectedOptions: firstProduct.selectedOptions ?? [],
+            product: item.product,
+            qty: item.qty ?? 1,
+            selectedOptions: item.selectedOptions ?? [],
           },
           items: item.items,
           userName: item.userName,
@@ -320,6 +311,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       console.log("Dashboard Response:", dashboardItems);
     } catch (err) {
       console.error("Failed to fetch dashboard orders:", err);
+      setFillDashboard([]);
     }
   };
 

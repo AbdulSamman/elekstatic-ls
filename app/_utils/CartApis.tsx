@@ -19,7 +19,7 @@ const sendCartToDashboard = async (payload: any) => {
   return await axiosClient.post("/api/dashboard-orders", { data: payload });
 };
 
-const getCartDashboard = async (email: any) => {
+const getCartDashboard = async () => {
   return await axiosClient.get(`/api/dashboard-orders`);
 };
 

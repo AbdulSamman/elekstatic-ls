@@ -194,7 +194,6 @@ export default function Dashboard() {
                                   className="text-sm text-neutral-300"
                                 >
                                   {option.title}: {option.label}{" "}
-                                  {option.color ? `(${option.color})` : ""}
                                 </li>
                               )
                             )}
