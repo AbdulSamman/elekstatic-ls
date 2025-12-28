@@ -241,8 +241,82 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   //     console.error("Failed to send order to dashboard:", err);
   //   }
   // };
+  // const [fillDashbaord, setFillDashboard] = useState<any[]>([]);
+
+  // const handleSendToDashboard = async () => {
+  //   if (!user || cart.length === 0) return;
+
+  //   const payload = {
+  //     userId: user.id,
+  //     userName: user.fullName,
+  //     email: user.primaryEmailAddress?.emailAddress,
+  //     items: cart.map((item: any) => ({
+  //       product: item.cart.product,
+  //       qty: item.cart.qty,
+  //       selectedOptions: item.cart.selectedOptions,
+  //     })),
+  //     orderStatus: "pending",
+  //   };
+
+  //   try {
+  //     const res = (await CartApis.sendCartToDashboard(payload)).data;
+
+  //     const firstItem = payload.items[0];
+
+  //     const dashboardItem = {
+  //       documentId: res.documentId,
+  //       // cart: {
+  //       //   product: firstItem.product,
+  //       //   qty: firstItem.qty,
+  //       //   selectedOptions: firstItem.selectedOptions,
+  //       // },
+  //       items: payload.items,
+  //       userName: payload.userName,
+  //       email: payload.email,
+  //       orderStatus: "pending",
+  //     };
+
+  //     setFillDashboard((prev) => [...prev, dashboardItem]);
+  //   } catch (err) {
+  //     console.error("Failed to send order to dashboard:", err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (user) {
+  //     getDashboardItems();
+  //   }
+  // }, [user]);
+
+  // const getDashboardItems = async () => {
+  //   try {
+  //     const res = (await CartApis.getCartDashboard()).data;
+
+  //     const dashboardItems = res.data.map((item: any) => {
+  //       return {
+  //         documentId: item.documentId,
+  //         // cart: {
+  //         //   product: item.product,
+  //         //   qty: item.qty ?? 1,
+  //         //   selectedOptions: item.selectedOptions ?? [],
+  //         // },
+  //         items: item.items,
+  //         userName: item.userName,
+  //         email: item.email,
+  //         orderStatus: item.orderStatus,
+  //       };
+  //     });
+
+  //     setFillDashboard(dashboardItems);
+  //     console.log("Dashboard Response:", dashboardItems);
+  //   } catch (err) {
+  //     console.error("Failed to fetch dashboard orders:", err);
+  //     setFillDashboard([]);
+  //   }
+  // };
   const [fillDashbaord, setFillDashboard] = useState<any[]>([]);
 
+  // Submit Order in Dashboard
   const handleSendToDashboard = async () => {
     if (!user || cart.length === 0) return;
 
@@ -261,59 +335,58 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     try {
       const res = (await CartApis.sendCartToDashboard(payload)).data;
 
-      const firstItem = payload.items[0];
-
       const dashboardItem = {
         documentId: res.documentId,
-        cart: {
-          product: firstItem.product,
-          qty: firstItem.qty,
-          selectedOptions: firstItem.selectedOptions,
-        },
         items: payload.items,
         userName: payload.userName,
         email: payload.email,
         orderStatus: "pending",
       };
 
-      setFillDashboard((prev) => [dashboardItem, ...prev]);
+      // Optimistisches Update direkt nach Submit
+      setFillDashboard((prev) => [...prev, dashboardItem]);
     } catch (err) {
       console.error("Failed to send order to dashboard:", err);
     }
   };
 
-  useEffect(() => {
-    if (user) {
-      getDashboardItems();
-    }
-  }, [user]);
-
+  // Fetch Dashboard Items
   const getDashboardItems = async () => {
     try {
       const res = (await CartApis.getCartDashboard()).data;
 
-      const dashboardItems = res.data.map((item: any) => {
-        return {
-          documentId: item.documentId,
-          cart: {
-            product: item.product,
-            qty: item.qty ?? 1,
-            selectedOptions: item.selectedOptions ?? [],
-          },
-          items: item.items,
-          userName: item.userName,
-          email: item.email,
-          orderStatus: item.orderStatus,
-        };
-      });
+      const dashboardItems = res.data.map((item: any) => ({
+        documentId: item.documentId,
+        items: item.items,
+        userName: item.userName,
+        email: item.email,
+        orderStatus: item.orderStatus,
+      }));
 
-      setFillDashboard(dashboardItems);
-      console.log("Dashboard Response:", dashboardItems);
+      // nur update, wenn sich Daten geändert haben
+      setFillDashboard((prev) => {
+        const prevIds = prev.map((o) => o.documentId).join(",");
+        const newIds = dashboardItems.map((o: any) => o.documentId).join(",");
+        return prevIds !== newIds ? dashboardItems : prev;
+      });
+      getDashboardItems();
     } catch (err) {
       console.error("Failed to fetch dashboard orders:", err);
       setFillDashboard([]);
     }
   };
+
+  // Initial Load + Auto Polling für neue Orders
+  useEffect(() => {
+    if (user) {
+      getDashboardItems();
+      // Polling alle 5 Sekunden für neue Orders
+      // const interval = setInterval(() => {
+      //   getDashboardItems();
+      // }, 3000);
+      // return () => clearInterval(interval);
+    }
+  }, [user]);
 
   return (
     <AppContext.Provider

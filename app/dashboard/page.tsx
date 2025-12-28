@@ -39,7 +39,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex mt-16 pb-5">
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex mt-16 pb-8">
       {/* Sidebar */}
       <aside
         className={`min-h-screen bg-neutral-900 border-r border-neutral-800 p-4 transition-all duration-300 overflow-hidden ${
@@ -114,7 +114,9 @@ export default function Dashboard() {
               <h3 className="font-semibold text-lg text-white flex items-center gap-2">
                 <Check size={16} /> Orders
               </h3>
-              <p className="mt-2 text-2xl text-white">320</p>
+              <p className="mt-2 text-2xl text-orange-500">
+                {fillDashbaord.length}
+              </p>
               <p className="text-sm text-neutral-400">Pending orders</p>
             </CardContent>
           </Card>
@@ -144,10 +146,7 @@ export default function Dashboard() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-        <div className="text-xl py-5 text-center uppercase">
-          there are{" "}
-          <span className="text-orange-500">{fillDashbaord.length}</span> orders
-        </div>
+
         {/* Orders List */}
         {fillDashbaord.length === 0 ? (
           <div className="text-center text-neutral-400">No orders yet.</div>
