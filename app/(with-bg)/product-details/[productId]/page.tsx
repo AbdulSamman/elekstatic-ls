@@ -41,7 +41,7 @@ function ProductDetails({ params }: any) {
         buildYourOwnName="...."
       />
 
-      <div className="my-14 xl:px-20 flex flex-col lg:flex-row items-center xl:justify-evenly gap-10">
+      <div className="my-14 xl:px-20 flex flex-col lg:flex-row items-center lg:justify-evenly  gap-10">
         <ProductBanner productDetails={productDetails} />
         <ProductInfo productDetails={productDetails} />
       </div>

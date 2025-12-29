@@ -113,13 +113,11 @@ function Header() {
 
           <div className="flex items-center gap-4">
             <div>
-              {user &&
-                user.primaryEmailAddress?.emailAddress ===
-                  "tkservas@gmail.com" && (
-                  <Link href="/dashboard">
-                    <LayoutDashboard />
-                  </Link>
-                )}
+              {user && (
+                <Link href="/dashboard">
+                  <LayoutDashboard />
+                </Link>
+              )}
             </div>
             <div className="gap-6 flex items-center">
               <Link

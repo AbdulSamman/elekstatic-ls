@@ -20,7 +20,7 @@ export default function BuildYourOwnPage({ params }: any) {
   const breadcrumbPath = `/product-details/${productId}/build-your-own`;
 
   return (
-    <div className="pb-26 px-2">
+    <div className="pb-26">
       {productDetails?.title && (
         <BreadCrumb
           path={breadcrumbPath}
@@ -29,7 +29,7 @@ export default function BuildYourOwnPage({ params }: any) {
         />
       )}
 
-      <div className="my-24 xl:px-20 flex flex-col md:flex-row items-start justify-center gap-12">
+      <div className="my-24 lg:px-20 flex flex-col md:flex-row items-start justify-center gap-12">
         <ProductBannerOwn productDetails={productDetails} />
 
         <div className="xl:w-3/5 md:w-2/3 w-full">
