@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, Mail, Settings, PieChart, Users, Menu, X } from "lucide-react";
+import { Check, Settings, PieChart, Users, Menu, X } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -34,36 +34,60 @@ export default function Dashboard() {
   ];
 
   const handleMenuToggle = () => {
-    setMenuOpen(!menuOpen);
-    if (window.innerWidth < 768) setMenuOpen(false);
+    setMenuOpen((prev) => !prev);
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex mt-16 pb-8">
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex mt-16 pb-8 relative">
+      {/* Mobile Overlay */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <aside
-        className={`min-h-screen bg-neutral-900 border-r border-neutral-800 p-4 transition-all duration-300 overflow-hidden ${
-          menuOpen && window.innerWidth > 768 ? "w-60" : "w-14"
-        }`}
+        className={`
+          bg-neutral-900 border-r border-neutral-800 p-4
+          transition-all duration-300 overflow-hidden
+          min-h-screen
+
+          /* Desktop – UNVERÄNDERT */
+          md:static
+          ${menuOpen ? "md:w-50" : "md:w-14"}
+
+          /* Mobile ONLY */
+          fixed md:relative
+          top-16 left-0 z-40
+          w-64
+          ${menuOpen ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0
+        `}
       >
         <div className="flex flex-col items-start">
+          {/* Sidebar Toggle – Desktop */}
           <div className="flex justify-between items-start mb-6">
             <Button
               onClick={handleMenuToggle}
-              className="bg-transparent"
+              className="bg-transparent p-0 hidden md:flex"
               style={{ padding: 0 }}
             >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </Button>
           </div>
+
           {menuOpen && (
             <h2 className="text-xl font-semibold py-4">Navigation</h2>
           )}
+
           <nav className="flex flex-col gap-4">
             {menuItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
+                onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-2 hover:text-white transition"
               >
                 {item.icon}
@@ -78,7 +102,18 @@ export default function Dashboard() {
       <div className="flex-1 p-6 transition-all duration-300">
         {/* Header */}
         <header className="flex items-center justify-between mb-10 flex-wrap gap-4">
-          <h1 className="text-3xl font-bold">BOFFMAN LS DASHBOARD</h1>
+          <div className="flex items-center gap-3">
+            {/* Mobile Menu Button */}
+            <Button
+              onClick={() => setMenuOpen(true)}
+              className="md:hidden bg-transparent p-0"
+            >
+              <Menu size={28} />
+            </Button>
+
+            <h1 className="text-3xl font-bold">BOFFMAN LS DASHBOARD</h1>
+          </div>
+
           <nav className="flex gap-4">
             <Button variant="outline" className="bg-transparent">
               <Users size={16} /> Users
@@ -100,6 +135,7 @@ export default function Dashboard() {
               <p className="text-sm text-neutral-400">Total sales this month</p>
             </CardContent>
           </Card>
+
           <Card className="bg-neutral-900 border-neutral-800">
             <CardContent className="p-6">
               <h3 className="font-semibold text-lg text-white flex items-center gap-2">
@@ -109,6 +145,7 @@ export default function Dashboard() {
               <p className="text-sm text-neutral-400">Active customers</p>
             </CardContent>
           </Card>
+
           <Card className="bg-neutral-900 border-neutral-800">
             <CardContent className="p-6">
               <h3 className="font-semibold text-lg text-white flex items-center gap-2">
@@ -129,10 +166,7 @@ export default function Dashboard() {
               Monthly Sales
             </h3>
             <ResponsiveContainer width="100%" height={250}>
-              <LineChart
-                data={data}
-                margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-              >
+              <LineChart data={data}>
                 <XAxis dataKey="name" stroke="#9CA3AF" />
                 <YAxis stroke="#9CA3AF" />
                 <Tooltip />
@@ -151,7 +185,7 @@ export default function Dashboard() {
         {fillDashbaord.length === 0 ? (
           <div className="text-center text-neutral-400">No orders yet.</div>
         ) : (
-          fillDashbaord.map((order: any, i: any) => (
+          fillDashbaord.map((order: any, i: number) => (
             <div key={i} className="mb-4 p-4 border rounded bg-neutral-900/20">
               <div>
                 <strong>User:</strong> {order.userName} ({order.email})
@@ -162,6 +196,7 @@ export default function Dashboard() {
               <div>
                 <strong>Products:</strong>
               </div>
+
               <ul className="ml-4 mt-2">
                 {order.items?.map((productItem: any, idx: number) => (
                   <li
@@ -192,7 +227,7 @@ export default function Dashboard() {
                                   key={oIdx}
                                   className="text-sm text-neutral-300"
                                 >
-                                  {option.title}: {option.label}{" "}
+                                  {option.title}: {option.label}
                                 </li>
                               )
                             )}

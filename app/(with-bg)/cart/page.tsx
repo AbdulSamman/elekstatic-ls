@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AppContext } from "../../AppContext";
 import { CiShoppingCart } from "react-icons/ci";
 import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 
 const Cart = () => {
   const { cart, handleDeleteCartItem, handleSendToDashboard } =
@@ -150,7 +151,17 @@ const Cart = () => {
             </div>
           )}
         </div>
-        <Button onClick={handleSendToDashboard}>Submit Order</Button>
+        <div className="flex items-center justify-center px-2">
+          <Button
+            size="lg"
+            className=" text-neutral-300 px-15 py-6 text-xl rounded-none text-[18px] bg-slate-900 border border-neutral-600 w-full  lg:w-auto "
+            onClick={handleSendToDashboard}
+          >
+            <span className="flex items-center justify-center gap-2">
+              SEND ORDER <ChevronRight />
+            </span>
+          </Button>
+        </div>
       </div>
     </section>
   );
