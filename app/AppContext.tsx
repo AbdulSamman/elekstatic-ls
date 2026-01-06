@@ -468,7 +468,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         const newIds = dashboardItems.map((o: any) => o.documentId).join(",");
         return prevIds !== newIds ? dashboardItems : prev;
       });
-      getDashboardItems();
+      //getDashboardItems();
     } catch (err) {
       console.error("Failed to fetch dashboard orders:", err);
       setFillDashboard([]);
