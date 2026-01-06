@@ -26,7 +26,19 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         const rawProducts = (await axiosClient.get("/api/products?populate=*"))
           .data;
 
-        setProducts(rawProducts.data);
+   // sortiere Produkte: sofortlieferbar zuerst
+      const sortedProducts = rawProducts.data.sort((a:any, b:any) => {
+        if (a.lieferStatus === "Sofort" && b.lieferStatus !== "Sofort") {
+          return -1; 
+        }
+        if (a.lieferStatus !== "Sofort" && b.lieferStatus === "Sofort") {
+          return 1; 
+        }
+        return 0;
+      });
+
+        //setProducts(rawProducts.data);
+        setProducts(sortedProducts)
       } catch (error) {
         console.error("failed to fetch products", error);
       }
