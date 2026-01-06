@@ -3,6 +3,8 @@ import SkeletonEffectProductInfo from "./SkeletonEffectProductInfo";
 import Link from "next/link";
 
 function ProductInfo({ productDetails }: any) {
+
+  
   return (
     <>
       {productDetails.title ? (
@@ -20,10 +22,31 @@ function ProductInfo({ productDetails }: any) {
               {productDetails?.description?.[0]?.children?.[0]?.text}
             </p>
 
+            {productDetails.lieferStatus === "Vorbestellung" ? (
+
+             <div className="flex flex-col items-start">
+              < div className="flex items-center justify-start gap-2 pt-2">
+               <div className="w-2 h-2 bg-red-800 rounded-full"></div>
+              <span className="text-red-800 text-xs">Vorbestellung:</span>
+              </div>
+               <span className="text-red-800 text-xs py-2 px-4">Lieferzeit kann 14 bis 28 Arbeitstage dauern</span>
+              </div>
+            ):(
+               
+              < div className="flex items-center justify-start gap-2 pt-2">
+               <div className="w-2 h-2 bg-green-800 rounded-full"></div>
+              <span className="text-green-800 text-xs">Sofort Lieferbar</span>
+              </div>
+
+            )}
+
+ 
+
             <span className="text-3xl font-bold text-slate-500 mt-4">
               € {productDetails.price}
             </span>
           </div>
+          
 
           <Link
             href={`/build-your-own/${productDetails.documentId}`}

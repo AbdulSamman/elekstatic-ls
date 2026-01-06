@@ -44,7 +44,7 @@ function PorductItem({ filteredProducts }: any) {
                <div className="w-2 h-2 bg-red-800 rounded-full"></div>
               <span className="text-red-800 text-xs">Vorbestellung:</span>
               </div>
-               <span className="text-red-800 text-xs">Lieferzeit kann 14 bis 28 Arbeitstage</span>
+               <span className="text-red-800 text-xs">Lieferzeit kann 14 bis 28 Arbeitstage dauern</span>
               </>
             ):(
                
