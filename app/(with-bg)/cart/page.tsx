@@ -11,7 +11,7 @@ import { ChevronRight } from "lucide-react";
 const Cart = () => {
   const { cart, handleDeleteCartItem, handleSendToDashboard } =
     useContext(AppContext);
- 
+
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
@@ -98,26 +98,28 @@ const Cart = () => {
                             <div className="my-4">
                               Category: {cartItem?.cart?.product?.category}
                             </div>
-                            
-      {cartItem?.cart?.product?.lieferStatus === "Sofort" ? (
 
-           < div className="flex items-center justify-start gap-2 pt-2">
-               <div className="w-2 h-2 bg-green-800 rounded-full"></div>
-              <span className="text-green-800 text-xs">Sofort Lieferbar</span>
-              </div>
-
-          
-            ):(
-               
-              <div className="flex flex-col items-start">
-              < div className="flex items-center justify-start gap-2 pt-2">
-               <div className="w-2 h-2 bg-red-800 rounded-full"></div>
-              <span className="text-red-800 text-xs">Vorbestellung:</span>
-              </div>
-               <span className="text-red-800 text-xs py-2 px-4">Lieferzeit kann 14 bis 28 Arbeitstage dauern</span>
-              </div>
-
-            )}
+                            {cartItem?.cart?.product?.lieferStatus ===
+                            "Sofort" ? (
+                              <div className="flex items-center justify-start gap-2 pt-2">
+                                <div className="w-2 h-2 bg-green-800 rounded-full"></div>
+                                <span className="text-green-800 text-xs">
+                                  Sofort Lieferbar
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="flex flex-col items-start">
+                                <div className="flex items-center justify-start gap-2 pt-2">
+                                  <div className="w-2 h-2 bg-red-800 rounded-full"></div>
+                                  <span className="text-red-800 text-xs">
+                                    Vorbestellung:
+                                  </span>
+                                </div>
+                                <span className="text-red-800 text-xs py-2 px-4">
+                                  Lieferzeit kann 14 bis 28 Arbeitstage dauern
+                                </span>
+                              </div>
+                            )}
 
                             <input
                               type="text"

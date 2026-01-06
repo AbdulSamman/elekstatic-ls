@@ -26,19 +26,19 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         const rawProducts = (await axiosClient.get("/api/products?populate=*"))
           .data;
 
-   // sortiere Produkte: sofortlieferbar zuerst
-      const sortedProducts = rawProducts.data.sort((a:any, b:any) => {
-        if (a.lieferStatus === "Sofort" && b.lieferStatus !== "Sofort") {
-          return -1; 
-        }
-        if (a.lieferStatus !== "Sofort" && b.lieferStatus === "Sofort") {
-          return 1; 
-        }
-        return 0;
-      });
+        // sortiere Produkte: sofortlieferbar zuerst
+        const sortedProducts = rawProducts.data.sort((a: any, b: any) => {
+          if (a.lieferStatus === "Sofort" && b.lieferStatus !== "Sofort") {
+            return -1;
+          }
+          if (a.lieferStatus !== "Sofort" && b.lieferStatus === "Sofort") {
+            return 1;
+          }
+          return 0;
+        });
 
         //setProducts(rawProducts.data);
-        setProducts(sortedProducts)
+        setProducts(sortedProducts);
       } catch (error) {
         console.error("failed to fetch products", error);
       }
@@ -111,65 +111,63 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
         const res = (await CartApis.addToCart(payload)).data;
 
-  //       setCart((prevCart: any[]) => [
-  //         ...prevCart,
-  //         {
-  //           documentId: res?.documentId, // <-- Strapi generiert id
+        //       setCart((prevCart: any[]) => [
+        //         ...prevCart,
+        //         {
+        //           documentId: res?.documentId, // <-- Strapi generiert id
 
-  //           cart: {
-  //             product: product,
-  //             qty: product.qty ?? 1,
-  //             selectedOptions: product.selectedOptions ?? [],
-  //           },
-  //         },
-  //       ]);
-  //     } catch (error) {
-  //       console.error("Error adding to cart", error);
-  //     }
-  //   }
-  // };
-  setCart((prevCart: any[]) => {
-        // 🔎 Gleiches Produkt + gleiche Optionen suchen
-        const existingIndex = prevCart.findIndex(
-          (item) =>
-            item.cart.product.id === product.id &&
-            JSON.stringify(item.cart.selectedOptions ?? []) ===
-              JSON.stringify(product.selectedOptions ?? [])
-        );
+        //           cart: {
+        //             product: product,
+        //             qty: product.qty ?? 1,
+        //             selectedOptions: product.selectedOptions ?? [],
+        //           },
+        //         },
+        //       ]);
+        //     } catch (error) {
+        //       console.error("Error adding to cart", error);
+        //     }
+        //   }
+        // };
+        setCart((prevCart: any[]) => {
+          // 🔎 Gleiches Produkt + gleiche Optionen suchen
+          const existingIndex = prevCart.findIndex(
+            (item) =>
+              item.cart.product.id === product.id &&
+              JSON.stringify(item.cart.selectedOptions ?? []) ===
+                JSON.stringify(product.selectedOptions ?? [])
+          );
 
-        // ✅ Produkt existiert → qty erhöhen
-        if (existingIndex !== -1) {
-          const updatedCart = [...prevCart];
-          updatedCart[existingIndex] = {
-            ...updatedCart[existingIndex],
-            cart: {
-              ...updatedCart[existingIndex].cart,
-              qty:
-                updatedCart[existingIndex].cart.qty +
-                (product.qty ?? 1),
+          // ✅ Produkt existiert → qty erhöhen
+          if (existingIndex !== -1) {
+            const updatedCart = [...prevCart];
+            updatedCart[existingIndex] = {
+              ...updatedCart[existingIndex],
+              cart: {
+                ...updatedCart[existingIndex].cart,
+                qty: updatedCart[existingIndex].cart.qty + (product.qty ?? 1),
+              },
+            };
+            return updatedCart;
+          }
+
+          // 🆕 Produkt existiert nicht → neu hinzufügen
+          return [
+            ...prevCart,
+            {
+              documentId: res?.documentId,
+              cart: {
+                product: product,
+                qty: product.qty ?? 1,
+                selectedOptions: product.selectedOptions ?? [],
+              },
             },
-          };
-          return updatedCart;
-        }
-
-        // 🆕 Produkt existiert nicht → neu hinzufügen
-        return [
-          ...prevCart,
-          {
-            documentId: res?.documentId,
-            cart: {
-              product: product,
-              qty: product.qty ?? 1,
-              selectedOptions: product.selectedOptions ?? [],
-            },
-          },
-        ];
-      });
-    } catch (error) {
-      console.error("Error adding to cart", error);
+          ];
+        });
+      } catch (error) {
+        console.error("Error adding to cart", error);
+      }
     }
-  }
-};
+  };
 
   // [user] => wenn user sich ändert, soll cart auch geändert werden
   useEffect(() => {
@@ -210,54 +208,52 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   //   }
   // };
 
-const getCartItems = async () => {
-  if (!user) return;
+  const getCartItems = async () => {
+    if (!user) return;
 
-  try {
-    const rawCart = (
-      await CartApis.getUserCartItems(user.primaryEmailAddress?.emailAddress)
-    ).data.data; // Backend liefert data.data
+    try {
+      const rawCart = (
+        await CartApis.getUserCartItems(user.primaryEmailAddress?.emailAddress)
+      ).data.data; // Backend liefert data.data
 
-    const mergedCart: any[] = [];
+      const mergedCart: any[] = [];
 
-    rawCart.forEach((cartItem: any) => {
-      const product = cartItem.products?.[0] || {}; // erstes Produkt aus Array
-      const selected = cartItem.selectedOptions?.[0] || {}; // erstes selectedOption-Objekt
-      const selectedOptions = selected.selectedOptions ?? [];
-      const qty = selected.qty ?? 1;
+      rawCart.forEach((cartItem: any) => {
+        const product = cartItem.products?.[0] || {}; // erstes Produkt aus Array
+        const selected = cartItem.selectedOptions?.[0] || {}; // erstes selectedOption-Objekt
+        const selectedOptions = selected.selectedOptions ?? [];
+        const qty = selected.qty ?? 1;
 
-      // Prüfe, ob dieses Produkt + Options schon im mergedCart ist
-      const existingIndex = mergedCart.findIndex(
-        (c) =>
-          c.cart.product.id === product.id &&
-          JSON.stringify(c.cart.selectedOptions ?? []) ===
-            JSON.stringify(selectedOptions)
-      );
+        // Prüfe, ob dieses Produkt + Options schon im mergedCart ist
+        const existingIndex = mergedCart.findIndex(
+          (c) =>
+            c.cart.product.id === product.id &&
+            JSON.stringify(c.cart.selectedOptions ?? []) ===
+              JSON.stringify(selectedOptions)
+        );
 
-      if (existingIndex !== -1) {
-        // Produkt existiert → qty erhöhen
-        mergedCart[existingIndex].cart.qty += qty;
-      } else {
-        // Neues Produkt hinzufügen
-        mergedCart.push({
-          documentId: cartItem.documentId,
-          cart: {
-            product: product,
-            qty: qty,
-            selectedOptions: selectedOptions,
-          },
-        });
-      }
-    });
+        if (existingIndex !== -1) {
+          // Produkt existiert → qty erhöhen
+          mergedCart[existingIndex].cart.qty += qty;
+        } else {
+          // Neues Produkt hinzufügen
+          mergedCart.push({
+            documentId: cartItem.documentId,
+            cart: {
+              product: product,
+              qty: qty,
+              selectedOptions: selectedOptions,
+            },
+          });
+        }
+      });
 
-    setCart(mergedCart);
-  } catch (error) {
-    console.error("Error fetching cart items", error);
-    setCart([]);
-  }
-};
-
-
+      setCart(mergedCart);
+    } catch (error) {
+      console.error("Error fetching cart items", error);
+      setCart([]);
+    }
+  };
 
   // delete cart Item
 

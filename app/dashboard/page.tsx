@@ -217,21 +217,22 @@ export default function Dashboard() {
                         </h2>
                         <span>
 
-                       
+
                            <div className="flex items-center justify-start gap-4">
                             <strong className="text-orange-600">Quanty: </strong>   <span className="text-slate-600">{productItem.qty}x</span>
                         </div>
                         </span>
                        {productItem?.product?.lieferStatus==="Sofort" ?(
 
+
  < div className="flex items-center justify-start gap-2 pt-2">
                <div className="w-2 h-2 bg-green-800 rounded-full"></div>
               <span className="text-green-800 text-xs">Sofort Lieferbar</span>
               </div>
 
-          
+
             ):(
-               
+
               <div className="flex flex-col items-start">
               < div className="flex items-center justify-start gap-2 pt-2">
                <div className="w-2 h-2 bg-red-800 rounded-full"></div>
