@@ -180,10 +180,7 @@ export default function ViewSummaryPage() {
               >
                 Add to Wish List
               </button>
-
-              <button className="bg-neutral-200 text-neutral-900 px-6 py-3 rounded-md font-semibold hover:bg-neutral-300 transition w-full md:w-auto">
-                Find Dealer →
-              </button>
+ 
             </div>
           </div>
         </div>

@@ -1,10 +1,26 @@
 import { FiBox } from "react-icons/fi";
 import SkeletonEffectProductInfo from "./SkeletonEffectProductInfo";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useContext, useState } from "react";
+import { AppContext } from "../../../AppContext";
 
 function ProductInfo({ productDetails }: any) {
 
   
+
+    const { handleAddToCart } = useContext(AppContext);
+  const [qty, setQty] = useState<Number>(1);
+
+  const handleClickAddToCart = () => {
+    handleAddToCart({
+      ...productDetails,
+      qty,
+      selectedOptions: [], // keine Optionen, da Sofort-Lieferbar
+
+   
+    });
+  };
   return (
     <>
       {productDetails.title ? (
@@ -47,14 +63,39 @@ function ProductInfo({ productDetails }: any) {
             </span>
           </div>
           
-
-          <Link
+ 
+          {/* <Link
             href={`/build-your-own/${productDetails.documentId}`}
             className="flex items-center justify-center gap-3 border border-neutral-100 hover:border-gray-400 transition px-6 py-3 font-semibold tracking-wide mt-4 hover:bg-neutral-900/40"
           >
             <FiBox className="text-xl" />
             <span>BUILD YOUR OWN</span>
           </Link>
+        </div>
+      ) : (
+        <SkeletonEffectProductInfo />
+      )}
+    </> */}
+
+{productDetails.lieferStatus === "Sofort" ? (
+            <Button
+              
+          size="lg"
+            className=" text-neutral-100 px-15 py-6 text-xl rounded-none text-[18px] bg-transparent border border-white w-full xl:w-auto"
+            onClick={handleClickAddToCart}
+            >
+              <FiBox className="text-xl" />
+              <span>ADD TO CART</span>
+            </Button>
+          ) : (
+            <Link
+              href={`/build-your-own/${productDetails.documentId}`}
+              className="flex items-center justify-center gap-3 border border-neutral-100 hover:border-gray-400 transition px-6 py-3 font-semibold tracking-wide mt-4 hover:bg-neutral-900/40"
+            >
+              <FiBox className="text-xl" />
+              <span>BUILD YOUR OWN</span>
+            </Link>
+          )}
         </div>
       ) : (
         <SkeletonEffectProductInfo />

@@ -194,7 +194,7 @@ export default function Dashboard() {
                 <strong>Status:</strong> {order.orderStatus}
               </div>
               <div>
-                <strong>Products:</strong>
+                <strong>Orders:</strong>
               </div>
 
               <ul className="ml-4 mt-2">
@@ -212,22 +212,48 @@ export default function Dashboard() {
                         />
                       )}
                       <div>
-                        <div>
-                          <strong>Title:</strong> {productItem.product.title}
+                        <h2 className="text-xl text-slate-700">
+                          {productItem.product.title}
+                        </h2>
+                        <span>
+
+                       
+                           <div className="flex items-center justify-start gap-4">
+                            <strong className="text-orange-600">Quanty: </strong>   <span className="text-slate-600">{productItem.qty}x</span>
                         </div>
-                        <div>
-                          <strong>Qty:</strong> {productItem.qty}
-                        </div>
+                        </span>
+                       {productItem?.product?.lieferStatus==="Sofort" ?(
+
+ < div className="flex items-center justify-start gap-2 pt-2">
+               <div className="w-2 h-2 bg-green-800 rounded-full"></div>
+              <span className="text-green-800 text-xs">Sofort Lieferbar</span>
+              </div>
+
+          
+            ):(
+               
+              <div className="flex flex-col items-start">
+              < div className="flex items-center justify-start gap-2 pt-2">
+               <div className="w-2 h-2 bg-red-800 rounded-full"></div>
+              <span className="text-red-800 text-xs">Vorbestellung:</span>
+              </div>
+               <span className="text-red-800 text-xs py-2 px-4">Lieferzeit kann 14 bis 28 Arbeitstage dauern</span>
+              </div>
+
+            )}
                         <div className="mt-1">
-                          <strong>Selected Options:</strong>
-                          <ul className="ml-4 mt-1">
+                          {productItem?.product?.lieferStatus ==="Vorbestellung" && (
+
+                            <strong className="text-green-300">Selected Options:</strong>
+                          )}
+                          <ul className="mt-1">
                             {productItem.selectedOptions?.map(
                               (option: any, oIdx: number) => (
                                 <li
                                   key={oIdx}
-                                  className="text-sm text-neutral-300"
+                                  className="text-sm text-slate-600 flex gap-2"
                                 >
-                                  {option.title}: {option.label}
+                                  <p className="text-neutral-600 w-20">{option.title}:</p> {option.label}
                                 </li>
                               )
                             )}

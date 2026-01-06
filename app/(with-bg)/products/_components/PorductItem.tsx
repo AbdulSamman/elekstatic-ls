@@ -39,19 +39,22 @@ function PorductItem({ filteredProducts }: any) {
               </div>
               <h3 className="font-medium text-white">{product.title}</h3>
             {product?.lieferStatus === "Vorbestellung" ? (
-              <>
+              <div className="h-15">
               < div className="flex items-center justify-start gap-2 pt-2">
                <div className="w-2 h-2 bg-red-800 rounded-full"></div>
               <span className="text-red-800 text-xs">Vorbestellung:</span>
               </div>
-               <span className="text-red-800 text-xs">Lieferzeit kann 14 bis 28 Arbeitstage dauern</span>
-              </>
+               <p className="text-red-800 text-xs  px-4">Lieferzeit kann 14 bis 28 Arbeitstage dauern</p>
+              </div>
             ):(
-               
-              < div className="flex items-center justify-start gap-2 pt-2">
+                  <div className="h-15">
+                < div className="flex items-center justify-start gap-2 pt-2 h-10">
                <div className="w-2 h-2 bg-green-800 rounded-full"></div>
               <span className="text-green-800 text-xs">Sofort Lieferbar</span>
               </div>
+             
+              </div>
+           
                
             )}
               <div className="text-sm text-neutral-400 mt-2">

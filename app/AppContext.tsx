@@ -111,23 +111,65 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
         const res = (await CartApis.addToCart(payload)).data;
 
-        setCart((prevCart: any[]) => [
+  //       setCart((prevCart: any[]) => [
+  //         ...prevCart,
+  //         {
+  //           documentId: res?.documentId, // <-- Strapi generiert id
+
+  //           cart: {
+  //             product: product,
+  //             qty: product.qty ?? 1,
+  //             selectedOptions: product.selectedOptions ?? [],
+  //           },
+  //         },
+  //       ]);
+  //     } catch (error) {
+  //       console.error("Error adding to cart", error);
+  //     }
+  //   }
+  // };
+  setCart((prevCart: any[]) => {
+        // 🔎 Gleiches Produkt + gleiche Optionen suchen
+        const existingIndex = prevCart.findIndex(
+          (item) =>
+            item.cart.product.id === product.id &&
+            JSON.stringify(item.cart.selectedOptions ?? []) ===
+              JSON.stringify(product.selectedOptions ?? [])
+        );
+
+        // ✅ Produkt existiert → qty erhöhen
+        if (existingIndex !== -1) {
+          const updatedCart = [...prevCart];
+          updatedCart[existingIndex] = {
+            ...updatedCart[existingIndex],
+            cart: {
+              ...updatedCart[existingIndex].cart,
+              qty:
+                updatedCart[existingIndex].cart.qty +
+                (product.qty ?? 1),
+            },
+          };
+          return updatedCart;
+        }
+
+        // 🆕 Produkt existiert nicht → neu hinzufügen
+        return [
           ...prevCart,
           {
-            documentId: res?.documentId, // <-- Strapi generiert id
-
+            documentId: res?.documentId,
             cart: {
               product: product,
               qty: product.qty ?? 1,
               selectedOptions: product.selectedOptions ?? [],
             },
           },
-        ]);
-      } catch (error) {
-        console.error("Error adding to cart", error);
-      }
+        ];
+      });
+    } catch (error) {
+      console.error("Error adding to cart", error);
     }
-  };
+  }
+};
 
   // [user] => wenn user sich ändert, soll cart auch geändert werden
   useEffect(() => {
@@ -138,35 +180,84 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     }
   }, [user]);
 
-  // get products from Cart
-  const getCartItems = async () => {
-    if (!user) return;
+  //get products from Cart
+  // const getCartItems = async () => {
+  //   if (!user) return;
 
-    try {
-      const rawCart = (
-        await CartApis.getUserCartItems(user.primaryEmailAddress?.emailAddress)
-      ).data.data;
+  //   try {
+  //     const rawCart = (
+  //       await CartApis.getUserCartItems(user.primaryEmailAddress?.emailAddress)
+  //     ).data.data;
 
-      const cartItems = rawCart.map((cartItem: any) => {
-        const product = cartItem.products?.[0] || {}; // erstes Produkt aus Array
-        const selected = cartItem.selectedOptions?.[0] || {}; // erstes selectedOption-Objekt
+  //     const cartItems = rawCart.map((cartItem: any) => {
+  //       const product = cartItem.products?.[0] || {}; // erstes Produkt aus Array
+  //       const selected = cartItem.selectedOptions?.[0] || {}; // erstes selectedOption-Objekt
 
-        return {
+  //       return {
+  //         documentId: cartItem.documentId,
+  //         cart: {
+  //           product: product,
+  //           qty: selected.qty ?? 1,
+  //           selectedOptions: selected.selectedOptions ?? [],
+  //         },
+  //       };
+  //     });
+
+  //     setCart(cartItems);
+  //   } catch (error) {
+  //     console.error("Error fetching cart items", error);
+  //     setCart([]);
+  //   }
+  // };
+
+const getCartItems = async () => {
+  if (!user) return;
+
+  try {
+    const rawCart = (
+      await CartApis.getUserCartItems(user.primaryEmailAddress?.emailAddress)
+    ).data.data; // Backend liefert data.data
+
+    const mergedCart: any[] = [];
+
+    rawCart.forEach((cartItem: any) => {
+      const product = cartItem.products?.[0] || {}; // erstes Produkt aus Array
+      const selected = cartItem.selectedOptions?.[0] || {}; // erstes selectedOption-Objekt
+      const selectedOptions = selected.selectedOptions ?? [];
+      const qty = selected.qty ?? 1;
+
+      // Prüfe, ob dieses Produkt + Options schon im mergedCart ist
+      const existingIndex = mergedCart.findIndex(
+        (c) =>
+          c.cart.product.id === product.id &&
+          JSON.stringify(c.cart.selectedOptions ?? []) ===
+            JSON.stringify(selectedOptions)
+      );
+
+      if (existingIndex !== -1) {
+        // Produkt existiert → qty erhöhen
+        mergedCart[existingIndex].cart.qty += qty;
+      } else {
+        // Neues Produkt hinzufügen
+        mergedCart.push({
           documentId: cartItem.documentId,
           cart: {
             product: product,
-            qty: selected.qty ?? 1,
-            selectedOptions: selected.selectedOptions ?? [],
+            qty: qty,
+            selectedOptions: selectedOptions,
           },
-        };
-      });
+        });
+      }
+    });
 
-      setCart(cartItems);
-    } catch (error) {
-      console.error("Error fetching cart items", error);
-      setCart([]);
-    }
-  };
+    setCart(mergedCart);
+  } catch (error) {
+    console.error("Error fetching cart items", error);
+    setCart([]);
+  }
+};
+
+
 
   // delete cart Item
 

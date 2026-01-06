@@ -18,8 +18,8 @@ const page = () => {
         buildYourOwnName="PRODUCTS"
       />
 
-      <div className="flex flex-col items-center justify-center pb-28 ">
-        <h2 className="text-4xl font-semibold text-neutral-400 pt-10">
+      <div className="flex flex-col items-center justify-center pb-28">
+        <h2 className="text-4xl font-semibold text-neutral-400 pt-10 px-1">
           PRODUCTS
         </h2>
         <p className="max-w-2xl text-center py-10">
