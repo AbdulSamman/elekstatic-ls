@@ -5,17 +5,16 @@ import { FaXTwitter, FaTiktok } from "react-icons/fa6";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
 import { Copyright } from "lucide-react";
 
 export const Footer = () => {
-  const { user } = useUser();
+  
   return (
     <div
       className="relative text-neutral-400 curved-top"
-      style={{ backgroundColor: "black", zIndex: 0 }}
+      style={{ backgroundColor: "black", zIndex: 50 }}
     >
-      <div className="flex flex-col items-start justify-between w-full xl:flex-row gap-2 ">
+      <div className="flex flex-col items-start justify-between w-full xl:flex-row gap-2">
         <div className="p-2 h-50 ">
           <div className="flex items-center gap-2">
             <Link
