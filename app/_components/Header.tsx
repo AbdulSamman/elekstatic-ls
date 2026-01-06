@@ -3,7 +3,6 @@
 import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useContext } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { CiShoppingCart } from "react-icons/ci";
@@ -14,7 +13,6 @@ import { LayoutDashboard } from "lucide-react";
 function Header() {
   const { user } = useUser();
   // nav background ändern
-  const pathname = usePathname();
 
   // // menu
   const menuRef = useRef<HTMLDivElement>(null); // Ref für das Menü-Element
@@ -84,7 +82,7 @@ function Header() {
 
             <ul className="flex flex-col items-center justify-center gap-8 text-sm lg:flex-row h-full p-1">
               <li className="text-2xl lg:text-sm">
-                <Link className="hover:text-white transition" href="#">
+                <Link className="hover:text-white transition" href="/products">
                   PRODUCTS
                 </Link>
               </li>

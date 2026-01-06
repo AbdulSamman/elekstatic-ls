@@ -103,8 +103,8 @@ const Cart = () => {
                             "Sofort" ? (
                               <div className="flex items-center justify-start gap-2 pt-2">
                                 <div className="w-2 h-2 bg-green-800 rounded-full"></div>
-                                <span className="text-green-800 text-xs">
-                                  Sofort Lieferbar
+                                <span className="text-green-800 text-xs py-2">
+                                  Auf Lager
                                 </span>
                               </div>
                             ) : (

@@ -216,36 +216,41 @@ export default function Dashboard() {
                           {productItem.product.title}
                         </h2>
                         <span>
-
-
-                           <div className="flex items-center justify-start gap-4">
-                            <strong className="text-orange-600">Quanty: </strong>   <span className="text-slate-600">{productItem.qty}x</span>
-                        </div>
+                          <div className="flex items-center justify-start gap-4">
+                            <strong className="text-orange-600">
+                              Quanty:{" "}
+                            </strong>{" "}
+                            <span className="text-slate-600">
+                              {productItem.qty}x
+                            </span>
+                          </div>
                         </span>
-                       {productItem?.product?.lieferStatus==="Sofort" ?(
-
-
- < div className="flex items-center justify-start gap-2 pt-2">
-               <div className="w-2 h-2 bg-green-800 rounded-full"></div>
-              <span className="text-green-800 text-xs">Sofort Lieferbar</span>
-              </div>
-
-
-            ):(
-
-              <div className="flex flex-col items-start">
-              < div className="flex items-center justify-start gap-2 pt-2">
-               <div className="w-2 h-2 bg-red-800 rounded-full"></div>
-              <span className="text-red-800 text-xs">Vorbestellung:</span>
-              </div>
-               <span className="text-red-800 text-xs py-2 px-4">Lieferzeit kann 14 bis 28 Arbeitstage dauern</span>
-              </div>
-
-            )}
+                        {productItem?.product?.lieferStatus === "Sofort" ? (
+                          <div className="flex items-center justify-start gap-2 pt-2">
+                            <div className="w-2 h-2 bg-green-800 rounded-full"></div>
+                            <span className="text-green-800 text-xs py-2">
+                              Auf Lagerd
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="flex flex-col items-start">
+                            <div className="flex items-center justify-start gap-2 pt-2">
+                              <div className="w-2 h-2 bg-red-800 rounded-full"></div>
+                              <span className="text-red-800 text-xs">
+                                Vorbestellung:
+                              </span>
+                            </div>
+                            <span className="text-red-800 text-xs py-2 px-4">
+                              Lieferzeit kann 14 bis 28 Arbeitstage dauern
+                            </span>
+                          </div>
+                        )}
                         <div className="mt-1">
-                          {productItem?.product?.lieferStatus ==="Vorbestellung" && (
-
-                            <strong className="text-green-300">Selected Options:</strong>
+                          {productItem?.product?.lieferStatus ===
+                            "Vorbestellung" && (
+                            <strong className="text-green-300">
+                              Selected Options:
+                            </strong>
                           )}
                           <ul className="mt-1">
                             {productItem.selectedOptions?.map(
@@ -254,7 +259,10 @@ export default function Dashboard() {
                                   key={oIdx}
                                   className="text-sm text-slate-600 flex gap-2"
                                 >
-                                  <p className="text-neutral-600 w-20">{option.title}:</p> {option.label}
+                                  <p className="text-neutral-600 w-20">
+                                    {option.title}:
+                                  </p>{" "}
+                                  {option.label}
                                 </li>
                               )
                             )}
