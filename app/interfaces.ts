@@ -30,6 +30,7 @@ export interface IProduct {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+  lieferStatus: string;
 }
 export interface IBanner {
   alternativeText?: boolean;
