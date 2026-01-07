@@ -57,12 +57,8 @@ export default function Dashboard({
           bg-neutral-900 border-r border-neutral-800 p-4
           transition-all duration-300 overflow-hidden
           min-h-screen
-
-          /* Desktop – UNVERÄNDERT */
           md:static
           ${menuOpen ? "md:w-50" : "md:w-14"}
-
-          /* Mobile ONLY */
           fixed md:relative
           top-16 left-0 z-40
           w-64

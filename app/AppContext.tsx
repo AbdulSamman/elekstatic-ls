@@ -432,18 +432,23 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     };
 
     try {
-      const res = (await CartApis.sendCartToDashboard(payload)).data;
+      // const res = (await CartApis.sendCartToDashboard(payload)).data;
 
-      const dashboardItem = {
-        documentId: res.documentId,
-        items: payload.items,
-        userName: payload.userName,
-        email: payload.email,
-        orderStatus: "pending",
-      };
+      // const dashboardItem = {
+      //   documentId: res.documentId,
+      //   items: payload.items,
+      //   userName: payload.userName,
+      //   email: payload.email,
+      //   orderStatus: payload.orderStatus,
+      // };
 
-      // Optimistisches Update direkt nach Submit
-      setFillDashboard((prev) => [...prev, dashboardItem]);
+      // // Optimistisches Update direkt nach Submit
+      // setFillDashboard((prev) => [...prev, dashboardItem]);
+
+      await CartApis.sendCartToDashboard(payload);
+
+      // Danach Dashboard neu laden
+      await getDashboardItems();
     } catch (err) {
       console.error("Failed to send order to dashboard:", err);
     }
@@ -463,12 +468,12 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       }));
 
       // nur update, wenn sich Daten geändert haben
-      setFillDashboard((prev) => {
-        const prevIds = prev.map((o) => o.documentId).join(",");
-        const newIds = dashboardItems.map((o: any) => o.documentId).join(",");
-        return prevIds !== newIds ? dashboardItems : prev;
-      });
-      getDashboardItems();
+      // setFillDashboard((prev) => {
+      //   const prevIds = prev.map((o) => o.documentId).join(",");
+      //   const newIds = dashboardItems.map((o: any) => o.documentId).join(",");
+      //   return prevIds !== newIds ? dashboardItems : prev;
+      // });
+      setFillDashboard(dashboardItems);
     } catch (err) {
       console.error("Failed to fetch dashboard orders:", err);
       setFillDashboard([]);
@@ -480,10 +485,10 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     if (user) {
       getDashboardItems();
       // Polling alle 5 Sekunden für neue Orders
-      // const interval = setInterval(() => {
-      //   getDashboardItems();
-      // }, 3000);
-      // return () => clearInterval(interval);
+      const interval = setInterval(async () => {
+        await getDashboardItems();
+      }, 20000);
+      return () => clearInterval(interval);
     }
   }, [user]);
 
