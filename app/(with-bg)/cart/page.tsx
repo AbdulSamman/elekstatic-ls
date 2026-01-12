@@ -7,32 +7,35 @@ import { AppContext } from "../../AppContext";
 import { CiShoppingCart } from "react-icons/ci";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Cart = () => {
-  const { cart, handleDeleteCartItem, handleSendToDashboard } =
+  //bezahlung
+  const router = useRouter();
+  const { cart, handleDeleteCartItem, handleSendToDashboard, totalPrice } =
     useContext(AppContext);
 
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+  // const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  useEffect(() => {
-    getTotalPrice();
-  }, [cart]);
+  // useEffect(() => {
+  //   getTotalPrice();
+  // }, [cart]);
 
-  const getTotalPrice = () => {
-    try {
-      const prices: number[] = [];
-      cart.forEach((item: any) => {
-        const price = parseFloat(item?.cart?.product?.price ?? 0);
-        const qty = item?.cart?.qty ?? 1;
-        prices.push(price * qty);
-      });
-      setTotalPrice(
-        prices.reduce((total: number, price: number) => total + price, 0)
-      );
-    } catch (error) {
-      console.error("error go get total price", error);
-    }
-  };
+  // const getTotalPrice = () => {
+  //   try {
+  //     const prices: number[] = [];
+  //     cart.forEach((item: any) => {
+  //       const price = parseFloat(item?.cart?.product?.price ?? 0);
+  //       const qty = item?.cart?.qty ?? 1;
+  //       prices.push(price * qty);
+  //     });
+  //     setTotalPrice(
+  //       prices.reduce((total: number, price: number) => total + price, 0)
+  //     );
+  //   } catch (error) {
+  //     console.error("error go get total price", error);
+  //   }
+  // };
 
   return (
     <section className="pb-26 flex items-center justify-center mt-24">
@@ -175,13 +178,23 @@ const Cart = () => {
           )}
         </div>
         <div className="flex items-center justify-center px-2">
-          <Button
+          {/* <Button
             size="lg"
             className=" text-neutral-300 px-15 py-6 text-xl rounded-none text-[18px] bg-slate-900 border border-neutral-600 w-full  lg:w-auto "
             onClick={handleSendToDashboard}
           >
             <span className="flex items-center justify-center gap-2">
               SEND ORDER <ChevronRight />
+            </span>
+          </Button> */}
+          <Button
+            size="lg"
+            className=" text-neutral-300 px-15 py-6 text-xl rounded-none text-[18px] bg-slate-900 border border-neutral-600 w-full  lg:w-auto "
+            onClick={() => router.push(`/checkout`)}
+          >
+            <span className="flex items-center justify-center gap-2">
+              CHECKOUT
+              <ChevronRight />
             </span>
           </Button>
         </div>

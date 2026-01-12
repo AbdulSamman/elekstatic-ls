@@ -10,6 +10,10 @@ export interface IAppContext {
   sectionImages: any[];
   handleSendToDashboard: (payload: any) => void;
   fillDashbaord: any;
+  totalPrice: number;
+  shipping: number;
+  getTotalAmountInCents: () => any;
+  handleShipping: (e: any) => void;
 }
 
 export interface IAppProvider {
@@ -105,4 +109,8 @@ export interface Section {
 
 export interface CartProps {
   setIsCartOpen: (isCartOpen: boolean) => void;
+}
+
+export interface AmountProps {
+  amount: number;
 }

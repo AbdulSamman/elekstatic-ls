@@ -449,6 +449,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
       // Danach Dashboard neu laden
       await getDashboardItems();
+      // setCart([]);
     } catch (err) {
       console.error("Failed to send order to dashboard:", err);
     }
@@ -492,6 +493,40 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     }
   }, [user]);
 
+  // price handlen
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [shipping, setShipping] = useState<number>(0);
+
+  useEffect(() => {
+    getTotalPrice();
+  }, [cart]);
+
+  const getTotalPrice = () => {
+    try {
+      const prices: number[] = [];
+      cart.forEach((item: any) => {
+        prices.push(parseFloat(item?.cart?.product?.price) * 1);
+      });
+      setTotalPrice(
+        prices.reduce((total: number, price: number) => total + price, 0)
+      );
+    } catch (error) {
+      console.log("error go get total price", error);
+    }
+  };
+
+  const getTotalAmountInCents = () => {
+    return Math.round((totalPrice - totalPrice / 100 + shipping) * 100);
+  };
+
+  const handleShipping = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setShipping(3.99);
+    } else {
+      setShipping(0);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -506,6 +541,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         sectionImages,
         handleSendToDashboard,
         fillDashbaord,
+
+        totalPrice,
+        shipping,
+        getTotalAmountInCents,
+        handleShipping,
       }}
     >
       {children}

@@ -1,0 +1,27 @@
+import { NextResponse } from "next/server";
+import Stripe from "stripe";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  typescript: true,
+  apiVersion: "2025-12-15.clover",
+});
+
+export const POST = async (request: Request) => {
+  try {
+    const { amount } = await request.json();
+
+    if (!amount || typeof amount !== "number") {
+      return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
+    }
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount, // in cents
+      currency: "eur",
+      automatic_payment_methods: { enabled: true },
+    });
+
+    return NextResponse.json({ clientSecret: paymentIntent.client_secret });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+};
