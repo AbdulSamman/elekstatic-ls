@@ -18,7 +18,7 @@ const Checkout = () => {
   useEffect(() => {
     const createPaymentIntent = async () => {
       const amount = getTotalAmountInCents();
-      if (amount <= 0) return; // Sicherstellen, dass Betrag gültig ist
+      if (amount <= 0) return;
       try {
         const res = await fetch("/api/create-intent", {
           method: "POST",
