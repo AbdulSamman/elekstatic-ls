@@ -3,7 +3,6 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   typescript: true,
-  apiVersion: "2025-12-15.clover",
 });
 
 export const POST = async (request: Request) => {
@@ -15,7 +14,7 @@ export const POST = async (request: Request) => {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount, // in cents
+      amount: amount,
       currency: "eur",
       automatic_payment_methods: { enabled: true },
     });

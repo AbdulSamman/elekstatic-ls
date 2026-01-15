@@ -516,7 +516,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   };
 
   const getTotalAmountInCents = () => {
-    return Math.round((totalPrice - totalPrice / 100 + shipping) * 100);
+    return Math.round((totalPrice + shipping) * 100);
   };
 
   const handleShipping = (e: React.ChangeEvent<HTMLInputElement>) => {

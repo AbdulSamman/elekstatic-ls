@@ -10,52 +10,30 @@ import {
 import { useState } from "react";
 
 const CheckoutForm = () => {
-  const { totalPrice } = useContext(AppContext);
   const stripe = useStripe();
   const elements = useElements();
-
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const { totalPrice, getTotalAmountInCents } = useContext(AppContext);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!stripe || !elements) return;
 
     setLoading(true);
     setErrorMessage("");
 
-    // Trigger form validation and wallet collection
-    const { error: submitError } = await elements.submit();
-    if (submitError) {
-      setLoading(false);
-      setErrorMessage(submitError.message || "Payment submission failed.");
-      return;
-    }
-
-    // Fetch clientSecret from server
-    const res = await fetch("/api/create-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: totalPrice * 100,
-      }),
-    });
-    const data = await res.json();
-    const clientSecret = data.clientSecret;
-    // Confirm payment
     const result = await stripe.confirmPayment({
-      clientSecret,
       elements,
       confirmParams: {
         return_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/payment-confirm`,
       },
     });
 
-    if (result.error) {
+    if (result.error)
       setErrorMessage(result.error.message || "Payment failed.");
-      setLoading(false);
-    }
+    setLoading(false);
   };
 
   return (
