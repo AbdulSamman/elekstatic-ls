@@ -22,9 +22,9 @@ const paymentConfirmed = () => {
       </p>
       <Link
         href="/"
-        className="p-2 mt-6 text-white rounded-md bg-primary text-[25px]"
+        className="py-2 px-6 mt-6 text-white rounded-md bg-primary text-[25px]"
       >
-        Go to Home
+        Go Back Home
       </Link>
     </div>
   );

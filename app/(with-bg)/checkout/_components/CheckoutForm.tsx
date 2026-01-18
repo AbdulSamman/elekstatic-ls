@@ -37,11 +37,10 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form className="pb-26" onSubmit={(e) => handleSubmit(e)}>
-      <div className="mx-10 xl:mx-80 ">
+    <form className="py-26" onSubmit={(e) => handleSubmit(e)}>
+      <div className="mx-10 md:mx-80 ">
         <PaymentElement />
-
-        <button className="bg-primary p-2 text-white rounded-md w-full mt-4">
+        <button className="bg-primary p-4 text-white rounded-md w-full mt-4 text-lg">
           {loading ? "Processing..." : "PAY & SEND ORDER"}
         </button>
       </div>

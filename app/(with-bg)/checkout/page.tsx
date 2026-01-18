@@ -42,7 +42,7 @@ const Checkout = () => {
 
   return (
     <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <div className="mt-24">
+      <div className="mt-24 ">
         <CheckoutForm />
       </div>
     </Elements>
