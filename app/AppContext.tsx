@@ -179,34 +179,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   }, [user]);
 
   //get products from Cart
-  // const getCartItems = async () => {
-  //   if (!user) return;
-
-  //   try {
-  //     const rawCart = (
-  //       await CartApis.getUserCartItems(user.primaryEmailAddress?.emailAddress)
-  //     ).data.data;
-
-  //     const cartItems = rawCart.map((cartItem: any) => {
-  //       const product = cartItem.products?.[0] || {}; // erstes Produkt aus Array
-  //       const selected = cartItem.selectedOptions?.[0] || {}; // erstes selectedOption-Objekt
-
-  //       return {
-  //         documentId: cartItem.documentId,
-  //         cart: {
-  //           product: product,
-  //           qty: selected.qty ?? 1,
-  //           selectedOptions: selected.selectedOptions ?? [],
-  //         },
-  //       };
-  //     });
-
-  //     setCart(cartItems);
-  //   } catch (error) {
-  //     console.error("Error fetching cart items", error);
-  //     setCart([]);
-  //   }
-  // };
 
   const getCartItems = async () => {
     if (!user) return;
@@ -269,7 +241,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     }
   };
 
-  // get secion Images
+  // get section Images
   useEffect(() => {
     try {
       (async () => {
@@ -503,15 +475,18 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
   const getTotalPrice = () => {
     try {
-      const prices: number[] = [];
-      cart.forEach((item: any) => {
-        prices.push(parseFloat(item?.cart?.product?.price) * 1);
-      });
-      setTotalPrice(
-        prices.reduce((total: number, price: number) => total + price, 0)
-      );
+      const total = cart.reduce((sum: number, item: any) => {
+        const price = Number(item?.cart?.product?.price);
+        const qty = Number(item?.cart?.qty ?? 1);
+
+        if (isNaN(price) || isNaN(qty)) return sum;
+
+        return sum + price * qty;
+      }, 0);
+
+      setTotalPrice(Number(total.toFixed(2)));
     } catch (error) {
-      console.log("error go get total price", error);
+      console.error("error get total price", error);
     }
   };
 

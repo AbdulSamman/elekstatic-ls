@@ -11,40 +11,32 @@ const stripePromise = loadStripe(
 );
 
 const Checkout = () => {
-  const { getTotalAmountInCents } = useContext(AppContext);
+  const { totalPrice } = useContext(AppContext);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
 
-  // PaymentIntent automatisch beim Laden der Seite erstellen
   useEffect(() => {
-    const createPaymentIntent = async () => {
-      const amount = getTotalAmountInCents();
-      if (amount <= 0) return;
-      try {
-        const res = await fetch("/api/create-intent", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount }),
-        });
-        const data = await res.json();
-        setClientSecret(data.clientSecret);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+    if (
+      typeof totalPrice !== "number" ||
+      isNaN(totalPrice) ||
+      totalPrice <= 0
+    ) {
+      return;
+    }
+    fetch("/api/create-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: totalPrice }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret))
+      .catch(console.error);
+  }, [totalPrice]);
 
-    createPaymentIntent();
-  }, []);
-
-  // Ladezustand anzeigen, bis clientSecret existiert
-  if (!clientSecret) {
-    return <p className="mt-24 text-center">Loading checkout...</p>;
-  }
+  if (!clientSecret) return null;
 
   return (
     <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <div className="mt-24 ">
-        <CheckoutForm />
-      </div>
+      <CheckoutForm />
     </Elements>
   );
 };

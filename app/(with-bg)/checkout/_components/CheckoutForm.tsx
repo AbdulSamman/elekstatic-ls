@@ -15,7 +15,7 @@ const CheckoutForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const { totalPrice, getTotalAmountInCents } = useContext(AppContext);
+  const { totalPrice } = useContext(AppContext);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,18 +24,18 @@ const CheckoutForm = () => {
     setLoading(true);
     setErrorMessage("");
 
-    const result = await stripe.confirmPayment({
+    const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/payment-confirm`,
       },
     });
 
-    if (result.error)
-      setErrorMessage(result.error.message || "Payment failed.");
-    setLoading(false);
+    if (error) {
+      setErrorMessage(error.message || "Payment failed");
+      setLoading(false);
+    }
   };
-
   return (
     <form className="py-26" onSubmit={(e) => handleSubmit(e)}>
       <div className="mx-10 md:mx-80 ">

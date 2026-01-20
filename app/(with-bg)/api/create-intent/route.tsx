@@ -13,17 +13,20 @@ export const POST = async (request: Request) => {
   try {
     const { amount } = await request.json();
 
-    if (!amount || typeof amount !== "number") {
+    if (typeof amount !== "number" || isNaN(amount) || amount <= 0) {
       return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount,
-      currency: "eur",
+      amount: Number(amount) * 100,
+      currency: "EUR",
       automatic_payment_methods: { enabled: true },
     });
 
-    return NextResponse.json({ clientSecret: paymentIntent.client_secret });
+    return NextResponse.json(
+      { clientSecret: paymentIntent.client_secret },
+      { status: 200 }
+    );
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
