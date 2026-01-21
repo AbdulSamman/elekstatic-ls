@@ -7,7 +7,7 @@ import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../AppContext";
 
 const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY as string
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY as string,
 );
 
 const Checkout = () => {
@@ -22,10 +22,11 @@ const Checkout = () => {
     ) {
       return;
     }
+    const amountInCents = Math.round(totalPrice * 100);
     fetch("/api/create-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: totalPrice }),
+      body: JSON.stringify({ amount: amountInCents }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret))

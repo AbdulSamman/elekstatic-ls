@@ -64,7 +64,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const getProductsbyCategory = async (category: string) => {
     const response = (
       await axiosClient.get(
-        `/api/products?filters[category][$eq]=${category}&populate=*`
+        `/api/products?filters[category][$eq]=${category}&populate=*`,
       )
     ).data;
 
@@ -77,7 +77,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/buildsummaries`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/buildsummaries`,
       );
       const data = res.data.data[0].options;
       setSections(data);
@@ -134,7 +134,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             (item) =>
               item.cart.product.id === product.id &&
               JSON.stringify(item.cart.selectedOptions ?? []) ===
-                JSON.stringify(product.selectedOptions ?? [])
+                JSON.stringify(product.selectedOptions ?? []),
           );
 
           // ✅ Produkt existiert → qty erhöhen
@@ -201,7 +201,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
           (c) =>
             c.cart.product.id === product.id &&
             JSON.stringify(c.cart.selectedOptions ?? []) ===
-              JSON.stringify(selectedOptions)
+              JSON.stringify(selectedOptions),
         );
 
         if (existingIndex !== -1) {
@@ -234,7 +234,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       await CartApis.deleteCartItem(documentId);
 
       setCart((prev: any[]) =>
-        prev.filter((item) => item.documentId !== documentId)
+        prev.filter((item) => item.documentId !== documentId),
       );
     } catch (error) {
       console.error("failed to delete cart item", error);
@@ -388,45 +388,81 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const [fillDashbaord, setFillDashboard] = useState<any[]>([]);
 
   // Submit Order in Dashboard
+  // const handleSendToDashboard = async () => {
+  //   if (!user || cart.length === 0) return;
+
+  //   const payload = {
+  //     userId: user.id,
+  //     userName: user.fullName,
+  //     email: user.primaryEmailAddress?.emailAddress,
+  //     items: cart.map((item: any) => ({
+  //       product: item.cart.product,
+  //       selectedOptions: item.cart.selectedOptions,
+  //       qty: item.cart.qty,
+  //       totalPrice: totalPrice * item.cart.qty,
+  //     })),
+  //     orderStatus: "pending",
+  //   };
+
+  //   try {
+  //     // const res = (await CartApis.sendCartToDashboard(payload)).data;
+
+  //     // const dashboardItem = {
+  //     //   documentId: res.documentId,
+  //     //   items: payload.items,
+  //     //   userName: payload.userName,
+  //     //   email: payload.email,
+  //     //   orderStatus: payload.orderStatus,
+  //     // };
+
+  //     // // Optimistisches Update direkt nach Submit
+  //     // setFillDashboard((prev) => [...prev, dashboardItem]);
+
+  //     await CartApis.sendCartToDashboard(payload);
+
+  //     // Danach Dashboard neu laden
+  //     await getDashboardItems();
+  //     // setCart([]);
+  //   } catch (err) {
+  //     console.error("Failed to send order to dashboard:", err);
+  //   }
+  // };
   const handleSendToDashboard = async () => {
     if (!user || cart.length === 0) return;
+
+    const items = cart.map((item: any) => {
+      const price = Number(item.cart.product.price);
+      const qty = Number(item.cart.qty ?? 1);
+
+      return {
+        product: item.cart.product,
+        selectedOptions: item.cart.selectedOptions,
+        qty,
+        totalPrice: Number((price * qty).toFixed(2)),
+      };
+    });
+
+    const orderTotal = items.reduce(
+      (sum: number, i: any) => sum + i.totalPrice,
+      0,
+    );
 
     const payload = {
       userId: user.id,
       userName: user.fullName,
       email: user.primaryEmailAddress?.emailAddress,
-      items: cart.map((item: any) => ({
-        product: item.cart.product,
-        qty: item.cart.qty,
-        selectedOptions: item.cart.selectedOptions,
-      })),
+      items,
+      totalPrice: Number(orderTotal.toFixed(2)),
       orderStatus: "pending",
     };
 
     try {
-      // const res = (await CartApis.sendCartToDashboard(payload)).data;
-
-      // const dashboardItem = {
-      //   documentId: res.documentId,
-      //   items: payload.items,
-      //   userName: payload.userName,
-      //   email: payload.email,
-      //   orderStatus: payload.orderStatus,
-      // };
-
-      // // Optimistisches Update direkt nach Submit
-      // setFillDashboard((prev) => [...prev, dashboardItem]);
-
       await CartApis.sendCartToDashboard(payload);
-
-      // Danach Dashboard neu laden
       await getDashboardItems();
-      // setCart([]);
     } catch (err) {
       console.error("Failed to send order to dashboard:", err);
     }
   };
-
   // Fetch Dashboard Items
   const getDashboardItems = async () => {
     try {
@@ -438,6 +474,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         userName: item.userName,
         email: item.email,
         orderStatus: item.orderStatus,
+        totalPrice: item.totalPrice,
       }));
 
       // nur update, wenn sich Daten geändert haben

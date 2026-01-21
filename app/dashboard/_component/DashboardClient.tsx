@@ -225,11 +225,12 @@ export default function Dashboard({
                             </span>
                           </div>
                         </span>
+                        <span>{productItem?.totalPrice?.toFixed(2)} €</span>
                         {productItem?.product?.lieferStatus === "Sofort" ? (
                           <div className="flex items-center justify-start gap-2 pt-2">
                             <div className="w-2 h-2 bg-green-800 rounded-full"></div>
-                            <span className="text-green-800 text-xs py-2">
-                              Auf Lager:
+                            <span className="text-green-800 text-sm py-2">
+                              Auf Lager
                             </span>
                           </div>
                         ) : (
@@ -264,7 +265,7 @@ export default function Dashboard({
                                   </p>{" "}
                                   {option.label}
                                 </li>
-                              )
+                              ),
                             )}
                           </ul>
                         </div>

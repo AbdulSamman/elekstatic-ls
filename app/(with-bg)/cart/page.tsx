@@ -95,7 +95,7 @@ const Cart = () => {
                                   {option?.label}
                                 </div>
                               );
-                            }
+                            },
                           )}
                           <div className="my-0.5 space-y-px text-md text-gray-400">
                             <div className="my-4">
@@ -170,7 +170,7 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
-              <h2 className="text-red-800 text-md bg-neutral-500/10 p-2 rounded-md mb-2 mx-2">
+              <h2 className="text-red-800 text-md bg-neutral-500/10 p-2 mb-2 mx-2">
                 Note: All Items will be sent together and with same color if you
                 dont choose your color.
               </h2>

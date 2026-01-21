@@ -1,21 +1,20 @@
 "use client";
 
-import { useContext } from "react";
-import { AppContext } from "../../../AppContext";
 import {
   PaymentElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { useState } from "react";
+
+import { useState, useContext } from "react";
+import { AppContext } from "../../../AppContext";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-
-  const { totalPrice } = useContext(AppContext);
+  const { handleSendToDashboard } = useContext(AppContext);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
