@@ -178,7 +178,7 @@ const Cart = () => {
           )}
         </div>
         <div className="flex items-center justify-center px-2">
-          {/* <Button
+          <Button
             size="lg"
             className=" text-neutral-300 px-15 py-6 text-xl rounded-none text-[18px] bg-slate-900 border border-neutral-600 w-full  lg:w-auto "
             onClick={handleSendToDashboard}
@@ -186,8 +186,8 @@ const Cart = () => {
             <span className="flex items-center justify-center gap-2">
               SEND ORDER <ChevronRight />
             </span>
-          </Button> */}
-          <Button
+          </Button>
+          {/* <Button
             size="lg"
             className=" text-neutral-300 px-15 py-6 text-xl rounded-none text-[18px] bg-slate-900 border border-neutral-600 w-full  lg:w-auto "
             onClick={() => router.push(`/checkout`)}
@@ -196,7 +196,7 @@ const Cart = () => {
               CHECKOUT
               <ChevronRight />
             </span>
-          </Button>
+          </Button> */}
         </div>
       </div>
     </section>
