@@ -27,7 +27,7 @@ export default function Dashboard({
   totalUsersCount: number;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { fillDashbaord } = useContext(AppContext);
+  const { fillDashboard } = useContext(AppContext);
 
   const menuItems = [
     { name: "Dashboard", icon: <PieChart size={16} />, href: "#dashboard" },
@@ -152,7 +152,7 @@ export default function Dashboard({
                 <Check size={16} /> Orders
               </h3>
               <p className="mt-2 text-2xl text-orange-500">
-                {fillDashbaord.length}
+                {fillDashboard.length}
               </p>
               <p className="text-sm text-neutral-400">Pending orders</p>
             </CardContent>
@@ -182,10 +182,10 @@ export default function Dashboard({
         </Card>
 
         {/* Orders List */}
-        {fillDashbaord.length === 0 ? (
+        {fillDashboard.length === 0 ? (
           <div className="text-center text-neutral-400">No orders yet.</div>
         ) : (
-          fillDashbaord.map((order: any, i: number) => (
+          fillDashboard.map((order: any, i: number) => (
             <div key={i} className="mb-4 p-4 border rounded bg-neutral-900/20">
               <div>
                 <strong>User:</strong> {order.userName} ({order.email})

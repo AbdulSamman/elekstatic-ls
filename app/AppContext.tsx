@@ -111,23 +111,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
         const res = (await CartApis.addToCart(payload)).data;
 
-        //       setCart((prevCart: any[]) => [
-        //         ...prevCart,
-        //         {
-        //           documentId: res?.documentId, // <-- Strapi generiert id
-
-        //           cart: {
-        //             product: product,
-        //             qty: product.qty ?? 1,
-        //             selectedOptions: product.selectedOptions ?? [],
-        //           },
-        //         },
-        //       ]);
-        //     } catch (error) {
-        //       console.error("Error adding to cart", error);
-        //     }
-        //   }
-        // };
         setCart((prevCart: any[]) => {
           // 🔎 Gleiches Produkt + gleiche Optionen suchen
           const existingIndex = prevCart.findIndex(
@@ -385,7 +368,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   //     setFillDashboard([]);
   //   }
   // };
-  const [fillDashbaord, setFillDashboard] = useState<any[]>([]);
+  const [fillDashboard, setFillDashboard] = useState<any[]>([]);
 
   // Submit Order in Dashboard
   // const handleSendToDashboard = async () => {
@@ -552,7 +535,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         handleDeleteCartItem,
         sectionImages,
         handleSendToDashboard,
-        fillDashbaord,
+        fillDashboard,
 
         totalPrice,
         shipping,

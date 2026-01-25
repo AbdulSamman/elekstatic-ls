@@ -9,7 +9,7 @@ export interface IAppContext {
   handleDeleteCartItem: (id: any) => void;
   sectionImages: any[];
   handleSendToDashboard: (payload: any) => void;
-  fillDashbaord: any;
+  fillDashboard: any;
   totalPrice: number;
   shipping: number;
   getTotalAmountInCents: () => any;
@@ -113,4 +113,10 @@ export interface CartProps {
 
 export interface AmountProps {
   amount: number;
+}
+
+export interface EmailTemplateProps {
+  firstName: string;
+  totalPrice: number;
+  email: string;
 }

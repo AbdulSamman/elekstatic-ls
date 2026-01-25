@@ -8,20 +8,24 @@ import {
 
 import { useState, useContext } from "react";
 import { AppContext } from "../../../AppContext";
+import { useUser } from "@clerk/nextjs";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const { user } = useUser();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const { handleSendToDashboard } = useContext(AppContext);
+  const { handleSendToDashboard, totalPrice, fillDashboard } =
+    useContext(AppContext);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!stripe || !elements) return;
 
     setLoading(true);
-    setErrorMessage("");
+    await sendEmail();
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -34,6 +38,20 @@ const CheckoutForm = () => {
       setErrorMessage(error.message || "Payment failed");
       setLoading(false);
     }
+  };
+  //RESEND EMAIL FUNCTION
+  const sendEmail = async () => {
+    const res = await fetch("/api/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstName: user?.firstName || user?.fullName || "Customer",
+        email: user?.emailAddresses[0].emailAddress,
+        totalPrice: totalPrice,
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
   };
   return (
     <form className="py-26" onSubmit={(e) => handleSubmit(e)}>
