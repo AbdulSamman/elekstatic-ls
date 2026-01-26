@@ -11,9 +11,11 @@ export async function POST(req: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const result = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "SAM & BOFF HiFi Audiotechnik <info@snbaudio.de>",
       to: email,
-      subject: "Test",
+      bcc: ["tkservas@gmail.com"],
+      subject:
+        "Welcome to SAM & BOFF HiFi Audiotechnik - Your Order Confirmation",
       react: EmailTemplate({
         firstName,
         email,
