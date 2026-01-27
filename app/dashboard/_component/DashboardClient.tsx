@@ -185,13 +185,16 @@ export default function Dashboard({
         {fillDashboard.length === 0 ? (
           <div className="text-center text-neutral-400">No orders yet.</div>
         ) : (
-          fillDashboard.map((order: any, i: number) => (
-            <div key={i} className="mb-4 p-4 border rounded bg-neutral-900/20">
+          fillDashboard.map((order: any) => (
+            <div
+              key={order?.documentId}
+              className="mb-4 p-4 border rounded bg-neutral-900/20"
+            >
               <div>
-                <strong>User:</strong> {order.userName} ({order.email})
+                <strong>User:</strong> {order?.userName} ({order.email})
               </div>
               <div>
-                <strong>Status:</strong> {order.orderStatus}
+                <strong>Status:</strong> {order?.orderStatus}
               </div>
               <div>
                 <strong>Orders:</strong>
@@ -204,16 +207,16 @@ export default function Dashboard({
                     className="mb-3 p-2 border rounded bg-neutral-800/40"
                   >
                     <div className="flex items-center gap-4">
-                      {productItem.product.banner?.url && (
+                      {productItem?.product?.banner?.url && (
                         <img
-                          src={productItem.product.banner.url}
-                          alt={productItem.product.title}
+                          src={productItem?.product?.banner?.url}
+                          alt={productItem?.product?.title}
                           className="w-20 h-20 object-contain rounded"
                         />
                       )}
                       <div>
                         <h2 className="text-xl text-slate-700">
-                          {productItem.product.title}
+                          {productItem?.product?.title}
                         </h2>
                         <span>
                           <div className="flex items-center justify-start gap-4">
@@ -221,7 +224,7 @@ export default function Dashboard({
                               Quanty:{" "}
                             </strong>{" "}
                             <span className="text-slate-600">
-                              {productItem.qty}x
+                              {productItem?.qty}x
                             </span>
                           </div>
                         </span>
@@ -261,9 +264,9 @@ export default function Dashboard({
                                   className="text-sm text-slate-600 flex gap-2"
                                 >
                                   <p className="text-neutral-600 w-20">
-                                    {option.title}:
+                                    {option?.title}:
                                   </p>{" "}
-                                  {option.label}
+                                  {option?.label}
                                 </li>
                               ),
                             )}

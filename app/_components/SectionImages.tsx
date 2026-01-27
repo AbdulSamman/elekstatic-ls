@@ -10,95 +10,80 @@ function SectionImages() {
   const { sectionImages } = useContext(AppContext);
 
   return (
-    // <div className="grid max-[725px]:grid-cols-1 max-[1440px]:grid-cols-2 max-[1780px]:grid-cols-3 max-[3000px]:grid-cols-4 gap-4 place-items-center p-2  lg:w-[80%] lg:justify-self-center">
-    //   {listToRender?.map((product: IProduct) => {
-    //     return (
-    //       <div
-    //         className="flex flex-col justify-center items-center w-87.5 max-[725px]:w-full gap-2"
-    //         key={product?.id}
-    //       >
-    //         <Link
-    //           href={`/product-details/${product?.documentId}`}
-    //           className=" w-87.5 max-[725px]:w-full shadow-md"
-    //         >
-    //           <div className="h-87.5 max-[725px]:w-full flex items-center justify-center group cursor-pointer">
-    //             <Image
-    //               src={product?.banner?.url || "/logo2.png"}
-    //               alt={product?.title || "bannerProducts"}
-    //               width={100}
-    //               height={100}
-    //               style={{ width: "auto", height: "340px" }}
-    //               priority
-    //               className="object-contain transition duration-500 group-hover:scale-110 p-0.5 max-[605px]:w-full"
-    //             />
-    //           </div>
-    //         </Link>
+    <section id="produkte" className="  mx-auto sm:px-4 py-32 bg-black">
+      {/* Überschrift im Technical-Branding Style */}
+      <div className="flex flex-col items-center mb-20">
+        <span className="text-[#00BFFF] text-xs font-black tracking-[0.5em] uppercase mb-4">
+          Visual Precision
+        </span>
+        <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter text-center">
+          FRONT PANEL <span className="text-neutral-500">MARKINGS</span>
+        </h2>
+        <div className="w-24 h-px bg-linear-to-r from-transparent via-[#00BFFF] to-transparent mt-8 shadow-[0_0_10px_#00BFFF]"></div>
+      </div>
 
-    //         <div className="flex flex-col w-full items-start justify-center h-25 p-3 gap-2 max-[605px]:w-full shadow-md rounded-b-lg">
-    //           <h2 className="text-[16px] font-bold">{product.title}</h2>
-    //           <div className="flex items-center justify-between italic w-full">
-    //             <h2 className="text-[14px] font-medium text-gray-400 flex gap-2 items-center">
-    //               <CiCircleList className="text-xl text-gray-600" />{" "}
-    //               {product.category}
-    //             </h2>
-    //             <h2 className="font-medium px-4">{product.price} €</h2>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     );
-    //   })}
-    // </div>
-
-    <section id="produkte" className="max-w-7xl mx-auto sm:px-4 py-15 mb-20">
-      <h2 className="text-3xl font-semibold text-neutral-400 text-center pb-15">
-        FRONT PANEL MARKINGS
-      </h2>
       {sectionImages.length > 0 ? (
-        <div className="grid md:grid-cols-3 gap-10 px-4">
+        <div className="grid md:grid-cols-3 gap-12 px-4">
           {sectionImages.map((sectionImage) => {
             return (
               <Card
                 key={sectionImage?.documentId}
-                className="bg-neutral-900/50 border-neutral-800 pb-0"
+                className="group bg-neutral-950 border-white/5 rounded-none hover:border-[#00BFFF]/30 transition-all duration-700 relative overflow-hidden"
               >
-                <CardContent className="p-4 flex flex-col justify-self-center gap-2">
-                  <div className="h-40 flex items-center justify-center group rounded-lg">
+                {/* Dekorativer Eck-Glow */}
+                <div className="absolute top-0 right-0 w-16 h-16 bg-[#00BFFF]/5 blur-2xl group-hover:bg-[#00BFFF]/15 transition-all"></div>
+
+                <CardContent className="p-6 flex flex-col">
+                  {/* Image Container mit Scan-Effekt */}
+                  <div className="relative h-56 flex items-center justify-center overflow-hidden bg-neutral-900/30">
                     <Image
                       src={sectionImage?.banner?.url || "/logo2.png"}
                       alt="sectionImage"
-                      width={390}
-                      height={160}
-                      style={{ width: "345px", height: "180px" }}
+                      fill
                       priority
-                      className="object-containt transition duration-500 group-hover:scale-105 p-0.5 max-[605px]:w-full rounded-lg"
+                      className="object-contain transition-all duration-700 group-hover:scale-110 group-hover:brightness-110 p-4"
                     />
+                    {/* Subtiler blauer Overlay-Schimmer beim Hover */}
+                    <div className="absolute inset-0 bg-[#00BFFF]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                   </div>
-                  <h3 className="font-medium text-white mt-6">
-                    {sectionImage.title}
-                  </h3>
-                  <p className="text-sm text-neutral-400 mt-1 h-15">
-                    {sectionImage.description?.map((descItem: any) =>
-                      descItem.children
-                        ?.map((child: any) => child.text)
-                        .join(" "),
-                    )}
-                  </p>
-                  <Link
-                    className="mt-4 w-full text-sm text-neutral-600 flex items-center justify-end"
-                    href={`/products?category=${sectionImage.category}?populate=*`}
-                  >
-                    Discover Now <ChevronsRight className="" />
-                  </Link>
+
+                  <div className="mt-8">
+                    <h3 className="font-bold text-lg text-white tracking-tight group-hover:text-[#00BFFF] transition-colors">
+                      {sectionImage.title}
+                    </h3>
+
+                    <div className="h-px w-12 bg-neutral-800 my-4 group-hover:w-full group-hover:bg-[#00BFFF]/30 transition-all duration-500"></div>
+
+                    <p className="text-sm text-neutral-500 leading-relaxed h-20 line-clamp-3">
+                      {sectionImage.description?.map((descItem: any) =>
+                        descItem.children
+                          ?.map((child: any) => child.text)
+                          .join(" "),
+                      )}
+                    </p>
+
+                    <Link
+                      className="mt-6 inline-flex items-center gap-2 text-xs font-black tracking-[0.2em] text-[#00BFFF] opacity-70 hover:opacity-100 group-hover:translate-x-2 transition-all"
+                      href={`/products?category=${sectionImage.category}?populate=*`}
+                    >
+                      DISCOVER NOW{" "}
+                      <ChevronsRight size={16} className="animate-pulse" />
+                    </Link>
+                  </div>
                 </CardContent>
               </Card>
             );
           })}
         </div>
       ) : (
-        <div className="gap-6 flex  items-center justify-center px-4  flex-wrap">
-          <div className="h-50 sm:w-70 bg-neutral-800 animate-pulse rounded-lg  w-full"></div>
-          <div className="h-50  sm:w-70 bg-neutral-800 animate-pulse rounded-lg w-full"></div>
-          <div className="h-50  sm:w-70 bg-neutral-800 animate-pulse rounded-lg w-full"></div>
+        /* Skeleton Loader im Tech-Style */
+        <div className="grid md:grid-cols-3 gap-10 px-4">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="h-96 bg-neutral-900/50 animate-pulse border border-white/5 rounded-none"
+            ></div>
+          ))}
         </div>
       )}
     </section>

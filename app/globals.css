@@ -8,6 +8,29 @@
   /* hier Farbe hinzufügen statt tailwind.config.ts neu V6*/
   --color-primary: #252422;
   --color-borderCol: #ff9b54;
+  /* NEU: Audio Glow Animation & Farbe */
+  --color-audio-cyan: #00bfff;
+  --animate-audio-glow: audioBeat 1.8s ease-in-out infinite;
+
+  @keyframes audioBeat {
+    0%,
+    100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 5px #00bfff) brightness(1);
+    }
+    20% {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 15px #00bfff) brightness(1.4);
+    }
+    40% {
+      transform: scale(0.98);
+      filter: drop-shadow(0 0 8px #00bfff) brightness(1.1);
+    }
+    70% {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 12px #00bfff) brightness(1.2);
+    }
+  }
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

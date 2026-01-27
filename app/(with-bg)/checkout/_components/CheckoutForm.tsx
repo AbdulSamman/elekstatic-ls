@@ -54,7 +54,7 @@ const CheckoutForm = () => {
     console.log(data);
   };
   return (
-    <form className="py-26" onSubmit={(e) => handleSubmit(e)}>
+    <form className="" onSubmit={(e) => handleSubmit(e)}>
       <div className="mx-10 md:mx-80 ">
         <PaymentElement />
         <button className="bg-primary p-4 text-white rounded-md w-full mt-4 text-lg">
