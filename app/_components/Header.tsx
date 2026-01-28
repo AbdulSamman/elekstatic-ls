@@ -36,7 +36,7 @@ function Header() {
     <header
       className={`fixed border-b border-audio-cyan/20 backdrop-blur-md z-50 top-0 left-0 w-full bg-black/60 transition-all duration-300`}
     >
-      <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-350 pl-1 pr-2 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="relative group">
