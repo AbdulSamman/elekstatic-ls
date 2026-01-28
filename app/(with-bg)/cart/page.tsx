@@ -205,7 +205,7 @@
 
 // export default Cart;
 "use client";
-import React from "react";
+
 import { FaRegTrashCan } from "react-icons/fa6";
 import Image from "next/image";
 import { useContext } from "react";

@@ -171,7 +171,7 @@ const stripePromise = loadStripe(
 );
 
 const Checkout = () => {
-  const { totalPrice, fillDashboard } = useContext(AppContext);
+  const { totalPrice, cart } = useContext(AppContext);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
 
   useEffect(() => {
@@ -241,86 +241,76 @@ const Checkout = () => {
               </h2>
 
               <div className="space-y-6">
-                {fillDashboard.map((order: any) => (
+                {cart.map((order: any) => (
                   <div key={order?.documentId} className="space-y-4">
-                    {order?.items?.map((productItem: any, idx: number) => (
-                      <div
-                        key={idx}
-                        className="flex flex-col md:flex-row gap-6 p-4 bg-black border border-white/5 group hover:border-white/10 transition-all"
-                      >
-                        {/* PRODUCT THUMBNAIL */}
-                        <div className="w-24 h-24 bg-neutral-900 shrink-0 flex items-center justify-center p-2 border border-white/5">
-                          {productItem?.product?.banner?.url && (
-                            <Image
-                              src={productItem?.product?.banner?.url}
-                              alt={productItem?.product?.title}
-                              className="w-full h-full object-contain"
-                              width={100}
-                              height={100}
-                            />
-                          )}
+                    {/* PRODUCT THUMBNAIL */}
+                    <div className="w-24 h-24 bg-neutral-900 shrink-0 flex items-center justify-center p-2 border border-white/5">
+                      {order?.cart?.product?.banner?.url && (
+                        <Image
+                          src={order?.cart?.product?.banner?.url}
+                          alt={order?.cart?.product?.title}
+                          className="w-full h-full object-contain"
+                          width={100}
+                          height={100}
+                        />
+                      )}
+                    </div>
+
+                    {/* PRODUCT SPECS */}
+                    <div className="flex-1 space-y-3">
+                      <div className="flex justify-between items-start">
+                        <h3 className="text-lg font-black text-white uppercase italic tracking-tight">
+                          {order?.cart?.product?.title}
+                        </h3>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-[10px] uppercase font-bold text-neutral-500">
+                          Quantity:{" "}
+                          <span className="text-white ml-2">
+                            {order?.cart?.qty}x
+                          </span>
                         </div>
 
-                        {/* PRODUCT SPECS */}
-                        <div className="flex-1 space-y-3">
-                          <div className="flex justify-between items-start">
-                            <h3 className="text-lg font-black text-white uppercase italic tracking-tight">
-                              {productItem?.product?.title}
-                            </h3>
-                            <span className="text-sm font-mono text-white">
-                              € {productItem?.totalPrice?.toFixed(2)}
+                        {/* DELIVERY STATUS */}
+                        {order?.cart?.product?.lieferStatus === "Sofort" ? (
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-[#00FF00] rounded-full shadow-[0_0_5px_#00FF00]"></div>
+                            <span className="text-[9px] font-black text-[#00FF00]/70 uppercase">
+                              In Stock
                             </span>
                           </div>
-
-                          <div className="grid grid-cols-2 gap-4">
-                            <div className="text-[10px] uppercase font-bold text-neutral-500">
-                              Quantity:{" "}
-                              <span className="text-white ml-2">
-                                {productItem?.qty}x
-                              </span>
-                            </div>
-
-                            {/* DELIVERY STATUS */}
-                            {productItem?.product?.lieferStatus === "Sofort" ? (
-                              <div className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 bg-[#00FF00] rounded-full shadow-[0_0_5px_#00FF00]"></div>
-                                <span className="text-[9px] font-black text-[#00FF00]/70 uppercase">
-                                  In Stock
-                                </span>
-                              </div>
-                            ) : (
-                              <div className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse"></div>
-                                <span className="text-[9px] font-black text-red-600 uppercase tracking-tighter">
-                                  Pre-Order (14-28d)
-                                </span>
-                              </div>
-                            )}
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse"></div>
+                            <span className="text-[9px] font-black text-red-600 uppercase tracking-tighter">
+                              Pre-Order (14-28d)
+                            </span>
                           </div>
-
-                          {/* SELECTED OPTIONS LIST */}
-                          <div className="pt-3 border-t border-white/5">
-                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                              {productItem?.selectedOptions?.map(
-                                (option: any, oIdx: number) => (
-                                  <li
-                                    key={oIdx}
-                                    className="text-[10px] flex gap-2 uppercase font-bold tracking-tighter"
-                                  >
-                                    <span className="text-neutral-600">
-                                      {option?.title}:
-                                    </span>
-                                    <span className="text-neutral-400">
-                                      {option?.label}
-                                    </span>
-                                  </li>
-                                ),
-                              )}
-                            </ul>
-                          </div>
-                        </div>
+                        )}
                       </div>
-                    ))}
+
+                      {/* SELECTED OPTIONS LIST */}
+                      <div className="pt-3 border-t border-white/5">
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {order?.cart?.selectedOptions?.map(
+                            (option: any, oIdx: number) => (
+                              <li
+                                key={oIdx}
+                                className="text-[10px] flex gap-2 uppercase font-bold tracking-tighter"
+                              >
+                                <span className="text-neutral-600">
+                                  {option?.title}:
+                                </span>
+                                <span className="text-neutral-400">
+                                  {option?.label}
+                                </span>
+                              </li>
+                            ),
+                          )}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>

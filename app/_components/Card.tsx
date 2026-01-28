@@ -5,7 +5,6 @@ import { Card as UiCard } from "@/components/ui/card";
 function Card() {
   return (
     <section className="bg-black py-32 relative overflow-hidden">
-      {/* Subtiler Hintergrund-Glow für die gesamte Section */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[#00BFFF]/5 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10 relative z-10">
