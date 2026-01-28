@@ -19,13 +19,40 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// export const metadata: Metadata = {
+//   title: "SnB audio",
+//   description: "HiFi Audiotechnik von SAMMAN & BOFFO",
+//   icons: {
+//     icon: "/logo.png",
+//     shortcut: "/logo.png",
+//     apple: "/logo.png",
+//   },
+// };
 export const metadata: Metadata = {
   title: "SnB audio",
   description: "HiFi Audiotechnik von SAMMAN & BOFFO",
+
+  metadataBase: new URL("https://snbaudio.de"),
   icons: {
-    icon: "/logo3.png",
-    shortcut: "/logo3.png",
-    apple: "/logo3.png",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    title: "SnB audio",
+    description: "HiFi Audiotechnik von SAMMAN & BOFFO",
+    url: "https://snbaudio.de",
+    siteName: "SnB audio",
+    images: [
+      {
+        url: "/logo.png",
+        width: 800,
+        height: 800,
+        alt: "SnB audio Logo",
+      },
+    ],
+    locale: "de_DE",
+    type: "website",
   },
 };
 

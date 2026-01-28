@@ -43,7 +43,7 @@ function Header() {
               <div className="absolute -inset-1 bg-audio-cyan/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
               <div className="relative flex items-center justify-center rounded-full animate-audio-glow">
                 <Image
-                  src="/logo3.png"
+                  src="/logo.png"
                   width={55}
                   height={55}
                   loading="eager"

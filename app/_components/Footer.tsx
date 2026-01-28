@@ -24,7 +24,7 @@ export const Footer = () => {
                 <div className="absolute -inset-1 bg-[#00BFFF]/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
                 <Image
                   alt="SnB Audio Logo"
-                  src={"/logo3.png"}
+                  src={"/logo.png"}
                   width={60}
                   height={60}
                   className="relative w-14 h-14 object-contain animate-audio-glow"
