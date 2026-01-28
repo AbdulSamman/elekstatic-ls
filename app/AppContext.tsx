@@ -460,12 +460,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         totalPrice: item.totalPrice,
       }));
 
-      // nur update, wenn sich Daten geändert haben
-      // setFillDashboard((prev) => {
-      //   const prevIds = prev.map((o) => o.documentId).join(",");
-      //   const newIds = dashboardItems.map((o: any) => o.documentId).join(",");
-      //   return prevIds !== newIds ? dashboardItems : prev;
-      // });
       setFillDashboard(dashboardItems);
     } catch (err) {
       console.error("Failed to fetch dashboard orders:", err);

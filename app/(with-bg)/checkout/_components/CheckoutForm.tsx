@@ -95,17 +95,22 @@ const CheckoutForm = () => {
     if (!stripe || !elements) return;
 
     setLoading(true);
-    await sendEmail();
+    try {
+      await sendEmail();
+      await handleSendToDashboard();
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/payment-confirm`,
+        },
+      });
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/payment-confirm`,
-      },
-    });
-
-    if (error) {
-      setErrorMessage(error.message || "Payment failed");
+      if (error) {
+        setErrorMessage(error.message || "Payment failed");
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error(error);
       setLoading(false);
     }
   };
@@ -120,8 +125,7 @@ const CheckoutForm = () => {
         totalPrice: totalPrice,
       }),
     });
-    const data = await res.json();
-    console.log(data);
+    //const data = await res.json();
   };
 
   return (

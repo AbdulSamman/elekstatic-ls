@@ -86,7 +86,7 @@ export const Footer = () => {
         {/* BOTTOM STRIPE */}
         <div className="mt-24 pt-10 relative">
           {/* Subtile Trennung unten */}
-          <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-neutral-900 to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-[#00BFFF]/50 to-transparent" />
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-3 text-[10px] tracking-[0.3em] text-neutral-600 uppercase font-bold">

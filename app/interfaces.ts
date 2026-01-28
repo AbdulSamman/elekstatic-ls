@@ -8,7 +8,8 @@ export interface IAppContext {
   cart: any[];
   handleDeleteCartItem: (id: any) => void;
   sectionImages: any[];
-  handleSendToDashboard: (payload: any) => void;
+  //handleSendToDashboard: (payload: any) => void;
+  handleSendToDashboard: () => Promise<void>;
   fillDashboard: any;
   totalPrice: number;
   shipping: number;
