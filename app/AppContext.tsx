@@ -371,48 +371,49 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   const [fillDashboard, setFillDashboard] = useState<any[]>([]);
 
   // Submit Order in Dashboard
+
   // const handleSendToDashboard = async () => {
   //   if (!user || cart.length === 0) return;
+
+  //   const items = cart.map((item: any) => {
+  //     const price = Number(item.cart.product.price);
+  //     const qty = Number(item.cart.qty ?? 1);
+
+  //     return {
+  //       product: item.cart.product,
+  //       selectedOptions: item.cart.selectedOptions,
+  //       qty,
+  //       totalPrice: Number((price * qty).toFixed(2)),
+  //     };
+  //   });
+
+  //   const orderTotal = items.reduce(
+  //     (sum: number, i: any) => sum + i.totalPrice,
+  //     0,
+  //   );
 
   //   const payload = {
   //     userId: user.id,
   //     userName: user.fullName,
   //     email: user.primaryEmailAddress?.emailAddress,
-  //     items: cart.map((item: any) => ({
-  //       product: item.cart.product,
-  //       selectedOptions: item.cart.selectedOptions,
-  //       qty: item.cart.qty,
-  //       totalPrice: totalPrice * item.cart.qty,
-  //     })),
+  //     items,
+  //     totalPrice: Number(orderTotal.toFixed(2)),
   //     orderStatus: "pending",
+
   //   };
 
   //   try {
-  //     // const res = (await CartApis.sendCartToDashboard(payload)).data;
-
-  //     // const dashboardItem = {
-  //     //   documentId: res.documentId,
-  //     //   items: payload.items,
-  //     //   userName: payload.userName,
-  //     //   email: payload.email,
-  //     //   orderStatus: payload.orderStatus,
-  //     // };
-
-  //     // // Optimistisches Update direkt nach Submit
-  //     // setFillDashboard((prev) => [...prev, dashboardItem]);
-
   //     await CartApis.sendCartToDashboard(payload);
-
-  //     // Danach Dashboard neu laden
   //     await getDashboardItems();
-  //     // setCart([]);
   //   } catch (err) {
   //     console.error("Failed to send order to dashboard:", err);
   //   }
   // };
-  const handleSendToDashboard = async () => {
+
+  const handleSendToDashboard = async (addressData: any = null) => {
     if (!user || cart.length === 0) return;
 
+    // 1. Deine bewährte Logik für die Items (beibehalten!)
     const items = cart.map((item: any) => {
       const price = Number(item.cart.product.price);
       const qty = Number(item.cart.qty ?? 1);
@@ -430,20 +431,34 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       0,
     );
 
+    // 2. Die Adresse extrahieren (Stripe liefert sie in .address)
+    const finalAddress = addressData?.address
+      ? addressData.address
+      : addressData;
+
+    // 3. Den Payload GENAU so aufbauen wie dein alter Code, nur mit address
     const payload = {
       userId: user.id,
-      userName: user.fullName,
+      userName: user.fullName || "Unbekannt",
       email: user.primaryEmailAddress?.emailAddress,
-      items,
+      items, // Dein funktionierendes Array
       totalPrice: Number(orderTotal.toFixed(2)),
       orderStatus: "pending",
+      address: finalAddress, // <--- Das neue Feld
     };
 
     try {
+      console.log("Sende Payload an Strapi:", payload);
+
+      // WICHTIG: Wir umschließen es hier NICHT mit { data: ... },
+      // da deine CartApis.sendCartToDashboard das anscheinend schon macht.
       await CartApis.sendCartToDashboard(payload);
+
       await getDashboardItems();
-    } catch (err) {
-      console.error("Failed to send order to dashboard:", err);
+      console.log("Strapi erfolgreich aktualisiert!");
+    } catch (err: any) {
+      console.error("Strapi Error:", err.response?.data || err);
+      throw err; // Damit CheckoutForm stoppt
     }
   };
   // Fetch Dashboard Items

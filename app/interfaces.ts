@@ -9,7 +9,7 @@ export interface IAppContext {
   handleDeleteCartItem: (id: any) => void;
   sectionImages: any[];
   //handleSendToDashboard: (payload: any) => void;
-  handleSendToDashboard: () => Promise<void>;
+  handleSendToDashboard: (addressData?: any) => Promise<void>;
   fillDashboard: any;
   totalPrice: number;
   shipping: number;
