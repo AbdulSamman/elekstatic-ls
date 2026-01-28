@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-
 import { BreadCrumbProps } from "../interfaces";
-import { ChevronRight } from "lucide-react";
 
 const BreadCrumb = ({
   path,
@@ -11,75 +9,77 @@ const BreadCrumb = ({
   buildYourOwnName,
 }: BreadCrumbProps) => {
   const segments = path.split("/").filter(Boolean);
+  const links: { name: string; href: string }[] = [];
 
-  const links: { name: string; href: string; useBack?: boolean }[] = [];
-
-  // home
   links.push({ name: "Home", href: "/" });
+  links.push({ name: "Products", href: "/products" });
 
-  //products
-  links.push({
-    name: "Products",
-    href: "/products",
-  });
-
-  // product details
   if (segments[0] === "product-details") {
-    links.push({ name: "Details", href: "#" });
+    links.push({ name: "Details", href: "/products" });
     links.push({
-      name: productName,
+      name: productName || "Product",
       href: `/product-details/${segments[1]}`,
-      useBack: true,
     });
   }
 
-  // Build Your Own kommt nur, wenn es in der URL ist
-  if (segments.includes("build-your-own")) {
+  // Nur hinzufügen, wenn der Pfad es enthält UND ein Name existiert (keine Punkte)
+  if (
+    segments.includes("build-your-own") &&
+    buildYourOwnName &&
+    buildYourOwnName !== "...."
+  ) {
     links.push({
-      name: buildYourOwnName || "Build Your Own",
+      name: buildYourOwnName,
       href: `/product-details/${segments[1]}/build-your-own`,
     });
   }
 
-  // View Summary kommt nur, wenn es in der URL ist UND Build Your Own davor existiert
-  if (segments.includes("view-summary")) {
+  if (
+    segments.includes("view-summary") &&
+    segments.includes("build-your-own")
+  ) {
     links.push({
-      name: "View Summary",
+      name: "Summary",
       href: `/product-details/${segments[1]}/build-your-own/view-summary`,
     });
   }
-  const clickableIndexes = [0, 1, 3]; // 0 = Home, 2 = Product Title
-  return (
-    <nav aria-label="breadcrumb" className="flex px-1 pt-24">
-      <ul className="flex flex-wrap items-center gap-2">
-        {links.map((link, index) => (
-          <li key={index} className="flex items-center gap-2">
-            {/* Trenner: Jetzt ein dezenter Chevron statt des klobigen grauen Polygons */}
-            {index !== 0 && (
-              <ChevronRight size={14} className="text-neutral-700" />
-            )}
 
-            <div className="relative group">
-              {/* Leuchteffekt beim Hover für klickbare Elemente */}
-              {clickableIndexes.includes(index) && (
-                <div className="absolute -inset-1 bg-[#00BFFF]/10 blur opacity-0 group-hover:opacity-100 transition duration-500 rounded-sm"></div>
+  const clickableIndexes = [0, 1, 3];
+
+  return (
+    <nav aria-label="breadcrumb" className="flex px-4 pt-24 bg-black">
+      <ul className="flex flex-wrap items-center gap-2">
+        {links.map((link, index) => {
+          const isLast = index === links.length - 1;
+
+          return (
+            <li key={index} className="relative flex items-center">
+              {index !== 0 && (
+                <span className="w-3 h-3 mx-2 bg-[#00BFFF]/20 [clip-path:polygon(0_0,0%_100%,100%_50%)]"></span>
               )}
 
-              {clickableIndexes.includes(index) ? (
+              {clickableIndexes.includes(index) && !isLast ? (
                 <Link
                   href={link.href}
-                  className="relative flex items-center justify-center border border-white/5 bg-neutral-950 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400 transition-all duration-300 hover:border-[#00BFFF]/50 hover:text-white"
+                  className="flex items-center justify-center bg-neutral-950 border border-white/5 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 hover:text-[#00BFFF] transition-all"
                 >
                   {link.name}
                 </Link>
               ) : (
-                <span className="relative flex items-center justify-center border border-white/5 bg-black/50 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-[#00BFFF] shadow-[0_0_10px_rgba(0,191,255,0.1)]">
+                <span
+                  className={`flex items-center justify-center px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-nowrap
+                  ${
+                    isLast
+                      ? "bg-black border border-[#00BFFF]/50 text-[#00BFFF] shadow-[0_0_15px_rgba(0,191,255,0.3)]"
+                      : "bg-neutral-950 border border-white/5 text-neutral-600"
+                  }`}
+                >
                   {link.name}
                 </span>
               )}
-            </div>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
