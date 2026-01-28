@@ -25,9 +25,8 @@ function Card() {
         ].map((item, index) => (
           <UiCard
             key={index}
-            className="group bg-neutral-950/50 border-white/5 hover:border-[#00BFFF]/40 transition-all duration-500 rounded-none relative overflow-hidden"
+            className="group bg-neutral-950/50 border-[#00BFFF]/10 hover:border-[#00BFFF]/40 transition-all duration-500 rounded-none relative overflow-hidden"
           >
-            {/* Hover-Effekt: Ein blauer Strahl oben am Rand der Card */}
             <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-[#00BFFF] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             <CardContent className="p-10">

@@ -38,7 +38,7 @@ function Header() {
     >
       <div className="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <div className="relative group">
               <div className="absolute -inset-1 bg-audio-cyan/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
               <div className="relative flex items-center justify-center rounded-full animate-audio-glow">
@@ -48,11 +48,11 @@ function Header() {
                   height={55}
                   loading="eager"
                   alt="SnB Audio Logo"
-                  className="object-contain rounded-full border border-audio-cyan/30"
+                  className="object-contain rounded-full"
                 />
               </div>
             </div>
-            <div className="hidden md:block">
+            <div className="  md:block">
               <Link href={"/"}>
                 <span className="text-xl font-bold tracking-[0.15em] text-white">
                   SnB <span className="text-audio-cyan">AUDIO</span>
@@ -93,7 +93,7 @@ function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-3 sm:gap-6">
+          <div className="flex items-center justify-center gap-2 sm:gap-6">
             {user?.primaryEmailAddress?.emailAddress ===
               "tkservas@gmail.com" && (
               <Link
@@ -124,7 +124,7 @@ function Header() {
                 <FaRegUserCircle className="text-2xl text-neutral-200" />
               </Link>
             ) : (
-              <div className="flex items-center pl-2 border-l border-neutral-800">
+              <div className="flex items-center justify-center pl-2 border-l border-audio-cyan">
                 <UserButton
                   appearance={{
                     variables: {
@@ -138,7 +138,7 @@ function Header() {
             )}
 
             <button
-              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full border border-audio-cyan/30 text-audio-cyan hover:bg-audio-cyan/10 transition cursor-pointer"
+              className="lg:hidden flex items-center justify-center w-8 h-8 border border-audio-cyan/30 text-audio-cyan hover:bg-audio-cyan/10 transition cursor-pointer"
               onClick={handleToggleMenu}
             >
               {!isMenuOpen ? <FiMenu size={20} /> : <FiX size={20} />}

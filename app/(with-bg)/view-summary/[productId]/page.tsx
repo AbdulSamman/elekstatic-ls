@@ -188,6 +188,7 @@
 //     </div>
 //   );
 // }
+
 "use client";
 
 import ProductBannerOwn from "../../build-your-own/_components/ProductBannerOwn";
@@ -257,7 +258,7 @@ export default function ViewSummaryPage() {
       <section className="max-w-350 mx-auto px-6 mt-16">
         <div className="flex flex-col lg:flex-row gap-20 items-start">
           {/* LEFT: VISUAL CONFIRMATION */}
-          <div className="lg:w-1/3 w-full sticky top-32">
+          <div className="lg:w-1/3 w-full">
             <div className="relative border border-white/5 bg-neutral-950/30 p-4">
               <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[#00BFFF]/40"></div>
               <ProductBannerOwn productDetails={productDetails} />
