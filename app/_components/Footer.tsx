@@ -10,12 +10,12 @@ export const Footer = () => {
   return (
     <footer className="relative bg-black text-neutral-400 pt-24 overflow-hidden">
       {/* ELEKTROSTATISCHE TRENNLINIE OBEN (Statt grauer Linie) */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#00BFFF]/50 to-transparent shadow-[0_0_15px_rgba(0,191,255,0.3)]" />
+      <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-[#00BFFF]/50 to-transparent shadow-[0_0_15px_rgba(0,191,255,0.3)]" />
 
       {/* Subtiler Glow Effekt im Hintergrund */}
-      <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-[#00BFFF]/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-100 h-100 bg-[#00BFFF]/5 blur-[120px] pointer-events-none" />
 
-      <div className="max-w-[1400px] mx-auto px-6 pb-12">
+      <div className="max-w-350 mx-auto px-6 pb-12">
         <div className="flex flex-col xl:flex-row justify-between gap-16">
           {/* BRAND SECTION */}
           <div className="flex-1 max-w-md">
@@ -50,7 +50,7 @@ export const Footer = () => {
           </div>
 
           {/* NAV LINKS SECTION */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 flex-[2]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 flex-2">
             {["Solutions", "Technology", "Support", "Company"].map((title) => {
               const links = {
                 Solutions: ["Custom Speakers", "Engineering", "Lab Series"],
@@ -86,7 +86,7 @@ export const Footer = () => {
         {/* BOTTOM STRIPE */}
         <div className="mt-24 pt-10 relative">
           {/* Subtile Trennung unten */}
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neutral-900 to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-neutral-900 to-transparent" />
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-3 text-[10px] tracking-[0.3em] text-neutral-600 uppercase font-bold">
