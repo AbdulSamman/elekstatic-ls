@@ -61,14 +61,34 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   };
 
   // all categories holen
-  const getProductsbyCategory = async (category: string) => {
-    const response = (
-      await axiosClient.get(
-        `/api/products?filters[category][$eq]=${category}&populate=*`,
-      )
-    ).data;
+  // const getProductsbyCategory = async (category: string) => {
+  //   const response = (
+  //     await axiosClient.get(
+  //       `/api/products?filters[category][$eq]=${category}&populate=*`,
+  //     )
+  //   ).data;
 
-    setProductListCategory(response.data);
+  //   setProductListCategory(response.data);
+  // };
+  const getProductsbyCategory = async (category: string) => {
+    // Verhindert unnötige Requests, wenn die Kategorie schon geladen ist
+    if (
+      productListCategory.length > 0 &&
+      productListCategory[0].category === category
+    ) {
+      return;
+    }
+
+    try {
+      const response = (
+        await axiosClient.get(
+          `/api/products?filters[category][$eq]=${category}&populate=*`,
+        )
+      ).data;
+      setProductListCategory(response.data);
+    } catch (error) {
+      console.error("Error fetching category", error);
+    }
   };
 
   // buildYourOwn auswahl
@@ -481,16 +501,30 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
   };
 
   // Initial Load + Auto Polling für neue Orders
+  // useEffect(() => {
+  //   if (user) {
+  //     getDashboardItems();
+  //     // Polling alle 5 Sekunden für neue Orders
+  //     const interval = setInterval(async () => {
+  //       await getDashboardItems();
+  //     }, 20000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [user]);
   useEffect(() => {
+    let interval: any;
+
     if (user) {
       getDashboardItems();
-      // Polling alle 5 Sekunden für neue Orders
-      const interval = setInterval(async () => {
-        await getDashboardItems();
-      }, 20000);
-      return () => clearInterval(interval);
+      interval = setInterval(() => {
+        getDashboardItems();
+      }, 30000); // Erhöhe auf 30 Sek, um den Server zu schonen
     }
-  }, [user]);
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [user?.id]); // Nutze user.id statt das ganze user-Objekt
 
   // price handlen
   const [totalPrice, setTotalPrice] = useState<number>(0);

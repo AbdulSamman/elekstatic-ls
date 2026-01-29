@@ -221,10 +221,15 @@ export default function ViewSummaryPage() {
   const [qty, setQty] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
 
+  // useEffect(() => {
+  //   if (!productId) return;
+  //   getProductById(productId);
+  // }, [productId, getProductById]);
   useEffect(() => {
     if (!productId) return;
     getProductById(productId);
-  }, [productId, getProductById]);
+    // getProductById hier entfernen, um den Loop zu stoppen!
+  }, [productId]);
 
   useEffect(() => {
     if (!productDetails?.price) return;
