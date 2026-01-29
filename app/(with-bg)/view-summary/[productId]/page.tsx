@@ -339,7 +339,7 @@ export default function ViewSummaryPage() {
 
                   {/* PRICE DISPLAY */}
                   <div className="text-right">
-                    <span className="text-2xl font-black text-white tracking-tighter italic">
+                    <span className="text-[20px] font-black text-white tracking-tighter italic">
                       € {total.toLocaleString()}
                     </span>
                   </div>

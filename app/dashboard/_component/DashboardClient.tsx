@@ -608,12 +608,18 @@ export default function Dashboard({
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { fillDashboard } = useContext(AppContext);
+  console.log("fill", fillDashboard);
 
   // 1. SORTIERUNG: Neueste zuerst (mit Fallback für leere Daten)
   const sortedOrders = useMemo(() => {
     return [...fillDashboard].sort((a, b) => {
-      const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-      const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      // Nimmt das Datum der Order oder das Datum des ersten Produkts
+      const dateA = new Date(
+        a.createdAt || a.items?.[0]?.product?.createdAt || 0,
+      ).getTime();
+      const dateB = new Date(
+        b.createdAt || b.items?.[0]?.product?.createdAt || 0,
+      ).getTime();
       return dateB - dateA;
     });
   }, [fillDashboard]);
@@ -629,12 +635,12 @@ export default function Dashboard({
   }).format(totalRevenue);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-neutral-100 flex mt-16 pb-20 relative font-sans">
+    <div className="min-h-screen bg-[#050505] text-neutral-100 flex mt-16  relative font-sans">
       {/* Sidebar */}
       <aside
         className={`bg-black/50 backdrop-blur-xl border-r border-white/5 p-4 transition-all duration-300 ${menuOpen ? "w-64" : "w-20"} hidden md:flex flex-col gap-8`}
       >
-        <div className="flex justify-center py-4">
+        <div className="flex justify-start py-4 pl-2 items-center">
           <Button
             onClick={() => setMenuOpen(!menuOpen)}
             variant="ghost"
@@ -668,7 +674,7 @@ export default function Dashboard({
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 p-4 md:p-10 max-w-7xl mx-auto w-full">
+      <div className="flex-1 p-4 md:p-10 max-w-7xl mx-auto w-full mb-20">
         {/* Header */}
         <header className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
           <div>
@@ -767,10 +773,15 @@ export default function Dashboard({
                       {/* DATUM ZUSÄTZLICH */}
                       <div className="flex items-center gap-2 text-neutral-500 mt-1">
                         <Calendar size={10} className="text-cyan-500/50" />
-                        <p className="text-[9px] font-bold uppercase tracking-wider text-neutral-600">
+                        <p className="text-[12px] font-bold uppercase tracking-wider text-neutral-600">
+                          {/* Wir prüfen erst die Order, dann das erste Item als Fallback */}
                           {order.createdAt
                             ? new Date(order.createdAt).toLocaleString("de-DE")
-                            : "Datum ausstehend"}
+                            : order.items?.[0]?.product?.createdAt
+                              ? new Date(
+                                  order.items[0].product.createdAt,
+                                ).toLocaleString("de-DE")
+                              : "Datum ausstehend"}
                         </p>
                       </div>
                     </div>

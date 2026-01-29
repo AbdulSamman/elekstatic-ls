@@ -325,7 +325,7 @@ const Checkout = () => {
                   <span className="text-[12px] font-black text-white uppercase tracking-[0.3em]">
                     Total Value
                   </span>
-                  <span className="text-4xl font-black text-white italic tracking-tighter font-mono">
+                  <span className="text-3xl font-black text-white italic tracking-tighter font-mono">
                     {totalPrice.toFixed(2)} €
                   </span>
                 </div>
