@@ -610,20 +610,18 @@ export default function Dashboard({
   const { fillDashboard } = useContext(AppContext);
   console.log("fill", fillDashboard);
 
-  // 1. SORTIERUNG: Neueste zuerst (mit Fallback für leere Daten)
+  // 1. SORTIERUNG: Neueste zuerst
   const sortedOrders = useMemo(() => {
     return [...fillDashboard].sort((a, b) => {
-      // Nimmt das Datum der Order oder das Datum des ersten Produkts
       const dateA = new Date(
-        a.createdAt || a.items?.[0]?.product?.createdAt || 0,
+        a.createdAt || a.attributes?.createdAt || 0,
       ).getTime();
       const dateB = new Date(
-        b.createdAt || b.items?.[0]?.product?.createdAt || 0,
+        b.createdAt || b.attributes?.createdAt || 0,
       ).getTime();
       return dateB - dateA;
     });
   }, [fillDashboard]);
-
   // 2. REVENUE BERECHNUNG: Summe aller Orders
   const totalRevenue = fillDashboard.reduce((acc: number, order: any) => {
     return acc + (Number(order.totalPrice) || 0);
@@ -773,15 +771,26 @@ export default function Dashboard({
                       {/* DATUM ZUSÄTZLICH */}
                       <div className="flex items-center gap-2 text-neutral-500 mt-1">
                         <Calendar size={10} className="text-cyan-500/50" />
-                        <p className="text-[12px] font-bold uppercase tracking-wider text-neutral-600">
-                          {/* Wir prüfen erst die Order, dann das erste Item als Fallback */}
-                          {order.createdAt
-                            ? new Date(order.createdAt).toLocaleString("de-DE")
-                            : order.items?.[0]?.product?.createdAt
-                              ? new Date(
-                                  order.items[0].product.createdAt,
-                                ).toLocaleString("de-DE")
-                              : "Datum ausstehend"}
+                        <p className="text-[12px] font-bold uppercase tracking-wider text-neutral-400">
+                          {(() => {
+                            // 1. Prüfe Order Datum, 2. Prüfe Produkt Datum (Fallback)
+                            const rawDate =
+                              order.createdAt ||
+                              order.items?.[0]?.product?.createdAt;
+
+                            if (!rawDate) return "Datum ausstehend";
+
+                            return (
+                              new Date(rawDate).toLocaleString("de-DE", {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                timeZone: "Europe/Berlin",
+                              }) + " Uhr"
+                            );
+                          })()}
                         </p>
                       </div>
                     </div>
@@ -796,6 +805,9 @@ export default function Dashboard({
                       </p>
                       {order.address ? (
                         <>
+                          <span className="text-cyan-500 font-black not-italic block mb-1 uppercase tracking-tight">
+                            {order.address.name || "Kein Empfänger"}
+                          </span>
                           {order.address.line1}, {order.address.postal_code}{" "}
                           {order.address.city}
                           <br />

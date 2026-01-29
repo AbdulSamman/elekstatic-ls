@@ -451,25 +451,24 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
       0,
     );
 
-    // 2. Die Adresse extrahieren (Stripe liefert sie in .address)
-    const finalAddress = addressData?.address
-      ? addressData.address
-      : addressData;
+    const nameFromStripe = addressData?.name || "";
+    const rawAddress = addressData?.address || addressData;
 
-    // 3. Den Payload GENAU so aufbauen wie dein alter Code, nur mit address
+    const finalAddress = {
+      ...rawAddress,
+      name: nameFromStripe, // Hier wird der Name explizit in das Objekt geschrieben
+    };
     const payload = {
       userId: user.id,
       userName: user.fullName || "Unbekannt",
       email: user.primaryEmailAddress?.emailAddress,
-      items, // Dein funktionierendes Array
+      items,
       totalPrice: Number(orderTotal.toFixed(2)),
       orderStatus: "pending",
-      address: finalAddress, // <--- Das neue Feld
+      address: finalAddress,
     };
 
     try {
-      // WICHTIG: Wir umschließen es hier NICHT mit { data: ... },
-      // da deine CartApis.sendCartToDashboard das anscheinend schon macht.
       await CartApis.sendCartToDashboard(payload);
 
       await getDashboardItems();
