@@ -448,14 +448,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
     };
 
     try {
-      console.log("Sende Payload an Strapi:", payload);
-
       // WICHTIG: Wir umschließen es hier NICHT mit { data: ... },
       // da deine CartApis.sendCartToDashboard das anscheinend schon macht.
       await CartApis.sendCartToDashboard(payload);
 
       await getDashboardItems();
-      console.log("Strapi erfolgreich aktualisiert!");
     } catch (err: any) {
       console.error("Strapi Error:", err.response?.data || err);
       throw err; // Damit CheckoutForm stoppt
@@ -473,6 +470,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
         email: item.email,
         orderStatus: item.orderStatus,
         totalPrice: item.totalPrice,
+        address: item.address,
       }));
 
       setFillDashboard(dashboardItems);
